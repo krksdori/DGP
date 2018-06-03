@@ -9,11 +9,20 @@ class PerlinCloud {
 		pg = createGraphics(width, height);
 	}
 
-	PGraphics draw() {
+	PGraphics draw(float cloudCoverN) {
 		  pg.beginDraw();
 		  pg.background(0);
 
 		  colorMode(HSB, 360, 600, 100);
+
+		  if(cloudCoverN < 0.6) {
+		  	cloudCoverN = 0;
+		  }
+
+
+		  float CC = map(cloudCoverN, 0, 1.0, 0, 80);
+
+
 		  
 		  pg.loadPixels();
 		  
@@ -23,7 +32,7 @@ class PerlinCloud {
 		    for (int y=0; y < height; y++) {
 		      float noiseVal = noise(x*0.01+frameCount*0.01, y*0.01+frameCount*0.01, noiseScale)*2;
 		    
-		      pg.pixels[x+y*width] = color(noiseVal*255, 20);
+		      pg.pixels[x+y*width] = color(noiseVal*255, CC);
 		      
 		      
 		    }

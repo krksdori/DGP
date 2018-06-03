@@ -65,29 +65,26 @@ public void draw() {
  
   background(200);
   
-  
   if(frameCount%(daySpeed) == 0) {
-   // background(255);
     dayCount = dayCount%365+1;
   }
 
   TimeFrame timeFrameSelected = parseJSON.timeFrames.get(dayCount%365);
   
   image(rainDrops.draw(timeFrameSelected.precipitationN), 0.0f, 0.0f);
-  blend(perlinCloud.draw(), 0, 0, width, height, 0, 0, width, height, LIGHTEST);
-  blend(sunRise.draw(), 0, 0, width, height, 0, 0, width, height, LIGHTEST);
-  blend(moonPhases.draw(timeFrameSelected.moonAge), 0, 0, width, height, 0, 0, width, height, LIGHTEST);
-  blend(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0, 0, width, height, 0, 0, width, height, LIGHTEST);
-  blend(tideLines.draw(), 0, 0, width, height, 0, 0, width, height, LIGHTEST);
-      
+  blend(perlinCloud.draw(timeFrameSelected.cloudCoverN), 0, 0, width, height, 0, 0, width, height, SCREEN);
+  blend(moonPhases.draw(timeFrameSelected.moonAge), 0, 0, width, height, 0, 0, width, height, SCREEN);
+  blend(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0, 0, width, height, 0, 0, width, height, SCREEN);
+  blend(tideLines.draw(timeFrameSelected.tideMinN, timeFrameSelected.tideMaxN), 0, 0, width, height, 0, 0, width, height, SCREEN);  
+  blend(sunRise.draw(timeFrameSelected.cloudCoverN), 0, 0, width, height, 0, 0, width, height, SCREEN);
 
-  //image(perlinCloud.draw(), 0, 0);
   
   
- // image(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0.0, 0.0);
+  // image(tideLines.draw(timeFrameSelected.tideMinN, timeFrameSelected.tideMaxN), 0, 0);
+  // image(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0.0, 0.0);
     
- // tint(255, 255, 255, 100);
-   // image(moonPhases.draw(timeFrameSelected.moonAge), 0.0, 0.0);
+  // tint(255, 255, 255, 100);
+  // image(moonPhases.draw(timeFrameSelected.moonAge), 0.0, 0.0);
   // image(sunRise.draw(), 0, 0);
   
  dayNightFade();
@@ -103,6 +100,12 @@ public void draw() {
  text("windDirection: " + timeFrameSelected.windDirection, 50, 170);
  text("windSpeed: " + timeFrameSelected.windSpeed, 50, 190);
  text("windSpeedN: " + timeFrameSelected.windSpeedN, 50, 210);
+
+ text("tideMinN: " + timeFrameSelected.tideMinN, 50, 230);
+ text("tideMaxN: " + timeFrameSelected.tideMaxN, 50, 250);
+ 
+ text("cloudCoverN: " + timeFrameSelected.cloudCoverN, 50, 270);
+ 
   
   if(exportVideo) {
     videoExport.saveFrame();
@@ -306,7 +309,24 @@ class ParseJSON {
         int windSpeedValue = windJO.getInt("value");
         float windSpeedValueN = windJO.getFloat("normalized");
 
-        timeFrames.add(new TimeFrame(date, precipitation, precipitationN, moonAge, moonVisible, moonPhase, windDirection, windSpeedValue, windSpeedValueN));
+        // TIDE
+        JSONObject tideJO = timeFrame.getJSONObject("tide");
+        
+        JSONObject tideJOMIN = tideJO.getJSONObject("min");
+        JSONObject tideJOMINM = tideJOMIN.getJSONObject("measurement");
+        int tideMin = tideJOMINM.getInt("value");
+        float tideMinN = tideJOMINM.getFloat("normalized");
+        
+        JSONObject tideJOMAX = tideJO.getJSONObject("max");
+        JSONObject tideJOMAXM = tideJOMAX.getJSONObject("measurement");
+        int tideMax = tideJOMAXM.getInt("value");
+        float tideMaxN = tideJOMAXM.getFloat("normalized");
+
+        JSONObject cloudCoverJO = timeFrame.getJSONObject("cloudCover");
+        float cloudCoverN = cloudCoverJO.getFloat("normalized");
+        
+
+        timeFrames.add(new TimeFrame(date, precipitation, precipitationN, moonAge, moonVisible, moonPhase, windDirection, windSpeedValue, windSpeedValueN, tideMin, tideMinN, tideMax, tideMaxN, cloudCoverN));
         
         println(timeFrames.size());
     }
@@ -327,8 +347,15 @@ class TimeFrame {
    int windDirection;
    int windSpeed;
    float windSpeedN;
+
+   int tideMin;
+   float tideMinN;
+   int tideMax;
+   float tideMaxN;
+
+   float cloudCoverN;
    
-   TimeFrame(String date, float precipitation, float precipitationN, float moonAge, int moonVisible, String moonPhase, int windDirection, int windSpeed, float windSpeedN) {
+   TimeFrame(String date, float precipitation, float precipitationN, float moonAge, int moonVisible, String moonPhase, int windDirection, int windSpeed, float windSpeedN, int tideMin, float tideMinN, int tideMax, float tideMaxN, float cloudCoverN) {
      this.date = date;
      this.precipitation = precipitation;
      this.precipitationN = precipitationN;
@@ -338,6 +365,12 @@ class TimeFrame {
      this.windDirection = windDirection;
      this.windSpeed = windSpeed;
      this.windSpeedN =windSpeedN;
+     this.tideMin = tideMin;
+     this.tideMinN = tideMinN;
+     this.tideMax = tideMax;
+     this.tideMaxN = tideMaxN;
+     this.cloudCoverN = cloudCoverN;
+
    }
    
 }
@@ -352,11 +385,20 @@ class PerlinCloud {
 		pg = createGraphics(width, height);
 	}
 
-	public PGraphics draw() {
+	public PGraphics draw(float cloudCoverN) {
 		  pg.beginDraw();
 		  pg.background(0);
 
 		  colorMode(HSB, 360, 600, 100);
+
+		  if(cloudCoverN < 0.6f) {
+		  	cloudCoverN = 0;
+		  }
+
+
+		  float CC = map(cloudCoverN, 0, 1.0f, 0, 80);
+
+
 		  
 		  pg.loadPixels();
 		  
@@ -366,7 +408,7 @@ class PerlinCloud {
 		    for (int y=0; y < height; y++) {
 		      float noiseVal = noise(x*0.01f+frameCount*0.01f, y*0.01f+frameCount*0.01f, noiseScale)*2;
 		    
-		      pg.pixels[x+y*width] = color(noiseVal*255, 20);
+		      pg.pixels[x+y*width] = color(noiseVal*255, CC);
 		      
 		      
 		    }
@@ -486,7 +528,14 @@ class SunRise {
   }
   
 
-  public PGraphics draw() {
+  public PGraphics draw(float cloudCoverN) {
+
+    float v = map(cloudCoverN, 0, 1.0f, 230, 150);
+   if(cloudCoverN > 0.6f) {
+     v = 100;
+   } 
+
+
    pg.beginDraw();
    pg.loadPixels();
     for (int x = 0; x < pg.width; x++) {
@@ -494,7 +543,7 @@ class SunRise {
         int index = x + y * pg.width;
         float d = dist(x, y, b.pos.x, b.pos.y);
         float col = 350 * b.r / d;
-        pg.pixels[index] = color(col, 200);
+        pg.pixels[index] = color(col, v);
       }
     }
   
@@ -545,52 +594,104 @@ class TideLines {
 	float f = 0.0f;
 	float colorState;
 
+	float movingSlider = 0.5f;
+
 	PGraphics pg;
 
 	TideLines(int width, int height) {
 		pg = createGraphics(width, height);
+
+		pg.beginDraw();
+		pg.background(0);
+		pg.endDraw();
 
 		noiseX = random(100);
 		noiseY = random(100);
 		noiseF = random(100);
 	}
 
-	public PGraphics draw() {
-		pg.beginDraw();
-		//pg.background(0);
-		pg.stroke(255, 150);
-		pg.strokeWeight(1);
-		pg.noFill();
-
-		pg.fill(0, 30);
-		pg.rect(0, 0, pg.width, pg.height);
+	public PGraphics draw(float min, float max) {
+		
+		//float min = 0.1;
+		float normal = 0.5f;
+		// max = 1.0;
 
 		
-		f += 0.0015f;
+		if(frameCount%(60*6) > 0 && frameCount%(60*6) < (60*1.5f)) {
+			movingSlider = (movingSlider*0.95f)+(normal*0.05f);
+			//println("NORMAL START");
+		} else 
+
+		if(frameCount%(60*6) > (60*1.5f) && frameCount%(60*6) < (60*3)) {
+			movingSlider = (movingSlider*0.99f)+(min*0.01f);
+			println("MIN");
+		
+		} else if(frameCount%(60*6) > (60*3) && frameCount%(60*6) < (60*4.5f)) {
+			movingSlider = (movingSlider*0.99f)+(max*0.01f);
+			println("MAX");		
+		} 
+
+		else if(frameCount%(60*6) > (60*4.5f) && frameCount%(60*6) < (60*6)) {
+			//movingSlider = (movingSlider*0.95)+(normal*0.05);
+			//println("NORMAL END");
+		
+		}
+		
+		float slider = map(movingSlider, 0.0f, 1.0f, -height*0.5f, height*1.4f);
+
+
+
+		pg.beginDraw();
+		pg.strokeWeight(5);
+		pg.fill(0, 50);
+		pg.noStroke();
+		pg.rect(0, 0, pg.width, pg.height);
+
+		f += 0.005f;
   
-		float waveH = map(width/2, 0, width, 100, 500);
-		for (int h = 0; h < height + 100; h += 3) {
+		float waveH = 100; //100+sin(frameCount*0.1)*300; // map(width/2, 0, width, 100, 500);
+		
+		for (int h = 0; h < height; h += 10) {
+		    
+		    if(h < slider) {
+
 		    pg.beginShape(); 
-		    pg.stroke(map(h, frameCount%height, height, 10, 20), map(h, frameCount%height, height, 0, 100), 205);
+		    //pg.stroke(map(h, frameCount%height, height, 10, 20), map(h, frameCount%height, height, 0, 100), 255);
+		    float colorShade = map(h, 0, height, 0, 255);
+		    float colorShade2 = map(h, 0, height, 0, 100);
+		    float colorShade3 = map(h, slider-(100*movingSlider), height, 0, 255);
+		    if(colorShade3<0) {
+		    	colorShade3 = 0;
+		    }
+			pg.stroke(colorShade3, colorShade2+colorShade3, colorShade+colorShade3);
+
 		    float x = 0;
-		    float y = h + waveH * noise(noiseX, noiseY + h * 0.01f, noiseF + f);
+		    float y = h + waveH * noise(noiseX, noiseY + h * 0.1f, noiseF);
+
 		    pg.curveVertex(x, y);
-		    for (int w = 0; w <= width; w += 20) {
+		    
+		    for (int w = 0; w <= width+100; w += 50) {
 		      x = w;
-		      y = h + waveH * noise(noiseX + w * 0.001f, noiseY + h * 0.01f, noiseF + f);
+		      float n = noise(noiseX + w * 0.001f, noiseY + h * 0.01f, noiseF + f);
+		      y = h + waveH * n;
+
 		      pg.curveVertex(x, y);
 		    }
 
 		    x = width;
 		    y = h + waveH * noise(noiseX + width, noiseY + h * 0.01f, noiseF + f);
+
 		    pg.curveVertex(x, y);
 		    pg.endShape();
+
+		}
+
+
+
 		}
 
 		pg.endDraw();
-		
 		return pg;
-
 	}
 
 

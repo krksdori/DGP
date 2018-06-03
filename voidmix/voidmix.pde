@@ -47,29 +47,26 @@ void draw() {
  
   background(200);
   
-  
   if(frameCount%(daySpeed) == 0) {
-   // background(255);
     dayCount = dayCount%365+1;
   }
 
   TimeFrame timeFrameSelected = parseJSON.timeFrames.get(dayCount%365);
   
   image(rainDrops.draw(timeFrameSelected.precipitationN), 0.0, 0.0);
-  blend(perlinCloud.draw(), 0, 0, width, height, 0, 0, width, height, LIGHTEST);
-  blend(sunRise.draw(), 0, 0, width, height, 0, 0, width, height, LIGHTEST);
-  blend(moonPhases.draw(timeFrameSelected.moonAge), 0, 0, width, height, 0, 0, width, height, LIGHTEST);
-  blend(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0, 0, width, height, 0, 0, width, height, LIGHTEST);
-  blend(tideLines.draw(), 0, 0, width, height, 0, 0, width, height, LIGHTEST);
-      
+  blend(perlinCloud.draw(timeFrameSelected.cloudCoverN), 0, 0, width, height, 0, 0, width, height, SCREEN);
+  blend(moonPhases.draw(timeFrameSelected.moonAge), 0, 0, width, height, 0, 0, width, height, SCREEN);
+  blend(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0, 0, width, height, 0, 0, width, height, SCREEN);
+  blend(tideLines.draw(timeFrameSelected.tideMinN, timeFrameSelected.tideMaxN), 0, 0, width, height, 0, 0, width, height, SCREEN);  
+  blend(sunRise.draw(timeFrameSelected.cloudCoverN), 0, 0, width, height, 0, 0, width, height, SCREEN);
 
-  //image(perlinCloud.draw(), 0, 0);
   
   
- // image(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0.0, 0.0);
+  // image(tideLines.draw(timeFrameSelected.tideMinN, timeFrameSelected.tideMaxN), 0, 0);
+  // image(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0.0, 0.0);
     
- // tint(255, 255, 255, 100);
-   // image(moonPhases.draw(timeFrameSelected.moonAge), 0.0, 0.0);
+  // tint(255, 255, 255, 100);
+  // image(moonPhases.draw(timeFrameSelected.moonAge), 0.0, 0.0);
   // image(sunRise.draw(), 0, 0);
   
  dayNightFade();
@@ -85,6 +82,12 @@ void draw() {
  text("windDirection: " + timeFrameSelected.windDirection, 50, 170);
  text("windSpeed: " + timeFrameSelected.windSpeed, 50, 190);
  text("windSpeedN: " + timeFrameSelected.windSpeedN, 50, 210);
+
+ text("tideMinN: " + timeFrameSelected.tideMinN, 50, 230);
+ text("tideMaxN: " + timeFrameSelected.tideMaxN, 50, 250);
+ 
+ text("cloudCoverN: " + timeFrameSelected.cloudCoverN, 50, 270);
+ 
   
   if(exportVideo) {
     videoExport.saveFrame();

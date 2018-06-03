@@ -32,7 +32,24 @@ class ParseJSON {
         int windSpeedValue = windJO.getInt("value");
         float windSpeedValueN = windJO.getFloat("normalized");
 
-        timeFrames.add(new TimeFrame(date, precipitation, precipitationN, moonAge, moonVisible, moonPhase, windDirection, windSpeedValue, windSpeedValueN));
+        // TIDE
+        JSONObject tideJO = timeFrame.getJSONObject("tide");
+        
+        JSONObject tideJOMIN = tideJO.getJSONObject("min");
+        JSONObject tideJOMINM = tideJOMIN.getJSONObject("measurement");
+        int tideMin = tideJOMINM.getInt("value");
+        float tideMinN = tideJOMINM.getFloat("normalized");
+        
+        JSONObject tideJOMAX = tideJO.getJSONObject("max");
+        JSONObject tideJOMAXM = tideJOMAX.getJSONObject("measurement");
+        int tideMax = tideJOMAXM.getInt("value");
+        float tideMaxN = tideJOMAXM.getFloat("normalized");
+
+        JSONObject cloudCoverJO = timeFrame.getJSONObject("cloudCover");
+        float cloudCoverN = cloudCoverJO.getFloat("normalized");
+        
+
+        timeFrames.add(new TimeFrame(date, precipitation, precipitationN, moonAge, moonVisible, moonPhase, windDirection, windSpeedValue, windSpeedValueN, tideMin, tideMinN, tideMax, tideMaxN, cloudCoverN));
         
         println(timeFrames.size());
     }
@@ -53,8 +70,15 @@ class TimeFrame {
    int windDirection;
    int windSpeed;
    float windSpeedN;
+
+   int tideMin;
+   float tideMinN;
+   int tideMax;
+   float tideMaxN;
+
+   float cloudCoverN;
    
-   TimeFrame(String date, float precipitation, float precipitationN, float moonAge, int moonVisible, String moonPhase, int windDirection, int windSpeed, float windSpeedN) {
+   TimeFrame(String date, float precipitation, float precipitationN, float moonAge, int moonVisible, String moonPhase, int windDirection, int windSpeed, float windSpeedN, int tideMin, float tideMinN, int tideMax, float tideMaxN, float cloudCoverN) {
      this.date = date;
      this.precipitation = precipitation;
      this.precipitationN = precipitationN;
@@ -64,6 +88,12 @@ class TimeFrame {
      this.windDirection = windDirection;
      this.windSpeed = windSpeed;
      this.windSpeedN =windSpeedN;
+     this.tideMin = tideMin;
+     this.tideMinN = tideMinN;
+     this.tideMax = tideMax;
+     this.tideMaxN = tideMaxN;
+     this.cloudCoverN = cloudCoverN;
+
    }
    
 }

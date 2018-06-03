@@ -14,7 +14,14 @@ class SunRise {
   }
   
 
-  PGraphics draw() {
+  PGraphics draw(float cloudCoverN) {
+
+    float v = map(cloudCoverN, 0, 1.0, 230, 150);
+   if(cloudCoverN > 0.6) {
+     v = 100;
+   } 
+
+
    pg.beginDraw();
    pg.loadPixels();
     for (int x = 0; x < pg.width; x++) {
@@ -22,7 +29,7 @@ class SunRise {
         int index = x + y * pg.width;
         float d = dist(x, y, b.pos.x, b.pos.y);
         float col = 350 * b.r / d;
-        pg.pixels[index] = color(col, 200);
+        pg.pixels[index] = color(col, v);
       }
     }
   
