@@ -32,7 +32,7 @@ TideLines tideLines;
 int dayCount = 0;
 int daySpeed = 60*6;
 
-boolean exportVideo = true;
+boolean exportVideo = false;
 
 public void setup() {
   
@@ -880,7 +880,7 @@ class FlowField {
 }
   public void settings() {  size(1080, 720); }
   static public void main(String[] passedArgs) {
-    String[] appletArgs = new String[] { "--present", "--window-color=#000000", "--hide-stop", "voidmix" };
+    String[] appletArgs = new String[] { "voidmix" };
     if (passedArgs != null) {
       PApplet.main(concat(appletArgs, passedArgs));
     } else {

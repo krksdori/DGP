@@ -10,8 +10,9 @@ SunRise sunRise;
 WindMap windMap;
 PerlinCloud perlinCloud;
 TideLines tideLines;
+Temperature temperature;
 
-int dayCount = 0;
+int dayCount = 100;
 int daySpeed = 60*6;
 
 boolean exportVideo = true;
@@ -29,26 +30,31 @@ void setup() {
   windMap = new WindMap(width, height);
   perlinCloud = new PerlinCloud(width, height);
   tideLines = new TideLines(width, height);
+  temperature = new Temperature(width, height);
   
   parseJSON.parse("result.json");
 
-  if(exportVideo) {
-    videoExport = new VideoExport(this, "export/options-"+hour()+""+minute()+""+second()+".mp4");
-    videoExport.setQuality(70, 128);
-    videoExport.setFrameRate(60);
-    videoExport.setLoadPixels(true);
-    videoExport.setDebugging(false);
-    videoExport.startMovie();
-  }
+  initVideo();
 
+}
+
+void initVideo() {
+  if(exportVideo) {
+      videoExport = new VideoExport(this, "export/options-day-" + dayCount + ".mp4");
+      videoExport.setQuality(70, 128);
+      videoExport.setFrameRate(60);
+      videoExport.setLoadPixels(true);
+      videoExport.setDebugging(false);
+      videoExport.startMovie();
+  }
 }
 
 void draw() {
  
   background(200);
-  
   if(frameCount%(daySpeed) == 0) {
     dayCount = dayCount%365+1;
+    initVideo();
   }
 
   TimeFrame timeFrameSelected = parseJSON.timeFrames.get(dayCount%365);
@@ -59,8 +65,10 @@ void draw() {
   blend(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0, 0, width, height, 0, 0, width, height, SCREEN);
   blend(tideLines.draw(timeFrameSelected.tideMinN, timeFrameSelected.tideMaxN), 0, 0, width, height, 0, 0, width, height, SCREEN);  
   blend(sunRise.draw(timeFrameSelected.cloudCoverN), 0, 0, width, height, 0, 0, width, height, SCREEN);
-
+  blend(temperature.draw(timeFrameSelected.temperatureN), 0, 0, width, height, 0, 0, width, height, SCREEN);
   
+  
+  //image(temperature.draw(timeFrameSelected.temperatureN), 0.0, 0.0);
   
   // image(tideLines.draw(timeFrameSelected.tideMinN, timeFrameSelected.tideMaxN), 0, 0);
   // image(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0.0, 0.0);
@@ -88,10 +96,18 @@ void draw() {
  
  text("cloudCoverN: " + timeFrameSelected.cloudCoverN, 50, 270);
  
+ text("temperature: " + timeFrameSelected.temperature, 50, 290);
+ text("temperatureN: " + timeFrameSelected.temperatureN, 50, 310);
+ 
   
   if(exportVideo) {
     videoExport.saveFrame();
   }
+  
+  if(frameCount%(daySpeed) == daySpeed-1) {
+    videoExport.endMovie();
+  }
+
 
 }
 

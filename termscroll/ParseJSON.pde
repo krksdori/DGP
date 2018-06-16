@@ -48,12 +48,10 @@ class ParseJSON {
         JSONObject cloudCoverJO = timeFrame.getJSONObject("cloudCover");
         float cloudCoverN = cloudCoverJO.getFloat("normalized");
         
-        JSONObject temperatureJO = timeFrame.getJSONObject("temperature");
-        float temperature = (temperatureJO.getFloat("value"))*0.1;
-        float temperatureN = temperatureJO.getFloat("normalized");
 
-        timeFrames.add(new TimeFrame(date, precipitation, precipitationN, moonAge, moonVisible, moonPhase, windDirection, windSpeedValue, windSpeedValueN, tideMin, tideMinN, tideMax, tideMaxN, cloudCoverN, temperature, temperatureN));
-       // println(timeFrames.size());
+        timeFrames.add(new TimeFrame(date, precipitation, precipitationN, moonAge, moonVisible, moonPhase, windDirection, windSpeedValue, windSpeedValueN, tideMin, tideMinN, tideMax, tideMaxN, cloudCoverN));
+        
+        println(timeFrames.size());
     }
   }
 }
@@ -80,10 +78,7 @@ class TimeFrame {
 
    float cloudCoverN;
    
-   float temperature;
-   float temperatureN;
-   
-   TimeFrame(String date, float precipitation, float precipitationN, float moonAge, int moonVisible, String moonPhase, int windDirection, int windSpeed, float windSpeedN, int tideMin, float tideMinN, int tideMax, float tideMaxN, float cloudCoverN, float temperature, float temperatureN) {
+   TimeFrame(String date, float precipitation, float precipitationN, float moonAge, int moonVisible, String moonPhase, int windDirection, int windSpeed, float windSpeedN, int tideMin, float tideMinN, int tideMax, float tideMaxN, float cloudCoverN) {
      this.date = date;
      this.precipitation = precipitation;
      this.precipitationN = precipitationN;
@@ -98,8 +93,7 @@ class TimeFrame {
      this.tideMax = tideMax;
      this.tideMaxN = tideMaxN;
      this.cloudCoverN = cloudCoverN;
-     this.temperature = temperature;
-     this.temperatureN = temperatureN;
+
    }
    
 }
