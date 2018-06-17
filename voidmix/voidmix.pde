@@ -13,14 +13,14 @@ TideLines tideLines;
 Temperature temperature;
 
 int dayCount = 100;
-int daySpeed = 60*6;
+int daySpeed = 60*6; // 60*6
 
-boolean exportVideo = true;
+boolean exportVideo = false;
 
 void setup() {
   
   size(1080, 720);
-  // size(2560, 1440);
+  //size(2560, 1440);
   
   parseJSON = new ParseJSON(); 
   
@@ -59,13 +59,17 @@ void draw() {
 
   TimeFrame timeFrameSelected = parseJSON.timeFrames.get(dayCount%365);
   
-  image(rainDrops.draw(timeFrameSelected.precipitationN), 0.0, 0.0);
-  blend(perlinCloud.draw(timeFrameSelected.cloudCoverN), 0, 0, width, height, 0, 0, width, height, SCREEN);
-  blend(moonPhases.draw(timeFrameSelected.moonAge), 0, 0, width, height, 0, 0, width, height, SCREEN);
+  //image(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0, 0);
+  
+  image(rainDrops.draw(timeFrameSelected.precipitationN, timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0.0, 0.0);
   blend(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0, 0, width, height, 0, 0, width, height, SCREEN);
-  blend(tideLines.draw(timeFrameSelected.tideMinN, timeFrameSelected.tideMaxN), 0, 0, width, height, 0, 0, width, height, SCREEN);  
-  blend(sunRise.draw(timeFrameSelected.cloudCoverN), 0, 0, width, height, 0, 0, width, height, SCREEN);
+  //blend(perlinCloud.draw(timeFrameSelected.cloudCoverN), 0, 0, width, height, 0, 0, width, height, SCREEN);
+  //blend(moonPhases.draw(timeFrameSelected.moonAge), 0, 0, width, height, 0, 0, width, height, SCREEN);
+  //blend(tideLines.draw(timeFrameSelected.tideMinN, timeFrameSelected.tideMaxN), 0, 0, width, height, 0, 0, width, height, SCREEN);  
+  //blend(sunRise.draw(timeFrameSelected.cloudCoverN), 0, 0, width, height, 0, 0, width, height, SCREEN);
   blend(temperature.draw(timeFrameSelected.temperatureN), 0, 0, width, height, 0, 0, width, height, SCREEN);
+  
+  //image(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0, 0);
   
   
   //image(temperature.draw(timeFrameSelected.temperatureN), 0.0, 0.0);
@@ -105,7 +109,9 @@ void draw() {
   }
   
   if(frameCount%(daySpeed) == daySpeed-1) {
-    videoExport.endMovie();
+    if(exportVideo) {
+      videoExport.endMovie();
+    }
   }
 
 

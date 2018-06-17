@@ -7,7 +7,7 @@ class WindMap {
 
 	WindMap(int width, int height) {
 		//pg = createGraphics(1080, 720);
-		pg = createGraphics(width, height);
+		pg = createGraphics(width, height, JAVA2D);
 
 		flowfield = new FlowField(10);
 		vehicles = new ArrayList<Vehicle>();
@@ -20,17 +20,18 @@ class WindMap {
 	 PGraphics draw(int windDirection, float windSpeedN) {
 
 	 	pg.beginDraw();
+    pg.background(0);
+	 	pg.smooth();
+    
+		flowfield.display(pg);
+		
+		for (Vehicle v : vehicles) {
+  		v.follow(flowfield);
+  		v.run(pg, windSpeedN);
+		}
 
-	 	pg.background(0);
-  		flowfield.display(pg);
-  		
-  		for (Vehicle v : vehicles) {
-    		v.follow(flowfield);
-    		v.run(pg, windSpeedN);
-  		}
-  
-  		flowfield.init(windDirection);
-  		pg.endDraw();	
+		flowfield.init(windDirection);
+		pg.endDraw();	
 
   		return pg;
 	 }
@@ -95,14 +96,33 @@ void follow(FlowField flow) {
     float arrowsize = 8;
     pg.translate(position.x,position.y);
     pg.stroke(255);
+    //pg.strokeWeight(5);
     pg.rotate(velocity.heading2D());
     float len = velocity.mag();
-    float c = map(maxspeed, 2, 7, 0, 255);
-    pg.stroke(c, 255-c, 255-c);
+    float c = map(maxspeed, 2, 7, 0, 1.0);
+    //float c = map(mouseX, 0.0, width, 0, 1.0);
+    
+    color c1 = color(100,149,237);
+    color c2 = color(0, 255, 0);
+    color c3 = color(255, 255, 0);
+    color c4 = color(255, 0, 0);
+
+    color sc = color(0.0); 
+    color sc2 = color(0.0);
+    if(c<0.5) {
+      sc = lerpColor(c1, c2, map(c, 0.0, 0.5, 0.0, 1.0) );
+    }
+    if(c > 0.5) {
+      sc2 = lerpColor(c3, c4, map(c, 0.5, 1.0, 0.0, 1.0) );
+    }
+    
+    pg.strokeWeight(2);
+    pg.stroke(sc+sc2);
     pg.line(len,0,len-arrowsize*2.0,0);
     pg.line(len,0,len-arrowsize,+arrowsize/2);
     pg.line(len,0,len-arrowsize,-arrowsize/2);
     pg.popMatrix();
+    pg.strokeWeight(1);
   }
 
   void borders() {

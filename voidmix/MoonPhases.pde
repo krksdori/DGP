@@ -41,26 +41,27 @@ class MoonPhases {
       }
     
       moonTexture.endDraw();
-      //moonPhasesDraw(moonPhases);
+      //moonPhasesDraw(moonPhases, 0.0);
 
   }
 
   void moonPhasesDraw(PGraphics p, float moonAge) {
     p.beginDraw();
- 
     float mapMoonData = map(moonAge, 0.0, 29.53059, 600.0, 0.0);
 
     t = ((mapMoonData+300)%frames)/(float)frames;
-    p.background(bg);
-    
+    p.background(0);
     p.translate(width/2, height/2);
 
     float moonRotate = map(moonAge, 0.0, 29.53059, PI*0.0, -PI*2.0);
 
-    p.rotate(moonRotate);
-    p.translate(200, 0.0);
+    float rX = cos(moonRotate)*200;
+    float rY = sin(moonRotate)*200;
 
-    
+    //p.rotate(moonRotate);
+    p.translate(floor(rX), floor(rY));
+    //p.rotate(frameCount*0.1);
+
 
     p.noStroke();
     p.rotate(PI/2);
@@ -107,17 +108,24 @@ PGraphics rotateMoon(float moonAge) {
   moon.beginDraw();
   moon.pushMatrix();
   moon.translate(width/2,height/2);
-  
+
   float moonRotate = map(moonAge, 0.0, 29.53059, PI*0.0, -PI*2.0);
 
-  moon.rotate(moonRotate);
-  moon.translate(200, 0.0);
+  //moon.rotate(moonRotate);
 
-  moon.rotate( (float)(frameCount*0.02*Math.sin(frameCount*0.005)*0.01) );
-  // moon.fill(255, 0, 0);
+  float rX = cos(moonRotate)*200;
+  float rY = sin(moonRotate)*200;
+  
+  moon.translate(floor(rX), floor(rY));
+    
+  //moon.rotate( (float)(frameCount*0.02*Math.sin(frameCount*0.005)*0.01) );
+  //moon.fill(255, 0, 0);
+
   
   // moon.rect(0, 0, width,height);
   moon.image(moonTexture, -width/2, -height/2);
+  //moon.fill(255, 0, 0);
+  //moon.rect(0, 0, width, height);
   moon.popMatrix();
   moon.endDraw();
   return moon;
@@ -127,7 +135,8 @@ PGraphics rotateMoon(float moonAge) {
 
     
     pg.beginDraw();
-    
+    pg.background(0);
+
     moonPhasesDraw(moonPhases, moonAge);
     pg.image(moonPhases, 0, 0);
     pg.blend(rotateMoon(moonAge), 0, 0, width, height, 0, 0, width, height, DARKEST);

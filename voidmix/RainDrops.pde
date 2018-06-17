@@ -16,13 +16,14 @@ class RainDrops {
     
   }
   
-  PGraphics draw(float p) {
+  PGraphics draw(float p, float windDirection, float windSpeed) {
    
    pg.beginDraw();
    if(p < 0.025) {
-      pg.background(0, 0, map(p, 0.0, 1.0, 140, 100));
+     //pg.background(0, 0, map(p, 0.0, 1.0, 140, 100));
+     pg.background(100);
    } else {
-    pg.background(map(p, 0.0, 1.0, 10, 50));
+     pg.background(map(p, 0.0, 1.0, 10, 50));
    } 
    
    if( p < 0.025) {
@@ -30,11 +31,24 @@ class RainDrops {
    }
    float treshHold = map(p, 0.0, 1.0, 0, 1000);
    
+   float rainOffset = 0.0;
+   
+   if(windDirection > 300 || windDirection < 60) {
+      rainOffset = -40*windSpeed;
+      println("right");
+   } else if(windDirection > 120 && windDirection < 240) {
+      rainOffset = 40*windSpeed;
+      println("left");
+   }
+
+
+
+
    for (int i = 0; i < rains.size(); i++) {
-     if(i<treshHold) {  
+     if(i<treshHold) {   //treshHold
         Rain rain = rains.get(i);
-        rain.fall();
-        rain.show(pg);
+        rain.fall(rainOffset);
+        rain.show(pg, rainOffset);
         
       }
    }
@@ -62,9 +76,9 @@ class Rain {
 
   }
 
-  void fall() {
+  void fall(float rainOffset) {
     y = y + (yspeed+yspeed*0.1);
-    x = x - 10;//(yspeed+yspeed*0.1);
+    x = x - rainOffset;//(yspeed+yspeed*0.1);
     
     if (y > height) {
       y = 0;
@@ -80,8 +94,8 @@ class Rain {
      }
   }
 
-  void show(PGraphics pg) {
+  void show(PGraphics pg, float rainOffset) {
     pg.stroke(255, 150);
-    pg.line(x, y, x-10, y+yspeed+len);
+    pg.line(x, y, x-rainOffset, y+yspeed+len);
   }
 }

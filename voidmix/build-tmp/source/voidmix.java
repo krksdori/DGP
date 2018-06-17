@@ -28,16 +28,17 @@ SunRise sunRise;
 WindMap windMap;
 PerlinCloud perlinCloud;
 TideLines tideLines;
+Temperature temperature;
 
-int dayCount = 0;
-int daySpeed = 60*6;
+int dayCount = 100;
+int daySpeed = 60*6; // 60*6
 
 boolean exportVideo = false;
 
 public void setup() {
   
   
-  // size(2560, 1440);
+  //size(2560, 1440);
   
   parseJSON = new ParseJSON(); 
   
@@ -47,38 +48,49 @@ public void setup() {
   windMap = new WindMap(width, height);
   perlinCloud = new PerlinCloud(width, height);
   tideLines = new TideLines(width, height);
+  temperature = new Temperature(width, height);
   
   parseJSON.parse("result.json");
 
-  if(exportVideo) {
-    videoExport = new VideoExport(this, "export/options-"+hour()+""+minute()+""+second()+".mp4");
-    videoExport.setQuality(70, 128);
-    videoExport.setFrameRate(60);
-    videoExport.setLoadPixels(true);
-    videoExport.setDebugging(false);
-    videoExport.startMovie();
-  }
+  initVideo();
 
+}
+
+public void initVideo() {
+  if(exportVideo) {
+      videoExport = new VideoExport(this, "export/options-day-" + dayCount + ".mp4");
+      videoExport.setQuality(70, 128);
+      videoExport.setFrameRate(60);
+      videoExport.setLoadPixels(true);
+      videoExport.setDebugging(false);
+      videoExport.startMovie();
+  }
 }
 
 public void draw() {
  
   background(200);
-  
   if(frameCount%(daySpeed) == 0) {
     dayCount = dayCount%365+1;
+    initVideo();
   }
 
   TimeFrame timeFrameSelected = parseJSON.timeFrames.get(dayCount%365);
   
-  image(rainDrops.draw(timeFrameSelected.precipitationN), 0.0f, 0.0f);
-  blend(perlinCloud.draw(timeFrameSelected.cloudCoverN), 0, 0, width, height, 0, 0, width, height, SCREEN);
-  blend(moonPhases.draw(timeFrameSelected.moonAge), 0, 0, width, height, 0, 0, width, height, SCREEN);
-  blend(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0, 0, width, height, 0, 0, width, height, SCREEN);
-  blend(tideLines.draw(timeFrameSelected.tideMinN, timeFrameSelected.tideMaxN), 0, 0, width, height, 0, 0, width, height, SCREEN);  
-  blend(sunRise.draw(timeFrameSelected.cloudCoverN), 0, 0, width, height, 0, 0, width, height, SCREEN);
-
+  //image(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0, 0);
   
+  image(rainDrops.draw(timeFrameSelected.precipitationN, timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0.0f, 0.0f);
+  blend(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0, 0, width, height, 0, 0, width, height, SCREEN);
+  //blend(perlinCloud.draw(timeFrameSelected.cloudCoverN), 0, 0, width, height, 0, 0, width, height, SCREEN);
+  //blend(moonPhases.draw(timeFrameSelected.moonAge), 0, 0, width, height, 0, 0, width, height, SCREEN);
+  //blend(tideLines.draw(timeFrameSelected.tideMinN, timeFrameSelected.tideMaxN), 0, 0, width, height, 0, 0, width, height, SCREEN);  
+  //blend(sunRise.draw(timeFrameSelected.cloudCoverN), 0, 0, width, height, 0, 0, width, height, SCREEN);
+  blend(temperature.draw(timeFrameSelected.temperatureN), 0, 0, width, height, 0, 0, width, height, SCREEN);
+  
+  //image(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0, 0);
+  
+  
+  //image(temperature.draw(timeFrameSelected.temperatureN), 0.0, 0.0);
   
   // image(tideLines.draw(timeFrameSelected.tideMinN, timeFrameSelected.tideMaxN), 0, 0);
   // image(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0.0, 0.0);
@@ -106,10 +118,20 @@ public void draw() {
  
  text("cloudCoverN: " + timeFrameSelected.cloudCoverN, 50, 270);
  
+ text("temperature: " + timeFrameSelected.temperature, 50, 290);
+ text("temperatureN: " + timeFrameSelected.temperatureN, 50, 310);
+ 
   
   if(exportVideo) {
     videoExport.saveFrame();
   }
+  
+  if(frameCount%(daySpeed) == daySpeed-1) {
+    if(exportVideo) {
+      videoExport.endMovie();
+    }
+  }
+
 
 }
 
@@ -178,26 +200,27 @@ class MoonPhases {
       }
     
       moonTexture.endDraw();
-      //moonPhasesDraw(moonPhases);
+      //moonPhasesDraw(moonPhases, 0.0);
 
   }
 
   public void moonPhasesDraw(PGraphics p, float moonAge) {
     p.beginDraw();
- 
     float mapMoonData = map(moonAge, 0.0f, 29.53059f, 600.0f, 0.0f);
 
     t = ((mapMoonData+300)%frames)/(float)frames;
-    p.background(bg);
-    
+    p.background(0);
     p.translate(width/2, height/2);
 
     float moonRotate = map(moonAge, 0.0f, 29.53059f, PI*0.0f, -PI*2.0f);
 
-    p.rotate(moonRotate);
-    p.translate(200, 0.0f);
+    float rX = cos(moonRotate)*200;
+    float rY = sin(moonRotate)*200;
 
-    
+    //p.rotate(moonRotate);
+    p.translate(floor(rX), floor(rY));
+    //p.rotate(frameCount*0.1);
+
 
     p.noStroke();
     p.rotate(PI/2);
@@ -244,17 +267,24 @@ public PGraphics rotateMoon(float moonAge) {
   moon.beginDraw();
   moon.pushMatrix();
   moon.translate(width/2,height/2);
-  
+
   float moonRotate = map(moonAge, 0.0f, 29.53059f, PI*0.0f, -PI*2.0f);
 
-  moon.rotate(moonRotate);
-  moon.translate(200, 0.0f);
+  //moon.rotate(moonRotate);
 
-  moon.rotate( (float)(frameCount*0.02f*Math.sin(frameCount*0.005f)*0.01f) );
-  // moon.fill(255, 0, 0);
+  float rX = cos(moonRotate)*200;
+  float rY = sin(moonRotate)*200;
+  
+  moon.translate(floor(rX), floor(rY));
+    
+  //moon.rotate( (float)(frameCount*0.02*Math.sin(frameCount*0.005)*0.01) );
+  //moon.fill(255, 0, 0);
+
   
   // moon.rect(0, 0, width,height);
   moon.image(moonTexture, -width/2, -height/2);
+  //moon.fill(255, 0, 0);
+  //moon.rect(0, 0, width, height);
   moon.popMatrix();
   moon.endDraw();
   return moon;
@@ -264,7 +294,8 @@ public PGraphics rotateMoon(float moonAge) {
 
     
     pg.beginDraw();
-    
+    pg.background(0);
+
     moonPhasesDraw(moonPhases, moonAge);
     pg.image(moonPhases, 0, 0);
     pg.blend(rotateMoon(moonAge), 0, 0, width, height, 0, 0, width, height, DARKEST);
@@ -325,10 +356,12 @@ class ParseJSON {
         JSONObject cloudCoverJO = timeFrame.getJSONObject("cloudCover");
         float cloudCoverN = cloudCoverJO.getFloat("normalized");
         
+        JSONObject temperatureJO = timeFrame.getJSONObject("temperature");
+        float temperature = (temperatureJO.getFloat("value"))*0.1f;
+        float temperatureN = temperatureJO.getFloat("normalized");
 
-        timeFrames.add(new TimeFrame(date, precipitation, precipitationN, moonAge, moonVisible, moonPhase, windDirection, windSpeedValue, windSpeedValueN, tideMin, tideMinN, tideMax, tideMaxN, cloudCoverN));
-        
-        println(timeFrames.size());
+        timeFrames.add(new TimeFrame(date, precipitation, precipitationN, moonAge, moonVisible, moonPhase, windDirection, windSpeedValue, windSpeedValueN, tideMin, tideMinN, tideMax, tideMaxN, cloudCoverN, temperature, temperatureN));
+       // println(timeFrames.size());
     }
   }
 }
@@ -355,7 +388,10 @@ class TimeFrame {
 
    float cloudCoverN;
    
-   TimeFrame(String date, float precipitation, float precipitationN, float moonAge, int moonVisible, String moonPhase, int windDirection, int windSpeed, float windSpeedN, int tideMin, float tideMinN, int tideMax, float tideMaxN, float cloudCoverN) {
+   float temperature;
+   float temperatureN;
+   
+   TimeFrame(String date, float precipitation, float precipitationN, float moonAge, int moonVisible, String moonPhase, int windDirection, int windSpeed, float windSpeedN, int tideMin, float tideMinN, int tideMax, float tideMaxN, float cloudCoverN, float temperature, float temperatureN) {
      this.date = date;
      this.precipitation = precipitation;
      this.precipitationN = precipitationN;
@@ -370,7 +406,8 @@ class TimeFrame {
      this.tideMax = tideMax;
      this.tideMaxN = tideMaxN;
      this.cloudCoverN = cloudCoverN;
-
+     this.temperature = temperature;
+     this.temperatureN = temperatureN;
    }
    
 }
@@ -443,13 +480,14 @@ class RainDrops {
     
   }
   
-  public PGraphics draw(float p) {
+  public PGraphics draw(float p, float windDirection, float windSpeed) {
    
    pg.beginDraw();
    if(p < 0.025f) {
-      pg.background(0, 0, map(p, 0.0f, 1.0f, 140, 100));
+     //pg.background(0, 0, map(p, 0.0, 1.0, 140, 100));
+     pg.background(100);
    } else {
-    pg.background(map(p, 0.0f, 1.0f, 10, 50));
+     pg.background(map(p, 0.0f, 1.0f, 10, 50));
    } 
    
    if( p < 0.025f) {
@@ -457,11 +495,24 @@ class RainDrops {
    }
    float treshHold = map(p, 0.0f, 1.0f, 0, 1000);
    
+   float rainOffset = 0.0f;
+   
+   if(windDirection > 300 || windDirection < 60) {
+      rainOffset = -40*windSpeed;
+      println("right");
+   } else if(windDirection > 120 && windDirection < 240) {
+      rainOffset = 40*windSpeed;
+      println("left");
+   }
+
+
+
+
    for (int i = 0; i < rains.size(); i++) {
-     if(i<treshHold) {  
+     if(i<treshHold) {   //treshHold
         Rain rain = rains.get(i);
-        rain.fall();
-        rain.show(pg);
+        rain.fall(rainOffset);
+        rain.show(pg, rainOffset);
         
       }
    }
@@ -489,9 +540,9 @@ class Rain {
 
   }
 
-  public void fall() {
+  public void fall(float rainOffset) {
     y = y + (yspeed+yspeed*0.1f);
-    x = x - 10;//(yspeed+yspeed*0.1);
+    x = x - rainOffset;//(yspeed+yspeed*0.1);
     
     if (y > height) {
       y = 0;
@@ -507,9 +558,9 @@ class Rain {
      }
   }
 
-  public void show(PGraphics pg) {
+  public void show(PGraphics pg, float rainOffset) {
     pg.stroke(255, 150);
-    pg.line(x, y, x-10, y+yspeed+len);
+    pg.line(x, y, x-rainOffset, y+yspeed+len);
   }
 }
 
@@ -584,6 +635,43 @@ class Blob {
   }
 
   
+
+}
+
+class Temperature {
+
+	PGraphics pg;
+
+  int warm = color(255, 100, 0);
+  int cold = color(0, 100, 255);
+
+	Temperature(int width, int height) {
+		pg = createGraphics(width, height);
+	}
+
+	public PGraphics draw(float temperature) {
+		  pg.beginDraw();
+		  pg.loadPixels();
+
+      	//float finalR = red(cold)*(1.0-temperature) + red(warm)*(temperature); 
+      	//float finalG = green(cold)*(1.0-temperature) + green(warm)*(temperature); 
+      	//float finalB = blue(cold)*(1.0-temperature) + blue(warm)*(temperature); 
+
+      	  int sc = lerpColor(cold, warm, temperature );
+		  for (int i = 0; i < width*height; i++) {
+  				pg.pixels[i] = color(red(sc), green(sc), blue(sc), 130);
+		  }
+
+
+
+		  pg.updatePixels();
+
+
+		  pg.endDraw();
+
+
+		  return pg;
+	}
 
 }
 
@@ -706,7 +794,7 @@ class WindMap {
 
 	WindMap(int width, int height) {
 		//pg = createGraphics(1080, 720);
-		pg = createGraphics(width, height);
+		pg = createGraphics(width, height, JAVA2D);
 
 		flowfield = new FlowField(10);
 		vehicles = new ArrayList<Vehicle>();
@@ -719,17 +807,18 @@ class WindMap {
 	 public PGraphics draw(int windDirection, float windSpeedN) {
 
 	 	pg.beginDraw();
+    pg.background(0);
+	 	pg.smooth();
+    
+		flowfield.display(pg);
+		
+		for (Vehicle v : vehicles) {
+  		v.follow(flowfield);
+  		v.run(pg, windSpeedN);
+		}
 
-	 	pg.background(0);
-  		flowfield.display(pg);
-  		
-  		for (Vehicle v : vehicles) {
-    		v.follow(flowfield);
-    		v.run(pg, windSpeedN);
-  		}
-  
-  		flowfield.init(windDirection);
-  		pg.endDraw();	
+		flowfield.init(windDirection);
+		pg.endDraw();	
 
   		return pg;
 	 }
@@ -794,14 +883,33 @@ public void follow(FlowField flow) {
     float arrowsize = 8;
     pg.translate(position.x,position.y);
     pg.stroke(255);
+    //pg.strokeWeight(5);
     pg.rotate(velocity.heading2D());
     float len = velocity.mag();
-    float c = map(maxspeed, 2, 7, 0, 255);
-    pg.stroke(c, 255-c, 255-c);
+    float c = map(maxspeed, 2, 7, 0, 1.0f);
+    //float c = map(mouseX, 0.0, width, 0, 1.0);
+    
+    int c1 = color(100,149,237);
+    int c2 = color(0, 255, 0);
+    int c3 = color(255, 255, 0);
+    int c4 = color(255, 0, 0);
+
+    int sc = color(0.0f); 
+    int sc2 = color(0.0f);
+    if(c<0.5f) {
+      sc = lerpColor(c1, c2, map(c, 0.0f, 0.5f, 0.0f, 1.0f) );
+    }
+    if(c > 0.5f) {
+      sc2 = lerpColor(c3, c4, map(c, 0.5f, 1.0f, 0.0f, 1.0f) );
+    }
+    
+    pg.strokeWeight(2);
+    pg.stroke(sc+sc2);
     pg.line(len,0,len-arrowsize*2.0f,0);
     pg.line(len,0,len-arrowsize,+arrowsize/2);
     pg.line(len,0,len-arrowsize,-arrowsize/2);
     pg.popMatrix();
+    pg.strokeWeight(1);
   }
 
   public void borders() {
@@ -880,7 +988,7 @@ class FlowField {
 }
   public void settings() {  size(1080, 720); }
   static public void main(String[] passedArgs) {
-    String[] appletArgs = new String[] { "voidmix" };
+    String[] appletArgs = new String[] { "--present", "--window-color=#000000", "--hide-stop", "voidmix" };
     if (passedArgs != null) {
       PApplet.main(concat(appletArgs, passedArgs));
     } else {
