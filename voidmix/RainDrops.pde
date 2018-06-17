@@ -20,9 +20,10 @@ class RainDrops {
    
    pg.beginDraw();
    if(p < 0.025) {
-     //pg.background(0, 0, map(p, 0.0, 1.0, 140, 100));
-     pg.background(100);
+     pg.background(0, 0, map(p, 0.0, 1.0, 140, 100));
+     //pg.background(0, 0, 255);
    } else {
+     //pg.background(255, 0, 0);
      pg.background(map(p, 0.0, 1.0, 10, 50));
    } 
    
@@ -35,10 +36,10 @@ class RainDrops {
    
    if(windDirection > 300 || windDirection < 60) {
       rainOffset = -40*windSpeed;
-      println("right");
+      //println("right");
    } else if(windDirection > 120 && windDirection < 240) {
       rainOffset = 40*windSpeed;
-      println("left");
+      //println("left");
    }
 
 
