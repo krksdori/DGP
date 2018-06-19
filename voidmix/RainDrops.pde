@@ -3,11 +3,16 @@ class RainDrops {
   
   ArrayList<Rain> rains = new ArrayList();
   PGraphics pg;
+  int blockw = 2560;
+  int blockh = 1440;
   
-  RainDrops(int width, int height) {
+  RainDrops(int _width, int _height) {
     
     //pg = createGraphics(1080, 720);
-    pg = createGraphics(width, height);
+    pg = createGraphics(_width, _height);
+    
+    blockw = _width;
+    blockh = _height;
      
     for(int i = 0; i < 1000; i++){
      rains.add(new Rain());
@@ -69,8 +74,8 @@ class Rain {
   float mx;
 
   Rain() {
-    x  = random(width);
-    y  = random(-height, 0);
+    x  = random(blockw);
+    y  = random(-blockh, 0);
     z  = 2.0;//random(-400, 25);
     len = random(10)+5.0;
     yspeed  = random(5)+10;
@@ -81,17 +86,17 @@ class Rain {
     y = y + (yspeed+yspeed*0.1);
     x = x - rainOffset;//(yspeed+yspeed*0.1);
     
-    if (y > height) {
+    if (y > blockh) {
       y = 0;
       yspeed = random(5)+10;
     }
     
-     if (x > width) {
+     if (x > blockw) {
       x = 0;
      }
      
      if (x < 0) {
-      x = width;
+      x = blockw;
      }
   }
 

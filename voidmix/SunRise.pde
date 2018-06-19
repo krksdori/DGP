@@ -3,11 +3,15 @@ class SunRise {
   
   Blob b;
   PGraphics pg;
+  int blockw = 2560;
+  int blockh = 1440;
  
-  SunRise(int width, int height) {
+  SunRise(int _width, int _height) {
      b = new Blob(0, 0);
      //pg = createGraphics(1080, 720);
-     pg = createGraphics(width, height);
+     pg = createGraphics(_width, _height);
+     blockw = _width;
+     blockh = _height;
 
 
      
@@ -62,8 +66,8 @@ class Blob {
   float sliceRotation = (PI*1.0)/(60.0*6.0);
 
   void update() {
-    pos.x = ((cos( ((-frameCount*sliceRotation)-PI*2.0)%(PI*1.0) ) )*width/2) + width/2 ; // + width/2 -100
-    pos.y = ((sin( ((-frameCount*sliceRotation)-PI*2.0)%(PI*1.0) ) )*height*1.2) + height*1.5 ; // + height+height/3 -100
+    pos.x = ((cos( ((-frameCount*sliceRotation)-PI*2.0)%(PI*1.0) ) )*blockw/2) + blockw/2 ; // + width/2 -100
+    pos.y = ((sin( ((-frameCount*sliceRotation)-PI*2.0)%(PI*1.0) ) )*blockh*1.2) +blockh*1.5 ; // + height+height/3 -100
     // pos.x = ((width+200.0) - ((frameCount*sliceRotation)%(width+400.0)));
     // pos.y = height/2;
 

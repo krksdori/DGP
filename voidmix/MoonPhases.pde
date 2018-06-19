@@ -11,16 +11,19 @@ class MoonPhases {
   PGraphics moonTexture; 
   PGraphics moonPhases;
   PGraphics moon;
-  
+  int blockw = 2560;
+  int blockh = 1440;
   PGraphics pg;
   
-  MoonPhases(int width, int height) {
+  MoonPhases(int _width, int _height) {
+      blockw = _width;
+      blockh = _height;
       //pg = createGraphics(1080, 720);
-      pg = createGraphics(width, height);
+      pg = createGraphics(_width, _height);
 
-      moonTexture = createGraphics(width, height);
-      moonPhases = createGraphics(width, height);
-      moon = createGraphics(width, height);
+      moonTexture = createGraphics(blockw, blockh);
+      moonPhases = createGraphics(blockw, blockh);
+      moon = createGraphics(blockw, blockh);
 
       moonTexture.beginDraw();
       moonTexture.background(0);
@@ -30,13 +33,13 @@ class MoonPhases {
         moonTexture.strokeWeight(0.1);
         moonTexture.stroke(255, 255, 255, 10);
 
-        float x1 = width/2 + radius*0.5 * cos(t);
-        float y1 = height/2 + radius*0.5 * sin(t);
+        float x1 = blockw/2 + radius*0.5 * cos(t);
+        float y1 = blockh/2 + radius*0.5 * sin(t);
 
         t = random(TWO_PI);
 
-        float x2 = width/2 + radius*0.5 * cos(t);
-        float y2 = height/2 + radius*0.5 * sin(t);
+        float x2 = blockw/2 + radius*0.5 * cos(t);
+        float y2 = blockh/2 + radius*0.5 * sin(t);
         moonTexture.line(x1, y1, x2, y2);
       }
     
@@ -51,7 +54,7 @@ class MoonPhases {
 
     t = ((mapMoonData+300)%frames)/(float)frames;
     p.background(0);
-    p.translate(width/2, height/2);
+    p.translate(blockw/2, blockh/2);
 
     float moonRotate = map(moonAge, 0.0, 29.53059, PI*0.0, -PI*2.0);
 
@@ -107,7 +110,7 @@ class MoonPhases {
 PGraphics rotateMoon(float moonAge) {
   moon.beginDraw();
   moon.pushMatrix();
-  moon.translate(width/2,height/2);
+  moon.translate(blockw/2,blockh/2);
 
   float moonRotate = map(moonAge, 0.0, 29.53059, PI*0.0, -PI*2.0);
 
@@ -123,7 +126,7 @@ PGraphics rotateMoon(float moonAge) {
 
   
   // moon.rect(0, 0, width,height);
-  moon.image(moonTexture, -width/2, -height/2);
+  moon.image(moonTexture, -blockw/2, -blockh/2);
   //moon.fill(255, 0, 0);
   //moon.rect(0, 0, width, height);
   moon.popMatrix();
@@ -139,7 +142,7 @@ PGraphics rotateMoon(float moonAge) {
 
     moonPhasesDraw(moonPhases, moonAge);
     pg.image(moonPhases, 0, 0);
-    pg.blend(rotateMoon(moonAge), 0, 0, width, height, 0, 0, width, height, DARKEST);
+    pg.blend(rotateMoon(moonAge), 0, 0, blockw, blockh, 0, 0, blockw, blockh, DARKEST);
     pg.endDraw();
     
     

@@ -4,16 +4,21 @@ class WindMap {
 	FlowField flowfield;
 	ArrayList<Vehicle> vehicles;
 	PGraphics pg;
+  int blockw = 2560;
+  int blockh = 1440;
 
-	WindMap(int width, int height) {
+	WindMap(int _width, int _height) {
 		//pg = createGraphics(1080, 720);
-		pg = createGraphics(width, height, JAVA2D);
+		pg = createGraphics(_width, _height);
+
+    blockw = _width;
+    blockh = _height;
 
 		flowfield = new FlowField(10);
 		vehicles = new ArrayList<Vehicle>();
 
 		for (int i = 0; i < 300; i++) {
-		  vehicles.add(new Vehicle(new PVector(random(width), random(height)), random(2, 5), random(0.1, 1.1)));
+		  vehicles.add(new Vehicle(new PVector(random(blockw), random(blockh)), random(2, 5), random(0.1, 1.1)));
 		}
 	}
 
@@ -126,10 +131,10 @@ void follow(FlowField flow) {
   }
 
   void borders() {
-    if (position.x < -r) position.x = width+r;
-    if (position.y < -r) position.y = height+r;
-    if (position.x > width+r) position.x = -r;
-    if (position.y > height+r) position.y = -r;
+    if (position.x < -r) position.x = blockw+r;
+    if (position.y < -r) position.y = blockh+r;
+    if (position.x > blockw+r) position.x = -r;
+    if (position.y > blockh+r) position.y = -r;
   }
 }
 
@@ -143,8 +148,8 @@ class FlowField {
 
   FlowField(int r) {
     resolution = r;
-    cols = width/resolution;
-    rows = height/resolution;
+    cols = blockw/resolution;
+    rows = blockh/resolution;
     field = new PVector[cols][rows];
     init(0);
   }

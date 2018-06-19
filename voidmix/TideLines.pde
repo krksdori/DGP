@@ -5,13 +5,17 @@ class TideLines {
 	float noiseF;
 	float f = 0.0;
 	float colorState;
-
-	float movingSlider = 0.5;
+  float movingSlider = 0.5;
+  int blockw = 2560;
+  int blockh = 1440;
 
 	PGraphics pg;
 
-	TideLines(int width, int height) {
-		pg = createGraphics(width, height);
+	TideLines(int _width, int _height) {
+		pg = createGraphics(_width, _height);
+    
+    blockw = _width;
+    blockh = _height;
 
 		pg.beginDraw();
 		pg.background(0);
@@ -49,7 +53,7 @@ class TideLines {
 		
 		}
 		
-		float slider = map(movingSlider, 0.0, 1.0, -height*0.5, height*1.4);
+		float slider = map(movingSlider, 0.0, 1.0, -blockw*0.5, blockh*1.4);
 
 
 
@@ -63,15 +67,15 @@ class TideLines {
   
 		float waveH = 100; //100+sin(frameCount*0.1)*300; // map(width/2, 0, width, 100, 500);
 		
-		for (int h = 0; h < height; h += 10) {
+		for (int h = 0; h < blockh; h += 10) {
 		    
 		    if(h < slider) {
 
 		    pg.beginShape(); 
 		    //pg.stroke(map(h, frameCount%height, height, 10, 20), map(h, frameCount%height, height, 0, 100), 255);
-		    float colorShade = map(h, 0, height, 0, 255);
-		    float colorShade2 = map(h, 0, height, 0, 100);
-		    float colorShade3 = map(h, slider-(100*movingSlider), height, 0, 255);
+		    float colorShade = map(h, 0, blockh, 0, 255);
+		    float colorShade2 = map(h, 0, blockh, 0, 100);
+		    float colorShade3 = map(h, slider-(100*movingSlider), blockh, 0, 255);
 		    if(colorShade3<0) {
 		    	colorShade3 = 0;
 		    }
@@ -82,7 +86,7 @@ class TideLines {
 
 		    pg.curveVertex(x, y);
 		    
-		    for (int w = 0; w <= width+100; w += 50) {
+		    for (int w = 0; w <= blockw+100; w += 50) {
 		      x = w;
 		      float n = noise(noiseX + w * 0.001, noiseY + h * 0.01, noiseF + f);
 		      y = h + waveH * n;
@@ -90,8 +94,8 @@ class TideLines {
 		      pg.curveVertex(x, y);
 		    }
 
-		    x = width;
-		    y = h + waveH * noise(noiseX + width, noiseY + h * 0.01, noiseF + f);
+		    x = blockw;
+		    y = h + waveH * noise(noiseX + blockw, noiseY + h * 0.01, noiseF + f);
 
 		    pg.curveVertex(x, y);
 		    pg.endShape();
