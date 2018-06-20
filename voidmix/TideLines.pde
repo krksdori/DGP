@@ -40,11 +40,11 @@ class TideLines {
 
 		if(frameCount%(60*6) > (60*1.5) && frameCount%(60*6) < (60*3)) {
 			movingSlider = (movingSlider*0.99)+(min*0.01);
-			println("MIN");
+			//println("MIN");
 		
 		} else if(frameCount%(60*6) > (60*3) && frameCount%(60*6) < (60*4.5)) {
 			movingSlider = (movingSlider*0.99)+(max*0.01);
-			println("MAX");		
+			//println("MAX");		
 		} 
 
 		else if(frameCount%(60*6) > (60*4.5) && frameCount%(60*6) < (60*6)) {

@@ -18,7 +18,7 @@ class SunRise {
   }
   
 
-  PGraphics draw(float cloudCoverN) {
+  PGraphics draw(float cloudCoverN, int ticker) {
 
     float v = map(cloudCoverN, 0, 1.0, 230, 150);
    if(cloudCoverN > 0.6) {
@@ -57,17 +57,21 @@ class Blob {
   Blob(float x, float y) {
     pos = new PVector (cos(x), sin(y));
     vel = new PVector(-1 , 1);
-    r = 80;
+    r = 20;
     
     pos.x = 0;
     pos.y = 0;
   }
   
-  float sliceRotation = (PI*1.0)/(60.0*6.0);
+  float sliceRotation = ((PI*2.0))/(60.0*4.0);
+  
+  // 5 = 100
+  // 3 = 60
+  // 
 
   void update() {
-    pos.x = ((cos( ((-frameCount*sliceRotation)-PI*2.0)%(PI*1.0) ) )*blockw/2) + blockw/2 ; // + width/2 -100
-    pos.y = ((sin( ((-frameCount*sliceRotation)-PI*2.0)%(PI*1.0) ) )*blockh*1.2) +blockh*1.5 ; // + height+height/3 -100
+    pos.x = ((cos( ((ticker*sliceRotation)-PI*1.25)%(PI*2.0) ) )*blockw/3.3) + blockw/2 ;//+ blockw/2 ; // + width/2 -100
+    pos.y = ((sin( ((ticker*sliceRotation)-PI*1.25)%(PI*2.0) ) )*blockw/4.3) + blockh/2 ; //+blockh*1.5 ; // + height+height/3 -100
     // pos.x = ((width+200.0) - ((frameCount*sliceRotation)%(width+400.0)));
     // pos.y = height/2;
 
