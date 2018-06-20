@@ -87,6 +87,9 @@ void draw() {
   if(ticker%(daySpeed) == 0) {
     if(firstAction == false) {
       dayCount = (dayCount%365)+1;
+      if(dayCount%365 ==0) {
+        exit();
+      }
     } else {
       firstAction = false;
     }
@@ -171,13 +174,15 @@ void draw() {
  // image(main, 0, 0);
   
  master.blend(sunRise.draw(timeFrameSelected.cloudCoverN, ticker), 0, 0, blockw, blockh, 0, 0, master.width, master.height, SCREEN);
-  
  master.endDraw();
- image(master, 0, 0, width, height);
+ //image(master, 0, 0, width, height);
  
  fill(255);
  text("day " + dayCount + " ,date " + timeFrameSelected.date, 50, 50);
  text("ticker: " + ticker, 50, 70);
+ if(activated) {
+   println(ticker);
+  }
  text("dayspeed: " + daySpeed, 50, 90);
  //master.text("moonAge: " + timeFrameSelected.moonAge, 50, 110);
  //master.text("moonVisible: " + timeFrameSelected.moonVisible+"%", 50, 130);
@@ -190,7 +195,6 @@ void draw() {
  //master.text("cloudCoverN: " + timeFrameSelected.cloudCoverN, 50, 270);
  //master.text("temperature: " + timeFrameSelected.temperature, 50, 290);
  //master.text("temperatureN: " + timeFrameSelected.temperatureN, 50, 310);
- 
   
  if(exportVideo) {
    if(activated) {
@@ -216,7 +220,7 @@ void dayNightFade(PGraphics main, int counter) {
  main.noStroke();
  main.fill(0, BGColor);
  main.rect(0, 0, blockw, blockh);
- println(counter%daySpeed);
+ //println(counter%daySpeed);
  BGColor = map(counter%daySpeed, (60*2.5)-fadeTime, (60*2.5), 0, 255);
  main.fill(0, BGColor);
  main.rect(0, 0, blockw, blockh); 
