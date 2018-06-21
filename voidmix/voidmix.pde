@@ -11,6 +11,7 @@ WindMap windMap;
 PerlinCloud perlinCloud;
 TideLines tideLines;
 Temperature temperature;
+LogScreen logScreen;
 
 int dayCount = 0;
 int daySpeed = 60*4; // 60*6
@@ -44,13 +45,14 @@ void setup() {
   
   parseJSON = new ParseJSON(); 
   
-  moonPhases = new MoonPhases(blockw, blockh);
+  moonPhases = new MoonPhases(master.width, master.height);
   rainDrops = new RainDrops(blockw, blockh);
   sunRise = new SunRise(blockw, blockh);
   windMap = new WindMap(blockw, blockh);
   perlinCloud = new PerlinCloud(blockw, blockh);
   tideLines = new TideLines(blockw, blockh);
   temperature = new Temperature(blockw, blockh);
+  logScreen = new LogScreen(blockw, blockh);
   
   parseJSON.parse("result.json");
 
@@ -82,8 +84,6 @@ void draw() {
  
   background(200);
   
-  
-  
   if(ticker%(daySpeed) == 0) {
     if(firstAction == false) {
       dayCount = (dayCount%365)+1;
@@ -104,9 +104,7 @@ void draw() {
   main.image(rainDrops.draw(timeFrameSelected.precipitationN, timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0.0, 0.0, blockw, blockh);
   main.blend(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
   main.blend(perlinCloud.draw(timeFrameSelected.cloudCoverN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
-  //main.blend(moonPhases.draw(timeFrameSelected.moonAge), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
   main.blend(tideLines.draw(timeFrameSelected.tideMinN, timeFrameSelected.tideMaxN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);  
-  //main.blend(sunRise.draw(timeFrameSelected.cloudCoverN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
   main.blend(temperature.draw(timeFrameSelected.temperatureN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
   
   dayNightFade(main, ticker);
@@ -172,8 +170,19 @@ void draw() {
   
     
  // image(main, 0, 0);
+
+ if(activated) {
+  master.image(logScreen.draw(timeFrameSelected, dayCount, ticker), master.width/3, master.height/3);
+ }
   
  master.blend(sunRise.draw(timeFrameSelected.cloudCoverN, ticker), 0, 0, blockw, blockh, 0, 0, master.width, master.height, SCREEN);
+<<<<<<< Updated upstream
+=======
+ master.blend(moonPhases.draw(timeFrameSelected.moonAge), 0, 0, master.width, master.height, 0, 0, master.width, master.height, SCREEN);
+  
+ 
+  
+>>>>>>> Stashed changes
  master.endDraw();
  //image(master, 0, 0, width, height);
  

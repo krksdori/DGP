@@ -58,8 +58,8 @@ class MoonPhases {
 
     float moonRotate = map(moonAge, 0.0, 29.53059, PI*0.0, -PI*2.0);
 
-    float rX = cos(moonRotate)*200;
-    float rY = sin(moonRotate)*200;
+    float rX = cos(moonRotate)*blockw/3;
+    float rY = sin(moonRotate)*blockh/3;
 
     //p.rotate(moonRotate);
     p.translate(floor(rX), floor(rY));
@@ -116,8 +116,8 @@ PGraphics rotateMoon(float moonAge) {
 
   //moon.rotate(moonRotate);
 
-  float rX = cos(moonRotate)*200;
-  float rY = sin(moonRotate)*200;
+  float rX = cos(moonRotate)*blockw/3;
+  float rY = sin(moonRotate)*blockh/3;
   
   moon.translate(floor(rX), floor(rY));
     
