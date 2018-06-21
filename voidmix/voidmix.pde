@@ -17,8 +17,8 @@ int dayCount = 0;
 int daySpeed = 60*4; // 60*6
 int cols = 3;
 int rows = 3;
-int blockw = 640;
-int blockh = 480;
+int blockw = 2560;
+int blockh = 1440;
 int masterw = blockw*3;
 int masterh = blockh*3;
 boolean activated = false;
@@ -176,15 +176,10 @@ void draw() {
  }
   
  master.blend(sunRise.draw(timeFrameSelected.cloudCoverN, ticker), 0, 0, blockw, blockh, 0, 0, master.width, master.height, SCREEN);
-<<<<<<< Updated upstream
-=======
  master.blend(moonPhases.draw(timeFrameSelected.moonAge), 0, 0, master.width, master.height, 0, 0, master.width, master.height, SCREEN);
   
- 
-  
->>>>>>> Stashed changes
  master.endDraw();
- //image(master, 0, 0, width, height);
+ image(master, 0, 0, width, height);
  
  fill(255);
  text("day " + dayCount + " ,date " + timeFrameSelected.date, 50, 50);
