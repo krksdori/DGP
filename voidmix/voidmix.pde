@@ -38,7 +38,7 @@ void setup() {
   //size(512, 288);
   //size(2560, 1440);
   //size(7680, 4320);
-
+  println("init");
 
   main = createGraphics(blockw,blockh);
   master = createGraphics(masterw, masterh);
@@ -179,7 +179,7 @@ void draw() {
  master.blend(moonPhases.draw(timeFrameSelected.moonAge), 0, 0, master.width, master.height, 0, 0, master.width, master.height, SCREEN);
   
  master.endDraw();
- image(master, 0, 0, width, height);
+ //image(master, 0, 0, width, height);
  
  fill(255);
  text("day " + dayCount + " ,date " + timeFrameSelected.date, 50, 50);
