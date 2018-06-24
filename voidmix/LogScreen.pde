@@ -1,14 +1,9 @@
-class ColumHolder {
-	String val1 = "";
-	String val2 = "";
-	String val3 = "";
-	String val4 = "";
+class Column {
+
+	String[] type = new String[3];
 	
-	ColumHolder(String _val1, String _val2, String _val3, String _val4) {
-		val1 = _val1;
-		val2 = _val2;
-		val3 = _val3;
-		val4 = _val4;
+	Column() {
+
 	}
 
 }
@@ -16,77 +11,90 @@ class ColumHolder {
 class LogScreen {
 
 	PGraphics pg;
+	PFont font;
 	int blockw = 2560;
   	int blockh = 1440;
-  	ArrayList<ColumHolder> lines;
   	int lastDayCount = -1;
   	float lineCounter = 0;
   	int lineCounterTarget = 0;
   	int removed = 0;
   	float lineHeight = 15;
-
+  	ArrayList<Column> columns = new ArrayList<Column>();
+  	ArrayList<Column> columnsTarget = new ArrayList<Column>();
+  	int fontSize = 60;
+  	
 	LogScreen(int _width, int _height) {
       	blockw = _width;
       	blockh = _height;
 
+      	font = createFont("data/font/SourceCodePro-Regular.ttf", fontSize);
 		pg = createGraphics(_width, _height);
-		lines = new ArrayList<ColumHolder>();
 
-		for(int i = 0;i < floor(blockh/lineHeight);i++) {
-			lines.add(new ColumHolder("-", "", "", ""));
+		for(int i = 0; i < 3; i++) {
+			columns.add(new Column());
+			columnsTarget.add(new Column());
 		}
+	}
+
+	void setType(TimeFrame timeFrameSelected) {
+		for(int i = 0; i < columnsTarget.size(); i++) {
+			if(i == 0) {
+				columnsTarget.get(i).type[0] = "moon age";
+				columnsTarget.get(i).type[1] = showType(timeFrameSelected.moonAge+"", abs(sin(frameCount*0.01)) );
+				columnsTarget.get(i).type[2] = "..";
+			} else if(i == 1) {
+				columnsTarget.get(i).type[0] = "moon visible" ;
+				columnsTarget.get(i).type[1] = showType(timeFrameSelected.moonVisible+"", abs(sin(((2*PI)*0.1)+frameCount*0.01)) );
+				columnsTarget.get(i).type[2] = "..";
+			} else if(i == 2) {
+				columnsTarget.get(i).type[0] = "moon phase";
+				columnsTarget.get(i).type[1] = showType(timeFrameSelected.moonPhase+"", abs(sin(((2*PI)*0.2)+frameCount*0.01)) );
+				columnsTarget.get(i).type[2] = "..";
+			}
+		}
+		columns = columnsTarget;
+	}
+
+	void updateType() {
+
+	}
+
+	String showType(String in, float slider) {
+		String text = "";
+		println(slider);
+		for(int s = 0; s < floor(slider*in.length()); s++) {
+			if(s < floor(slider*in.length())/2) {
+				text += in.charAt(floor(random(0, in.length())));
+			} else {
+				text += in.charAt(s);
+			}
+		}
+		return text;
 	}
 
 	PGraphics draw(TimeFrame timeFrameSelected, int dayCount, int ticker) {
 
-		
-		if(lastDayCount != dayCount) {
-
-			lines.add(new ColumHolder("-", "-", "-", "-"));
-			lines.add(new ColumHolder("day", dayCount+"", "--", "--"));
-			lines.add(new ColumHolder("Moon Age", timeFrameSelected.moonAge+"", "--", "--"));
-			lines.add(new ColumHolder("moonVisible", ""+timeFrameSelected.moonVisible+"%", "--", "--"));
- 			lines.add(new ColumHolder("Moon Phase", ""+timeFrameSelected.moonPhase, "--", "--"));
-			lines.add(new ColumHolder("windDirection", ""+timeFrameSelected.windDirection, "--", "--"));
- 			lines.add(new ColumHolder("windSpeed", ""+timeFrameSelected.windSpeed, "--", "--"));
- 			lines.add(new ColumHolder("windSpeedN", ""+timeFrameSelected.windSpeedN, "--", "--"));
- 			lines.add(new ColumHolder("tideMinN", ""+timeFrameSelected.tideMinN, "--", "--"));
- 			lines.add(new ColumHolder("tideMaxN", ""+timeFrameSelected.tideMaxN, "--", "--"));
- 			lines.add(new ColumHolder("cloudCoverN", ""+timeFrameSelected.cloudCoverN, "--", "--"));
- 			lines.add(new ColumHolder("temperature", ""+timeFrameSelected.temperature, "--", "--"));
- 			lines.add(new ColumHolder("temperatureN", ""+timeFrameSelected.temperatureN, "--", "--"));
-
- 			//lineCounterTarget += 13;
-
-			lastDayCount = dayCount;
-		}
-
-		//lineCounter = lineCounter*0.99 + lineCounterTarget*0.01;
-
-		if(lines.size() > (((blockh)/lineHeight)) ) {
-			//if(ticker%5==0) {
-				lines.remove(0);
-			//}
-    	}
+		setType(timeFrameSelected);
+		updateType();
 
 		pg.beginDraw();
+		pg.background(0);
+		pg.textFont(font);
+		
+		int lineHeight = 70;
+		int spacingC1 = floor((blockw/3)*1);
+		int spacingC2 = floor((blockw/3)*2);
 
-		//println(lineCounter + " " + lineCounterTarget);
-
-		int index = 0;
-		pg.background(0, 0, 0);
-		for(ColumHolder l : lines) {
-			
-			pg.text(l.val1, 15, index*lineHeight+5);
-			pg.text(l.val2, 130, index*lineHeight+5);
-			pg.text(l.val3, 250, index*lineHeight+5);
-			pg.text(l.val4, 320, index*lineHeight+5);
-
-			index++;
+		int i = 0;
+		for(Column c : columns) {
+			pg.pushMatrix();
+			pg.translate(0, (i*lineHeight) + 200);
+			pg.text(c.type[0], 0, 0);
+			pg.text(c.type[1], spacingC1, 0);
+			pg.text(c.type[2], spacingC2, 0);
+			pg.popMatrix();
+			i++;
 		}
-
-
-
 		
 		pg.endDraw();
 		return pg;		
@@ -94,3 +102,145 @@ class LogScreen {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// pg.pushMatrix();
+		// pg.translate(50, blockh-50);
+		// pg.text("LOCATION", 0, 0);
+		// pg.translate(spacingC1, 0);
+		// pg.text("52°04’52.8”N 4°19’09.7”E", 0,0); // data
+		// pg.translate(-spacingC1, 0);
+ 	// 	pg.popMatrix();
+
+		
+		// pg.translate(50, lineHeight);
+		// pg.text("DATE " + timeFrameSelected.date, 0, 0);
+		
+ 	// 	pg.translate(0, 150+lineHeight);
+		// pg.text("ticker", 0, 0);
+		// pg.translate(spacingC1, 0);
+		// pg.text(ticker+"", 0,0); // data
+		// pg.translate(-spacingC1, 0);
+ 	// 	pg.translate(spacingC2, 0);
+ 	// 	pg.text("+10%", 0, 0);
+ 	// 	pg.translate(-spacingC2, 0);
+
+ 	// 	pg.translate(0, lineHeight);
+		// pg.text("dayspeed", 0, 0);
+		// pg.translate(spacingC1, 0);
+		// pg.text(daySpeed+"", 0,0);  // data
+		// pg.translate(-spacingC1, 0);
+		// pg.translate(spacingC2, 0);
+		// pg.text("+10%", 0, 0);
+		// pg.translate(-spacingC2, 0);
+
+		// pg.translate(0, lineHeight);
+		// pg.text("moonAge", 0, 0);
+		// pg.translate(spacingC1, 0);
+		// pg.text(timeFrameSelected.moonAge+"", 0,0);  // data
+		// pg.translate(-spacingC1, 0);
+		// pg.translate(spacingC2, 0);
+		// pg.text("+10%", 0, 0);
+		// pg.translate(-spacingC2, 0);
+
+		// pg.translate(0, lineHeight);
+		// pg.text("moonVisible", 0, 0);
+		// pg.translate(spacingC1, 0);
+		// pg.text(timeFrameSelected.moonVisible+"%", 0,0);  // data
+		// pg.translate(-spacingC1, 0);
+		// pg.translate(spacingC2, 0);
+		// pg.text("+10%", 0, 0);
+		// pg.translate(-spacingC2, 0);
+
+		// pg.translate(0, lineHeight);
+		// pg.text("moonPhase", 0, 0);
+		// pg.translate(spacingC1, 0);
+		// pg.text(timeFrameSelected.moonPhase+"", 0,0);  // data
+		// pg.translate(-spacingC1, 0);
+		// pg.translate(spacingC2, 0);
+		// pg.text("+10%", 0, 0);
+		// pg.translate(-spacingC2, 0);
+
+		// pg.translate(0, lineHeight);
+		// pg.text("windDirection", 0, 0);
+		// pg.translate(spacingC1, 0);
+		// pg.text(timeFrameSelected.windDirection+"", 0,0);  // data
+		// pg.translate(-spacingC1, 0);
+		// pg.translate(spacingC2, 0);
+		// pg.text("+10%", 0, 0);
+		// pg.translate(-spacingC2, 0);
+
+		// pg.translate(0, lineHeight);
+		// pg.text("windSpeed", 0, 0);
+		// pg.translate(spacingC1, 0);
+		// pg.text(timeFrameSelected.windSpeed+"", 0,0);  // data
+		// pg.translate(-spacingC1, 0);
+		// pg.translate(spacingC2, 0);
+		// pg.text("+10%", 0, 0);
+		// pg.translate(-spacingC2, 0);
+
+		// pg.translate(0, lineHeight);
+		// pg.text("windSpeedN", 0, 0);
+		// pg.translate(spacingC1, 0);
+		// pg.text(timeFrameSelected.windSpeedN+"", 0,0);  // data
+		// pg.translate(-spacingC1, 0);
+		// pg.translate(spacingC2, 0);
+		// pg.text("+10%", 0, 0);
+		// pg.translate(-spacingC2, 0);
+
+		// pg.translate(0, lineHeight);
+		// pg.text("tideMinN", 0, 0);
+		// pg.translate(spacingC1, 0);
+		// pg.text(timeFrameSelected.tideMinN+"", 0,0);  // data
+		// pg.translate(-spacingC1, 0);
+		// pg.translate(spacingC2, 0);
+		// pg.text("+10%", 0, 0);
+		// pg.translate(-spacingC2, 0);
+
+		// pg.translate(0, lineHeight);
+		// pg.text("tideMaxN", 0, 0);
+		// pg.translate(spacingC1, 0);
+		// pg.text(timeFrameSelected.tideMaxN+"", 0,0);  // data
+		// pg.translate(-spacingC1, 0);
+		// pg.translate(spacingC2, 0);
+		// pg.text("+10%", 0, 0);
+		// pg.translate(-spacingC2, 0);
+
+		// pg.translate(0, lineHeight);
+		// pg.text("cloudCoverN", 0, 0);
+		// pg.translate(spacingC1, 0);
+		// pg.text(timeFrameSelected.cloudCoverN+"", 0,0);  // data
+		// pg.translate(-spacingC1, 0);
+		// pg.translate(spacingC2, 0);
+		// pg.text("+10%", 0, 0);
+		// pg.translate(-spacingC2, 0);
+
+		// pg.translate(0, lineHeight);
+		// pg.text("temperature", 0, 0);
+		// pg.translate(spacingC1, 0);
+		// pg.text(timeFrameSelected.temperature+"", 0,0);  // data
+		// pg.translate(-spacingC1, 0);
+		// pg.translate(spacingC2, 0);
+		// pg.text("+10%", 0, 0);
+		// pg.translate(-spacingC2, 0);
+
+		// pg.translate(0, lineHeight);
+		// pg.text("temperatureN", 0, 0);  // data
+		// pg.translate(spacingC1, 0);
+		// pg.text(timeFrameSelected.temperatureN+"", 0,0);
+		// pg.translate(-spacingC1, 0);
+		// pg.translate(spacingC2, 0);
+		// pg.text("+10%", 0, 0);
+		// pg.translate(-spacingC2, 0);

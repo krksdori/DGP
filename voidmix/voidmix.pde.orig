@@ -17,8 +17,8 @@ int dayCount = 0;
 int daySpeed = 60*4; // 60*6
 int cols = 3;
 int rows = 3;
-int blockw = 512;
-int blockh = 288;
+int blockw = 640;
+int blockh = 480;
 int masterw = blockw*3;
 int masterh = blockh*3;
 boolean activated = false;
@@ -34,11 +34,11 @@ boolean exportVideo = true;
 
 void setup() {
   
-  //size(2560, 1440);
-  size(1536, 864);
+  size(1080, 720);
+  //size(512, 288);
   //size(2560, 1440);
   //size(7680, 4320);
-  println("init");
+
 
   main = createGraphics(blockw,blockh);
   master = createGraphics(masterw, masterh);
@@ -52,7 +52,7 @@ void setup() {
   perlinCloud = new PerlinCloud(blockw, blockh);
   tideLines = new TideLines(blockw, blockh);
   temperature = new Temperature(blockw, blockh);
-  logScreen = new LogScreen(2560, 1440);
+  logScreen = new LogScreen(blockw, blockh);
   
   parseJSON.parse("result.json");
 
@@ -102,10 +102,10 @@ void draw() {
   main.beginDraw();
   //main.background(0);
   main.image(rainDrops.draw(timeFrameSelected.precipitationN, timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0.0, 0.0, blockw, blockh);
-  //main.blend(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
-  //main.blend(perlinCloud.draw(timeFrameSelected.cloudCoverN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
-  //main.blend(tideLines.draw(timeFrameSelected.tideMinN, timeFrameSelected.tideMaxN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);  
-  //main.blend(temperature.draw(timeFrameSelected.temperatureN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
+  main.blend(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
+  main.blend(perlinCloud.draw(timeFrameSelected.cloudCoverN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
+  main.blend(tideLines.draw(timeFrameSelected.tideMinN, timeFrameSelected.tideMaxN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);  
+  main.blend(temperature.draw(timeFrameSelected.temperatureN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
   
   dayNightFade(main, ticker);
   main.endDraw();
@@ -115,6 +115,8 @@ void draw() {
     frames.remove(0);
     activated = true;
   }
+  
+  
   
   frames.add(new Frame(main.get()));
 
@@ -126,6 +128,7 @@ void draw() {
   
   master.beginDraw();
   master.background(100);
+ 
 
   for(Frame f : frames) {
     
@@ -164,19 +167,24 @@ void draw() {
     } 
     index++;
   }
+  
     
- //image(main, 0, 0);
+ // image(main, 0, 0);
 
  if(activated) {
-   master.image(logScreen.draw(timeFrameSelected, dayCount, ticker), masterw/cols, masterh/rows, masterw/cols, masterh/rows);
-  //image(logScreen.draw(timeFrameSelected, dayCount, ticker), 0, 0);
+  master.image(logScreen.draw(timeFrameSelected, dayCount, ticker), master.width/3, master.height/3);
  }
   
  master.blend(sunRise.draw(timeFrameSelected.cloudCoverN, ticker), 0, 0, blockw, blockh, 0, 0, master.width, master.height, SCREEN);
+<<<<<<< Updated upstream
+=======
  master.blend(moonPhases.draw(timeFrameSelected.moonAge), 0, 0, master.width, master.height, 0, 0, master.width, master.height, SCREEN);
   
+ 
+  
+>>>>>>> Stashed changes
  master.endDraw();
- image(master, 0, 0, width, height);
+ //image(master, 0, 0, width, height);
  
  fill(255);
  text("day " + dayCount + " ,date " + timeFrameSelected.date, 50, 50);

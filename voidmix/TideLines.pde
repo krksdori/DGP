@@ -1,21 +1,20 @@
-
 class TideLines {
 	float noiseX;
 	float noiseY;
 	float noiseF;
 	float f = 0.0;
 	float colorState;
-  float movingSlider = 0.5;
-  int blockw = 2560;
-  int blockh = 1440;
+  	float movingSlider = 0.5;
+  	int blockw = 2560;
+  	int blockh = 1440;
 
 	PGraphics pg;
 
 	TideLines(int _width, int _height) {
 		pg = createGraphics(_width, _height);
     
-    blockw = _width;
-    blockh = _height;
+    	blockw = _width;
+    	blockh = _height;
 
 		pg.beginDraw();
 		pg.background(0);
