@@ -3,6 +3,7 @@ import com.hamoid.*;
 VideoExport videoExport;
 
 ParseJSON parseJSON;
+SmoothJson smoothJson;
 
 MoonPhases moonPhases;
 RainDrops rainDrops;
@@ -14,11 +15,12 @@ Temperature temperature;
 LogScreen logScreen;
 
 int dayCount = 0;
+int dayCountMagic = 0;
 int daySpeed = 60*4; // 60*6
 int cols = 3;
 int rows = 3;
-int blockw = 512;
-int blockh = 288;
+int blockw = 1920;
+int blockh = 1080;
 int masterw = blockw*3;
 int masterh = blockh*3;
 boolean activated = false;
@@ -43,7 +45,7 @@ void setup() {
   main = createGraphics(blockw,blockh);
   master = createGraphics(masterw, masterh);
   
-  parseJSON = new ParseJSON(); 
+  parseJSON = new ParseJSON();
   
   moonPhases = new MoonPhases(master.width, master.height);
   rainDrops = new RainDrops(blockw, blockh);
@@ -52,9 +54,10 @@ void setup() {
   perlinCloud = new PerlinCloud(blockw, blockh);
   tideLines = new TideLines(blockw, blockh);
   temperature = new Temperature(blockw, blockh);
-  logScreen = new LogScreen(2560, 1440);
+  logScreen = new LogScreen(blockw, blockh);
   
   parseJSON.parse("result.json");
+  smoothJson = new SmoothJson(parseJSON.timeFrames.get(0));
 
   initVideo();
   
@@ -82,7 +85,7 @@ void initVideo() {
 
 void draw() {
  
-  background(200);
+  background(0);
   
   if(ticker%(daySpeed) == 0) {
     if(firstAction == false) {
@@ -94,18 +97,36 @@ void draw() {
       firstAction = false;
     }
     initVideo();
-    
   }
 
+  if(dayCount > 0) {
+   if((ticker-80)%(daySpeed) == 0) {
+    if(firstAction == false) {
+      dayCountMagic = (dayCountMagic%365)+1;
+    }
+  }
+  }
  
   TimeFrame timeFrameSelected = parseJSON.timeFrames.get(dayCount%365);
+  TimeFrame timeFrameSelectedMagic = parseJSON.timeFrames.get(dayCountMagic%365);
+
+  smoothJson.newTarget(parseJSON.timeFrames.get((dayCount+1)%365));
+  smoothJson.update();
+  TimeFrame timeFrameSmooth = smoothJson.tfCurrent;
+
   main.beginDraw();
   //main.background(0);
   main.image(rainDrops.draw(timeFrameSelected.precipitationN, timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0.0, 0.0, blockw, blockh);
-  //main.blend(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
-  //main.blend(perlinCloud.draw(timeFrameSelected.cloudCoverN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
-  //main.blend(tideLines.draw(timeFrameSelected.tideMinN, timeFrameSelected.tideMaxN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);  
-  //main.blend(temperature.draw(timeFrameSelected.temperatureN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
+  if(timeFrameSelected.windSpeedN > 0.5) {
+    main.blend(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
+  }
+  main.blend(perlinCloud.draw(timeFrameSelected.cloudCoverN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
+  
+  if(timeFrameSelected.moonPhase.equals("Waning Crescent") || timeFrameSelected.moonPhase.equals("New Moon") || timeFrameSelected.moonPhase.equals("Full Moon") || timeFrameSelected.moonPhase.equals("Waxing Crescent")) {
+    main.blend(tideLines.draw(timeFrameSelected.tideMinN, timeFrameSelected.tideMaxN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);  
+  }
+  
+  main.blend(temperature.draw(timeFrameSmooth.temperatureN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
   
   dayNightFade(main, ticker);
   main.endDraw();
@@ -127,37 +148,37 @@ void draw() {
   master.beginDraw();
   master.background(100);
 
-  for(Frame f : frames) {
+  for(Frame f : frames) {    
     
-    if(index == 7*times) {
+    if(index == 7*times) {  // 7
         x = (masterw/3)*1;
         y = 0;
         master.image(f.img, x, y, masterw/cols, masterh/rows);
-    } else if(index == 6*times) {
+    } else if(index == 6*times) { // 6
         x = (masterw/3)*2;
         y = 0;
         master.image(f.img, x, y, masterw/cols, masterh/rows);
-    } else if(index == 5*times) {
+    } else if(index == 5*times) { // 5
         x = (masterw/3)*2;
         y = (masterh/3);
         master.image(f.img, x, y, masterw/cols, masterh/rows);
-    } else if(index == 4*times) {
+    } else if(index == 4*times) { // 4
         x = (masterw/3)*2;
         y = (masterh/3)*2;
         master.image(f.img, x, y, masterw/cols, masterh/rows);
-    } else if(index == 3*times) {
+    } else if(index == 3*times) {// 3
         x = (masterw/3)*1;
         y = (masterh/3)*2;
         master.image(f.img, x, y, masterw/cols, masterh/rows);
-    } else if(index == 2*times) {
+    } else if(index == 2*times) { // 2
         x = (masterw/3)*0;
         y = (masterh/3)*2;
         master.image(f.img, x, y, masterw/cols, masterh/rows);
-    } else if(index == 1*times) {
+    } else if(index == 1*times) { // 1
         x = (masterw/3)*0;
         y = (masterh/3)*1;
         master.image(f.img, x, y, masterw/cols, masterh/rows);
-    } else if(index == 0*times) {
+    } else if(index == 0*times) { // 0
         x = (masterw/3)*0;
         y = (masterh/3)*0;
         master.image(f.img, x, y, masterw/cols, masterh/rows);
@@ -168,12 +189,12 @@ void draw() {
  //image(main, 0, 0);
 
  if(activated) {
-   master.image(logScreen.draw(timeFrameSelected, dayCount, ticker), masterw/cols, masterh/rows, masterw/cols, masterh/rows);
+   master.image(logScreen.draw(timeFrameSelectedMagic, timeFrameSmooth, dayCount, ticker), masterw/cols, masterh/rows, masterw/cols, masterh/rows);
   //image(logScreen.draw(timeFrameSelected, dayCount, ticker), 0, 0);
  }
   
- master.blend(sunRise.draw(timeFrameSelected.cloudCoverN, ticker), 0, 0, blockw, blockh, 0, 0, master.width, master.height, SCREEN);
- master.blend(moonPhases.draw(timeFrameSelected.moonAge), 0, 0, master.width, master.height, 0, 0, master.width, master.height, SCREEN);
+ master.blend(sunRise.draw(timeFrameSelectedMagic.cloudCoverN, ticker), 0, 0, blockw, blockh, 0, 0, master.width, master.height, SCREEN);
+ master.blend(moonPhases.draw(timeFrameSmooth.moonAge, ticker), 0, 0, master.width, master.height, 0, 0, master.width, master.height, SCREEN);
   
  master.endDraw();
  image(master, 0, 0, width, height);

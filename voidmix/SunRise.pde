@@ -5,7 +5,8 @@ class SunRise {
   PGraphics pg;
   int blockw = 2560;
   int blockh = 1440;
- 
+  float vCurrent = 0.0;
+  
   SunRise(int _width, int _height) {
      b = new Blob(0, 0);
      //pg = createGraphics(1080, 720);
@@ -20,10 +21,12 @@ class SunRise {
 
   PGraphics draw(float cloudCoverN, int ticker) {
 
-    float v = map(cloudCoverN, 0, 1.0, 230, 150);
+   float v = map(cloudCoverN, 0, 1.0, 230, 150);
    if(cloudCoverN > 0.6) {
      v = 100;
    } 
+
+   vCurrent = vCurrent*0.9 + v * 0.1;
 
 
    pg.beginDraw();
@@ -33,7 +36,7 @@ class SunRise {
         int index = x + y * pg.width;
         float d = dist(x, y, b.pos.x, b.pos.y);
         float col = 350 * b.r / d;
-        pg.pixels[index] = color(col, v);
+        pg.pixels[index] = color(col, vCurrent);
       }
     }
   
@@ -69,7 +72,7 @@ class Blob {
   // 3 = 60
   // 
 
-  void update() {
+  void update() { //-PI*1.25
     pos.x = ((cos( ((ticker*sliceRotation)-PI*1.25)%(PI*2.0) ) )*blockw/3.3) + blockw/2 ;//+ blockw/2 ; // + width/2 -100
     pos.y = ((sin( ((ticker*sliceRotation)-PI*1.25)%(PI*2.0) ) )*blockw/4.3) + blockh/2 ; //+blockh*1.5 ; // + height+height/3 -100
     // pos.x = ((width+200.0) - ((frameCount*sliceRotation)%(width+400.0)));

@@ -62,7 +62,7 @@ class MoonPhases {
     float rY = sin(moonRotate)*blockh/3;
 
     //p.rotate(moonRotate);
-    p.translate(floor(rX), floor(rY));
+    //p.translate(floor(rX), floor(rY));
     //p.rotate(frameCount*0.1);
 
 
@@ -107,7 +107,7 @@ class MoonPhases {
     p.endDraw();
 }
 
-PGraphics rotateMoon(float moonAge) {
+PGraphics rotateMoon(float moonAge, float x, float y) {
   moon.beginDraw();
   moon.pushMatrix();
   moon.translate(blockw/2,blockh/2);
@@ -119,13 +119,14 @@ PGraphics rotateMoon(float moonAge) {
   float rX = cos(moonRotate)*blockw/3;
   float rY = sin(moonRotate)*blockh/3;
   
-  moon.translate(floor(rX), floor(rY));
+ // moon.translate(floor(rX), floor(rY));
     
   //moon.rotate( (float)(frameCount*0.02*Math.sin(frameCount*0.005)*0.01) );
   //moon.fill(255, 0, 0);
 
   
   // moon.rect(0, 0, width,height);
+  moon.translate(x, y);
   moon.image(moonTexture, -blockw/2, -blockh/2);
   //moon.fill(255, 0, 0);
   //moon.rect(0, 0, width, height);
@@ -134,15 +135,37 @@ PGraphics rotateMoon(float moonAge) {
   return moon;
 }
   
-  PGraphics draw(float moonAge) {
+  PGraphics draw(float moonAge, int ticker) {
 
     
     pg.beginDraw();
     pg.background(0);
 
+    //float moonRotate = map(moonAge, 0.0, 29.53059, PI*0.0, -PI*2.0);
+
+    float sliceRotation = ((PI*2.0))/( ((60.0*4.0)*29.53059) );
+
+    float x = ((cos( ((ticker*-sliceRotation))%(PI*2.0) ) )*blockw/3.3) ;//+ blockw/2 ; // + width/2 -100
+    float y = ((sin( ((ticker*-sliceRotation))%(PI*2.0) ) )*blockw/4.3) ; //+blockh*1.5 ; // + height+height/3 -100
+    
+
+    //float rX = cos(moonRotate)*blockw/3;
+    //float rY = sin(moonRotate)*blockh/3;
+    //pg.translate(floor(rX), floor(rY));
+    pg.translate(x, y);
+    pg.pushMatrix();
+
     moonPhasesDraw(moonPhases, moonAge);
+    
+
+
     pg.image(moonPhases, 0, 0);
-    pg.blend(rotateMoon(moonAge), 0, 0, blockw, blockh, 0, 0, blockw, blockh, DARKEST);
+    pg.pushMatrix();
+
+    pg.blend(rotateMoon(moonAge, x, y), 0, 0, blockw, blockh, 0, 0, blockw, blockh, DARKEST);
+    pg.popMatrix();
+    pg.popMatrix();
+
     pg.endDraw();
     
     

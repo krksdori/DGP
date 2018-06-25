@@ -22,7 +22,7 @@ class WindMap {
 		}
 	}
 
-	 PGraphics draw(int windDirection, float windSpeedN) {
+	 PGraphics draw(float windDirection, float windSpeedN) {
 
 	 	pg.beginDraw();
     pg.background(0);
@@ -36,6 +36,7 @@ class WindMap {
 		}
 
 		flowfield.init(windDirection);
+    println("new wind dir " + windDirection);
 		pg.endDraw();	
 
   		return pg;
@@ -154,13 +155,12 @@ class FlowField {
     init(0);
   }
 
-  void init(int windDirection) {
+  void init(float windDirection) {
     noiseSeed((int)1000);
     float xoff = 0;
 
     float windDireciton = windDirection;
     float windDirecitonMapped = map(windDireciton, 0.0, 360.0, PI*0.0, PI*2.0);
-
     
     for (int i = 0; i < cols; i++) {
       float yoff = 0;

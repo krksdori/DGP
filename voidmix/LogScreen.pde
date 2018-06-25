@@ -1,11 +1,7 @@
 class Column {
-
-	String[] type = new String[3];
-	
+	String[] type = new String[4];
 	Column() {
-
 	}
-
 }
 
 class LogScreen {
@@ -21,7 +17,7 @@ class LogScreen {
   	float lineHeight = 15;
   	ArrayList<Column> columns = new ArrayList<Column>();
   	ArrayList<Column> columnsTarget = new ArrayList<Column>();
-  	int fontSize = 60;
+  	int fontSize = 10;
   	
 	LogScreen(int _width, int _height) {
       	blockw = _width;
@@ -30,26 +26,49 @@ class LogScreen {
       	font = createFont("data/font/SourceCodePro-Regular.ttf", fontSize);
 		pg = createGraphics(_width, _height);
 
-		for(int i = 0; i < 3; i++) {
+		for(int i = 0; i < 7; i++) {
 			columns.add(new Column());
 			columnsTarget.add(new Column());
 		}
 	}
 
-	void setType(TimeFrame timeFrameSelected) {
+	void setType(TimeFrame timeFrameSelected, TimeFrame tfCurrent) {
 		for(int i = 0; i < columnsTarget.size(); i++) {
 			if(i == 0) {
 				columnsTarget.get(i).type[0] = "moon age";
-				columnsTarget.get(i).type[1] = showType(timeFrameSelected.moonAge+"", abs(sin(frameCount*0.01)) );
+				columnsTarget.get(i).type[1] = timeFrameSelected.moonAge+"";
 				columnsTarget.get(i).type[2] = "..";
+				columnsTarget.get(i).type[3] = "..";
 			} else if(i == 1) {
 				columnsTarget.get(i).type[0] = "moon visible" ;
-				columnsTarget.get(i).type[1] = showType(timeFrameSelected.moonVisible+"", abs(sin(((2*PI)*0.1)+frameCount*0.01)) );
+				columnsTarget.get(i).type[1] = timeFrameSelected.moonVisible+"";
 				columnsTarget.get(i).type[2] = "..";
+				columnsTarget.get(i).type[3] = "..";
 			} else if(i == 2) {
 				columnsTarget.get(i).type[0] = "moon phase";
-				columnsTarget.get(i).type[1] = showType(timeFrameSelected.moonPhase+"", abs(sin(((2*PI)*0.2)+frameCount*0.01)) );
+				columnsTarget.get(i).type[1] = timeFrameSelected.moonPhase+"";
 				columnsTarget.get(i).type[2] = "..";
+				columnsTarget.get(i).type[3] = "..";
+			} else if(i == 3) {
+				columnsTarget.get(i).type[0] = "wind direction";
+				columnsTarget.get(i).type[1] = timeFrameSelected.windDirection+"";
+				columnsTarget.get(i).type[2] = "..";
+				columnsTarget.get(i).type[3] = tfCurrent.windDirection+"";
+			} else if(i == 4) {
+				columnsTarget.get(i).type[0] = "wind speed";
+				columnsTarget.get(i).type[1] = timeFrameSelected.windSpeed+"";
+				columnsTarget.get(i).type[2] = timeFrameSelected.windSpeedN+"";
+				columnsTarget.get(i).type[3] = tfCurrent.windSpeedN+"";
+			} else if(i == 5) {
+				columnsTarget.get(i).type[0] = "temperature";
+				columnsTarget.get(i).type[1] = timeFrameSelected.temperature+"";
+				columnsTarget.get(i).type[2] = timeFrameSelected.temperatureN+"";
+				columnsTarget.get(i).type[3] = tfCurrent.temperatureN+"";
+			} else if(i == 6) {
+				columnsTarget.get(i).type[0] = "cloud cover";
+				columnsTarget.get(i).type[1] = timeFrameSelected.cloudCover+"";
+				columnsTarget.get(i).type[2] = timeFrameSelected.cloudCoverN+"";
+				columnsTarget.get(i).type[3] = "..";
 			}
 		}
 		columns = columnsTarget;
@@ -72,26 +91,28 @@ class LogScreen {
 		return text;
 	}
 
-	PGraphics draw(TimeFrame timeFrameSelected, int dayCount, int ticker) {
+	PGraphics draw(TimeFrame timeFrameSelected, TimeFrame tfCurrent, int dayCount, int ticker) {
 
-		setType(timeFrameSelected);
+		setType(timeFrameSelected, tfCurrent);
 		updateType();
 
 		pg.beginDraw();
-		pg.background(0);
+		pg.background(0, 100, 0);
 		pg.textFont(font);
 		
-		int lineHeight = 70;
-		int spacingC1 = floor((blockw/3)*1);
-		int spacingC2 = floor((blockw/3)*2);
+		int lineHeight = 10;
+		int spacingC1 = floor((blockw/4)*1);
+		int spacingC2 = floor((blockw/4)*2);
+		int spacingC3 = floor((blockw/4)*3);
 
 		int i = 0;
 		for(Column c : columns) {
 			pg.pushMatrix();
-			pg.translate(0, (i*lineHeight) + 200);
+			pg.translate(0, (i*lineHeight) + 20);
 			pg.text(c.type[0], 0, 0);
 			pg.text(c.type[1], spacingC1, 0);
 			pg.text(c.type[2], spacingC2, 0);
+			pg.text(c.type[3], spacingC3, 0);
 			pg.popMatrix();
 			i++;
 		}
@@ -102,145 +123,3 @@ class LogScreen {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// pg.pushMatrix();
-		// pg.translate(50, blockh-50);
-		// pg.text("LOCATION", 0, 0);
-		// pg.translate(spacingC1, 0);
-		// pg.text("52°04’52.8”N 4°19’09.7”E", 0,0); // data
-		// pg.translate(-spacingC1, 0);
- 	// 	pg.popMatrix();
-
-		
-		// pg.translate(50, lineHeight);
-		// pg.text("DATE " + timeFrameSelected.date, 0, 0);
-		
- 	// 	pg.translate(0, 150+lineHeight);
-		// pg.text("ticker", 0, 0);
-		// pg.translate(spacingC1, 0);
-		// pg.text(ticker+"", 0,0); // data
-		// pg.translate(-spacingC1, 0);
- 	// 	pg.translate(spacingC2, 0);
- 	// 	pg.text("+10%", 0, 0);
- 	// 	pg.translate(-spacingC2, 0);
-
- 	// 	pg.translate(0, lineHeight);
-		// pg.text("dayspeed", 0, 0);
-		// pg.translate(spacingC1, 0);
-		// pg.text(daySpeed+"", 0,0);  // data
-		// pg.translate(-spacingC1, 0);
-		// pg.translate(spacingC2, 0);
-		// pg.text("+10%", 0, 0);
-		// pg.translate(-spacingC2, 0);
-
-		// pg.translate(0, lineHeight);
-		// pg.text("moonAge", 0, 0);
-		// pg.translate(spacingC1, 0);
-		// pg.text(timeFrameSelected.moonAge+"", 0,0);  // data
-		// pg.translate(-spacingC1, 0);
-		// pg.translate(spacingC2, 0);
-		// pg.text("+10%", 0, 0);
-		// pg.translate(-spacingC2, 0);
-
-		// pg.translate(0, lineHeight);
-		// pg.text("moonVisible", 0, 0);
-		// pg.translate(spacingC1, 0);
-		// pg.text(timeFrameSelected.moonVisible+"%", 0,0);  // data
-		// pg.translate(-spacingC1, 0);
-		// pg.translate(spacingC2, 0);
-		// pg.text("+10%", 0, 0);
-		// pg.translate(-spacingC2, 0);
-
-		// pg.translate(0, lineHeight);
-		// pg.text("moonPhase", 0, 0);
-		// pg.translate(spacingC1, 0);
-		// pg.text(timeFrameSelected.moonPhase+"", 0,0);  // data
-		// pg.translate(-spacingC1, 0);
-		// pg.translate(spacingC2, 0);
-		// pg.text("+10%", 0, 0);
-		// pg.translate(-spacingC2, 0);
-
-		// pg.translate(0, lineHeight);
-		// pg.text("windDirection", 0, 0);
-		// pg.translate(spacingC1, 0);
-		// pg.text(timeFrameSelected.windDirection+"", 0,0);  // data
-		// pg.translate(-spacingC1, 0);
-		// pg.translate(spacingC2, 0);
-		// pg.text("+10%", 0, 0);
-		// pg.translate(-spacingC2, 0);
-
-		// pg.translate(0, lineHeight);
-		// pg.text("windSpeed", 0, 0);
-		// pg.translate(spacingC1, 0);
-		// pg.text(timeFrameSelected.windSpeed+"", 0,0);  // data
-		// pg.translate(-spacingC1, 0);
-		// pg.translate(spacingC2, 0);
-		// pg.text("+10%", 0, 0);
-		// pg.translate(-spacingC2, 0);
-
-		// pg.translate(0, lineHeight);
-		// pg.text("windSpeedN", 0, 0);
-		// pg.translate(spacingC1, 0);
-		// pg.text(timeFrameSelected.windSpeedN+"", 0,0);  // data
-		// pg.translate(-spacingC1, 0);
-		// pg.translate(spacingC2, 0);
-		// pg.text("+10%", 0, 0);
-		// pg.translate(-spacingC2, 0);
-
-		// pg.translate(0, lineHeight);
-		// pg.text("tideMinN", 0, 0);
-		// pg.translate(spacingC1, 0);
-		// pg.text(timeFrameSelected.tideMinN+"", 0,0);  // data
-		// pg.translate(-spacingC1, 0);
-		// pg.translate(spacingC2, 0);
-		// pg.text("+10%", 0, 0);
-		// pg.translate(-spacingC2, 0);
-
-		// pg.translate(0, lineHeight);
-		// pg.text("tideMaxN", 0, 0);
-		// pg.translate(spacingC1, 0);
-		// pg.text(timeFrameSelected.tideMaxN+"", 0,0);  // data
-		// pg.translate(-spacingC1, 0);
-		// pg.translate(spacingC2, 0);
-		// pg.text("+10%", 0, 0);
-		// pg.translate(-spacingC2, 0);
-
-		// pg.translate(0, lineHeight);
-		// pg.text("cloudCoverN", 0, 0);
-		// pg.translate(spacingC1, 0);
-		// pg.text(timeFrameSelected.cloudCoverN+"", 0,0);  // data
-		// pg.translate(-spacingC1, 0);
-		// pg.translate(spacingC2, 0);
-		// pg.text("+10%", 0, 0);
-		// pg.translate(-spacingC2, 0);
-
-		// pg.translate(0, lineHeight);
-		// pg.text("temperature", 0, 0);
-		// pg.translate(spacingC1, 0);
-		// pg.text(timeFrameSelected.temperature+"", 0,0);  // data
-		// pg.translate(-spacingC1, 0);
-		// pg.translate(spacingC2, 0);
-		// pg.text("+10%", 0, 0);
-		// pg.translate(-spacingC2, 0);
-
-		// pg.translate(0, lineHeight);
-		// pg.text("temperatureN", 0, 0);  // data
-		// pg.translate(spacingC1, 0);
-		// pg.text(timeFrameSelected.temperatureN+"", 0,0);
-		// pg.translate(-spacingC1, 0);
-		// pg.translate(spacingC2, 0);
-		// pg.text("+10%", 0, 0);
-		// pg.translate(-spacingC2, 0);
