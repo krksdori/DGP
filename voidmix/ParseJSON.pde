@@ -52,8 +52,11 @@ class ParseJSON {
         JSONObject temperatureJO = timeFrame.getJSONObject("temperature");
         float temperature = (temperatureJO.getFloat("value"))*0.1;
         float temperatureN = temperatureJO.getFloat("normalized");
+        
+        // MOSH
+        float mosh = timeFrame.getFloat("mosh");
 
-        timeFrames.add(new TimeFrame(date, precipitation, precipitationN, moonAge, moonVisible, moonPhase, windDirection, windSpeedValue, windSpeedValueN, tideMin, tideMinN, tideMax, tideMaxN, cloudCover, cloudCoverN, temperature, temperatureN));
+        timeFrames.add(new TimeFrame(date, precipitation, precipitationN, moonAge, moonVisible, moonPhase, windDirection, windSpeedValue, windSpeedValueN, tideMin, tideMinN, tideMax, tideMaxN, cloudCover, cloudCoverN, temperature, temperatureN, mosh));
        // println(timeFrames.size());
     }
   }
@@ -84,12 +87,14 @@ class TimeFrame {
    
    float temperature;
    float temperatureN;
+   
+   float mosh;
 
    TimeFrame() {
 
    }
    
-   TimeFrame(String date, float precipitation, float precipitationN, float moonAge, int moonVisible, String moonPhase, float windDirection, int windSpeed, float windSpeedN, int tideMin, float tideMinN, int tideMax, float tideMaxN, float cloudCover, float cloudCoverN, float temperature, float temperatureN) {
+   TimeFrame(String date, float precipitation, float precipitationN, float moonAge, int moonVisible, String moonPhase, float windDirection, int windSpeed, float windSpeedN, int tideMin, float tideMinN, int tideMax, float tideMaxN, float cloudCover, float cloudCoverN, float temperature, float temperatureN, float mosh) {
      this.date = date;
      this.precipitation = precipitation;
      this.precipitationN = precipitationN;
@@ -107,6 +112,7 @@ class TimeFrame {
      this.cloudCoverN = cloudCoverN;
      this.temperature = temperature;
      this.temperatureN = temperatureN;
+     this.mosh = mosh;
    }
    
 }
@@ -135,6 +141,7 @@ class SmoothJson {
      newTf.cloudCoverN = first.cloudCoverN;
      newTf.temperature = first.temperature;
      newTf.temperatureN = first.temperatureN;
+     newTf.mosh = first.mosh;
      this.tfCurrent = newTf;
   }
 
@@ -157,10 +164,13 @@ class SmoothJson {
      newTf.cloudCoverN = target.cloudCoverN;
      newTf.temperature = target.temperature;
      newTf.temperatureN = target.temperatureN;
-    tfTarget = newTf;
+     newTf.mosh = target.mosh;
+     tfTarget = newTf;
   }
 
   void update() {
+      tfCurrent.mosh = tfCurrent.mosh*0.9 + tfTarget.mosh*0.1;
+      
       //tfCurrent.windSpeedN = tfCurrent.windSpeedN*0.9 + tfTarget.windSpeedN*0.1;
       //tfCurrent.windDirection = tfCurrent.windDirection*0.99 + tfTarget.windDirection*0.01;
       //tfCurrent.temperatureN = tfCurrent.temperatureN*0.99 + tfTarget.temperatureN*0.01;

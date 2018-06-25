@@ -26,7 +26,7 @@ class LogScreen {
       	font = createFont("data/font/SourceCodePro-Regular.ttf", fontSize);
 		pg = createGraphics(_width, _height);
 
-		for(int i = 0; i < 7; i++) {
+		for(int i = 0; i < 8; i++) {
 			columns.add(new Column());
 			columnsTarget.add(new Column());
 		}
@@ -69,7 +69,13 @@ class LogScreen {
 				columnsTarget.get(i).type[1] = timeFrameSelected.cloudCover+"";
 				columnsTarget.get(i).type[2] = timeFrameSelected.cloudCoverN+"";
 				columnsTarget.get(i).type[3] = "..";
-			}
+			} else if(i == 7) {
+        columnsTarget.get(i).type[0] = "mosh";
+        columnsTarget.get(i).type[1] = timeFrameSelected.mosh+"";
+        columnsTarget.get(i).type[2] = tfCurrent.mosh+"";
+        columnsTarget.get(i).type[3] = "..";
+      }
+ 
 		}
 		columns = columnsTarget;
 	}
@@ -97,8 +103,12 @@ class LogScreen {
 		updateType();
 
 		pg.beginDraw();
-		pg.background(0, 100, 0);
+		pg.background(100);
 		pg.textFont(font);
+
+    pg.noStroke();
+    pg.fill(map(tfCurrent.mosh, 0.0, 1.0, 0.0, 255.0));
+    pg.rect(0, pg.height-10, 10, 10);
 		
 		int lineHeight = 10;
 		int spacingC1 = floor((blockw/4)*1);
@@ -107,6 +117,7 @@ class LogScreen {
 
 		int i = 0;
 		for(Column c : columns) {
+      fill(0);
 			pg.pushMatrix();
 			pg.translate(0, (i*lineHeight) + 20);
 			pg.text(c.type[0], 0, 0);

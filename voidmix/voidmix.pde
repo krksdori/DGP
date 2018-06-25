@@ -19,8 +19,8 @@ int dayCountMagic = 0;
 int daySpeed = 60*4; // 60*6
 int cols = 3;
 int rows = 3;
-int blockw = 1920;
-int blockh = 1080;
+int blockw = 320;
+int blockh = 180;
 int masterw = blockw*3;
 int masterh = blockh*3;
 boolean activated = false;
@@ -37,7 +37,7 @@ boolean exportVideo = true;
 void setup() {
   
   //size(2560, 1440);
-  size(1536, 864);
+  size(960, 540);
   //size(2560, 1440);
   //size(7680, 4320);
   println("init");
@@ -90,9 +90,7 @@ void draw() {
   if(ticker%(daySpeed) == 0) {
     if(firstAction == false) {
       dayCount = (dayCount%365)+1;
-      if(dayCount%365 ==0) {
-        exit();
-      }
+      
     } else {
       firstAction = false;
     }
@@ -110,7 +108,7 @@ void draw() {
   TimeFrame timeFrameSelected = parseJSON.timeFrames.get(dayCount%365);
   TimeFrame timeFrameSelectedMagic = parseJSON.timeFrames.get(dayCountMagic%365);
 
-  smoothJson.newTarget(parseJSON.timeFrames.get((dayCount+1)%365));
+  smoothJson.newTarget(parseJSON.timeFrames.get((dayCountMagic)%365));
   smoothJson.update();
   TimeFrame timeFrameSmooth = smoothJson.tfCurrent;
 
@@ -195,6 +193,10 @@ void draw() {
   
  master.blend(sunRise.draw(timeFrameSelectedMagic.cloudCoverN, ticker), 0, 0, blockw, blockh, 0, 0, master.width, master.height, SCREEN);
  master.blend(moonPhases.draw(timeFrameSmooth.moonAge, ticker), 0, 0, master.width, master.height, 0, 0, master.width, master.height, SCREEN);
+ 
+ master.noStroke();
+ master.fill(map(timeFrameSmooth.mosh, 0.0, 1.0, 0.0, 255.0));
+ master.rect(width/2 -blockw/2 , height/2 + blockh /2 - 10, 10, 10);
   
  master.endDraw();
  image(master, 0, 0, width, height);
@@ -227,7 +229,11 @@ void draw() {
  if(ticker%(daySpeed) == daySpeed-1) {
     if(exportVideo) {
      videoExport.endMovie();
+      if(dayCount%365==0) {
+        exit();
+     }
     }
+   
  }
  
  if(activated == true) {

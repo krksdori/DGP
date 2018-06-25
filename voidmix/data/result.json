@@ -46,7 +46,8 @@
         "temperature": {
             "value": 15,
             "normalized": 0.18081180811808117
-        }
+        },
+        "mosh": 0.0000060383386581
     },
     {
         "date": "January 02",
@@ -95,7 +96,8 @@
         "temperature": {
             "value": 57,
             "normalized": 0.33579335793357934
-        }
+        },
+        "mosh": 0.00000670926517572
     },
     {
         "date": "January 03",
@@ -144,7 +146,8 @@
         "temperature": {
             "value": 63,
             "normalized": 0.35793357933579334
-        }
+        },
+        "mosh": 0.0000097763578274
     },
     {
         "date": "January 04",
@@ -193,7 +196,8 @@
         "temperature": {
             "value": 67,
             "normalized": 0.3726937269372694
-        }
+        },
+        "mosh": 0.0000075399361023
     },
     {
         "date": "January 05",
@@ -242,7 +246,8 @@
         "temperature": {
             "value": 28,
             "normalized": 0.22878228782287824
-        }
+        },
+        "mosh": 0.0000020766773163
     },
     {
         "date": "January 06",
@@ -291,7 +296,8 @@
         "temperature": {
             "value": -7,
             "normalized": 0.0996309963099631
-        }
+        },
+        "mosh": 0.0000002875399361
     },
     {
         "date": "January 07",
@@ -340,7 +346,8 @@
         "temperature": {
             "value": 31,
             "normalized": 0.23985239852398524
-        }
+        },
+        "mosh": 0.0000077635782748
     },
     {
         "date": "January 08",
@@ -389,7 +396,8 @@
         "temperature": {
             "value": 60,
             "normalized": 0.34686346863468637
-        }
+        },
+        "mosh": 0.0000082108626198
     },
     {
         "date": "January 09",
@@ -438,7 +446,8 @@
         "temperature": {
             "value": 60,
             "normalized": 0.34686346863468637
-        }
+        },
+        "mosh": 0.00000766773163
     },
     {
         "date": "January 10",
@@ -487,7 +496,8 @@
         "temperature": {
             "value": 63,
             "normalized": 0.35793357933579334
-        }
+        },
+        "mosh": 0.0000061661341853
     },
     {
         "date": "January 11",
@@ -536,7 +546,8 @@
         "temperature": {
             "value": 75,
             "normalized": 0.4022140221402214
-        }
+        },
+        "mosh": 0.0000093610223642
     },
     {
         "date": "January 12",
@@ -585,7 +596,8 @@
         "temperature": {
             "value": 55,
             "normalized": 0.3284132841328413
-        }
+        },
+        "mosh": 0.0000018849840255
     },
     {
         "date": "January 13",
@@ -634,7 +646,8 @@
         "temperature": {
             "value": 44,
             "normalized": 0.2878228782287823
-        }
+        },
+        "mosh": 0.00000159744408945
     },
     {
         "date": "January 14",
@@ -683,7 +696,8 @@
         "temperature": {
             "value": 42,
             "normalized": 0.28044280442804426
-        }
+        },
+        "mosh": 0.00000389776357826
     },
     {
         "date": "January 15",
@@ -732,7 +746,8 @@
         "temperature": {
             "value": 34,
             "normalized": 0.25092250922509224
-        }
+        },
+        "mosh": 0.00000725239616615
     },
     {
         "date": "January 16",
@@ -781,7 +796,8 @@
         "temperature": {
             "value": 9,
             "normalized": 0.15867158671586715
-        }
+        },
+        "mosh": 0.000001277955271566
     },
     {
         "date": "January 17",
@@ -830,7 +846,8 @@
         "temperature": {
             "value": -34,
             "normalized": 0
-        }
+        },
+        "mosh": 0.0000014376996805
     },
     {
         "date": "January 18",
@@ -879,7 +896,8 @@
         "temperature": {
             "value": -27,
             "normalized": 0.025830258302583026
-        }
+        },
+        "mosh": 0.0000061022364217
     },
     {
         "date": "January 19",
@@ -928,7 +946,8 @@
         "temperature": {
             "value": -4,
             "normalized": 0.11070110701107011
-        }
+        },
+        "mosh": 0.0000055271565495
     },
     {
         "date": "January 20",
@@ -977,7 +996,8 @@
         "temperature": {
             "value": 13,
             "normalized": 0.17343173431734318
-        }
+        },
+        "mosh": 0.0000031948881789
     },
     {
         "date": "January 21",
@@ -1026,7 +1046,8 @@
         "temperature": {
             "value": 11,
             "normalized": 0.16605166051660517
-        }
+        },
+        "mosh": 0.0000026837060703
     },
     {
         "date": "January 22",
@@ -1075,7 +1096,8 @@
         "temperature": {
             "value": 2,
             "normalized": 0.13284132841328414
-        }
+        },
+        "mosh": 0.0000067092651757
     },
     {
         "date": "January 23",
@@ -1124,7 +1146,8 @@
         "temperature": {
             "value": 20,
             "normalized": 0.1992619926199262
-        }
+        },
+        "mosh": 0.00000594249201275
     },
     {
         "date": "January 24",
@@ -1173,7 +1196,8 @@
         "temperature": {
             "value": 35,
             "normalized": 0.25461254612546125
-        }
+        },
+        "mosh": 0.00000546325878595
     },
     {
         "date": "January 25",
@@ -1222,7 +1246,8 @@
         "temperature": {
             "value": -3,
             "normalized": 0.11439114391143912
-        }
+        },
+        "mosh": 0.00000057507987223
     },
     {
         "date": "January 26",
@@ -1271,7 +1296,8 @@
         "temperature": {
             "value": -27,
             "normalized": 0.025830258302583026
-        }
+        },
+        "mosh": 0.0083067092651757
     },
     {
         "date": "January 27",
@@ -1320,7 +1346,8 @@
         "temperature": {
             "value": 24,
             "normalized": 0.2140221402214022
-        }
+        },
+        "mosh": 0.0010223642172524
     },
     {
         "date": "January 28",
@@ -1369,7 +1396,8 @@
         "temperature": {
             "value": 75,
             "normalized": 0.4022140221402214
-        }
+        },
+        "mosh": 0.0865814696485623
     },
     {
         "date": "January 29",
@@ -1418,7 +1446,8 @@
         "temperature": {
             "value": 48,
             "normalized": 0.3025830258302583
-        }
+        },
+        "mosh": 0.10415335463258784
     },
     {
         "date": "January 30",
@@ -1467,7 +1496,8 @@
         "temperature": {
             "value": 53,
             "normalized": 0.3210332103321033
-        }
+        },
+        "mosh": 0.15942492012779553
     },
     {
         "date": "January 31",
@@ -1516,7 +1546,8 @@
         "temperature": {
             "value": 39,
             "normalized": 0.2693726937269373
-        }
+        },
+        "mosh": 0.0987220447284345
     },
     {
         "date": "February 01",
@@ -1565,7 +1596,8 @@
         "temperature": {
             "value": 47,
             "normalized": 0.2988929889298893
-        }
+        },
+        "mosh": 0.0006964856230032
     },
     {
         "date": "February 02",
@@ -1614,7 +1646,8 @@
         "temperature": {
             "value": 98,
             "normalized": 0.4870848708487085
-        }
+        },
+        "mosh": 0.00090415335463256
     },
     {
         "date": "February 03",
@@ -1663,7 +1696,8 @@
         "temperature": {
             "value": 91,
             "normalized": 0.4612546125461255
-        }
+        },
+        "mosh": 0.00004728434504793
     },
     {
         "date": "February 04",
@@ -1712,7 +1746,8 @@
         "temperature": {
             "value": 56,
             "normalized": 0.33210332103321033
-        }
+        },
+        "mosh": 0.00049520766773163
     },
     {
         "date": "February 05",
@@ -1761,7 +1796,8 @@
         "temperature": {
             "value": 44,
             "normalized": 0.2878228782287823
-        }
+        },
+        "mosh": 0.11182108626198083
     },
     {
         "date": "February 06",
@@ -1810,7 +1846,8 @@
         "temperature": {
             "value": 49,
             "normalized": 0.3062730627306273
-        }
+        },
+        "mosh": 0.26357827476038337
     },
     {
         "date": "February 07",
@@ -1859,7 +1896,8 @@
         "temperature": {
             "value": 36,
             "normalized": 0.25830258302583026
-        }
+        },
+        "mosh": 0.0000194888178914
     },
     {
         "date": "February 08",
@@ -1908,7 +1946,8 @@
         "temperature": {
             "value": 5,
             "normalized": 0.14391143911439114
-        }
+        },
+        "mosh": 0.0001916932907348
     },
     {
         "date": "February 09",
@@ -1957,7 +1996,8 @@
         "temperature": {
             "value": -8,
             "normalized": 0.0959409594095941
-        }
+        },
+        "mosh": 0.00015335463258784
     },
     {
         "date": "February 10",
@@ -2006,7 +2046,8 @@
         "temperature": {
             "value": -19,
             "normalized": 0.055350553505535055
-        }
+        },
+        "mosh": 0.00006006389776
     },
     {
         "date": "February 11",
@@ -2055,7 +2096,8 @@
         "temperature": {
             "value": -2,
             "normalized": 0.11808118081180811
-        }
+        },
+        "mosh": 0.00002492012779553
     },
     {
         "date": "February 12",
@@ -2104,7 +2146,8 @@
         "temperature": {
             "value": 12,
             "normalized": 0.16974169741697417
-        }
+        },
+        "mosh": 0.0000001118210863
     },
     {
         "date": "February 13",
@@ -2153,7 +2196,8 @@
         "temperature": {
             "value": 27,
             "normalized": 0.22509225092250923
-        }
+        },
+        "mosh": 0.000095207667732
     },
     {
         "date": "February 14",
@@ -2202,7 +2246,8 @@
         "temperature": {
             "value": 53,
             "normalized": 0.3210332103321033
-        }
+        },
+        "mosh": 0.0000020766773163
     },
     {
         "date": "February 15",
@@ -2251,7 +2296,8 @@
         "temperature": {
             "value": 84,
             "normalized": 0.4354243542435424
-        }
+        },
+        "mosh": 0.0000049520766773
     },
     {
         "date": "February 16",
@@ -2300,7 +2346,8 @@
         "temperature": {
             "value": 65,
             "normalized": 0.36531365313653136
-        }
+        },
+        "mosh": 0.0002747603833865
     },
     {
         "date": "February 17",
@@ -2349,7 +2396,8 @@
         "temperature": {
             "value": 63,
             "normalized": 0.35793357933579334
-        }
+        },
+        "mosh": 0.000779552715655
     },
     {
         "date": "February 18",
@@ -2398,7 +2446,8 @@
         "temperature": {
             "value": 54,
             "normalized": 0.3247232472324723
-        }
+        },
+        "mosh": 0.00686900958466453
     },
     {
         "date": "February 19",
@@ -2447,7 +2496,8 @@
         "temperature": {
             "value": 64,
             "normalized": 0.36162361623616235
-        }
+        },
+        "mosh": 0.00150159744408945
     },
     {
         "date": "February 20",
@@ -2496,7 +2546,8 @@
         "temperature": {
             "value": 80,
             "normalized": 0.42066420664206644
-        }
+        },
+        "mosh": 0.0722044728434505
     },
     {
         "date": "February 21",
@@ -2545,7 +2596,8 @@
         "temperature": {
             "value": 86,
             "normalized": 0.44280442804428044
-        }
+        },
+        "mosh": 0.03865814696485624
     },
     {
         "date": "February 22",
@@ -2594,7 +2646,8 @@
         "temperature": {
             "value": 82,
             "normalized": 0.4280442804428044
-        }
+        },
+        "mosh": 0.11214057507987223
     },
     {
         "date": "February 23",
@@ -2643,7 +2696,8 @@
         "temperature": {
             "value": 77,
             "normalized": 0.4095940959409594
-        }
+        },
+        "mosh": 0.0001246006389776
     },
     {
         "date": "February 24",
@@ -2692,7 +2746,8 @@
         "temperature": {
             "value": 49,
             "normalized": 0.3062730627306273
-        }
+        },
+        "mosh": 0.0009329073482428
     },
     {
         "date": "February 25",
@@ -2741,7 +2796,8 @@
         "temperature": {
             "value": 65,
             "normalized": 0.36531365313653136
-        }
+        },
+        "mosh": 0.0057507987220447
     },
     {
         "date": "February 26",
@@ -2790,7 +2846,8 @@
         "temperature": {
             "value": 85,
             "normalized": 0.43911439114391143
-        }
+        },
+        "mosh": 0.1306709265175719
     },
     {
         "date": "February 27",
@@ -2839,7 +2896,8 @@
         "temperature": {
             "value": 80,
             "normalized": 0.42066420664206644
-        }
+        },
+        "mosh": 0.13162939297124602
     },
     {
         "date": "February 28",
@@ -2888,7 +2946,8 @@
         "temperature": {
             "value": 45,
             "normalized": 0.2915129151291513
-        }
+        },
+        "mosh": 0.07827476038338659
     },
     {
         "date": "March 01",
@@ -2937,7 +2996,8 @@
         "temperature": {
             "value": 64,
             "normalized": 0.36162361623616235
-        }
+        },
+        "mosh": 0.0012779552715655
     },
     {
         "date": "March 02",
@@ -2986,7 +3046,8 @@
         "temperature": {
             "value": 69,
             "normalized": 0.3800738007380074
-        }
+        },
+        "mosh": 0.00900958466453676
     },
     {
         "date": "March 03",
@@ -3035,7 +3096,8 @@
         "temperature": {
             "value": 71,
             "normalized": 0.3874538745387454
-        }
+        },
+        "mosh": 0.00034185303514376
     },
     {
         "date": "March 04",
@@ -3084,7 +3146,8 @@
         "temperature": {
             "value": 89,
             "normalized": 0.45387453874538747
-        }
+        },
+        "mosh": 0
     },
     {
         "date": "March 05",
@@ -3133,7 +3196,8 @@
         "temperature": {
             "value": 67,
             "normalized": 0.3726937269372694
-        }
+        },
+        "mosh": 0.19488817891373802
     },
     {
         "date": "March 06",
@@ -3182,7 +3246,8 @@
         "temperature": {
             "value": 62,
             "normalized": 0.35424354243542433
-        }
+        },
+        "mosh": 0.00062619808306709
     },
     {
         "date": "March 07",
@@ -3231,7 +3296,8 @@
         "temperature": {
             "value": 66,
             "normalized": 0.36900369003690037
-        }
+        },
+        "mosh": 0.0010223642172524
     },
     {
         "date": "March 08",
@@ -3280,7 +3346,8 @@
         "temperature": {
             "value": 69,
             "normalized": 0.3800738007380074
-        }
+        },
+        "mosh": 0.0043769968051118
     },
     {
         "date": "March 09",
@@ -3329,7 +3396,8 @@
         "temperature": {
             "value": 80,
             "normalized": 0.42066420664206644
-        }
+        },
+        "mosh": 0.0027156549520766
     },
     {
         "date": "March 10",
@@ -3378,7 +3446,8 @@
         "temperature": {
             "value": 77,
             "normalized": 0.4095940959409594
-        }
+        },
+        "mosh": 0.0098083067092651
     },
     {
         "date": "March 11",
@@ -3427,7 +3496,8 @@
         "temperature": {
             "value": 92,
             "normalized": 0.46494464944649444
-        }
+        },
+        "mosh": 0.00686900958466453
     },
     {
         "date": "March 12",
@@ -3476,7 +3546,8 @@
         "temperature": {
             "value": 90,
             "normalized": 0.4575645756457565
-        }
+        },
+        "mosh": 0.00722044728434505
     },
     {
         "date": "March 13",
@@ -3525,7 +3596,8 @@
         "temperature": {
             "value": 68,
             "normalized": 0.3763837638376384
-        }
+        },
+        "mosh": 0.0086261980830671
     },
     {
         "date": "March 14",
@@ -3574,7 +3646,8 @@
         "temperature": {
             "value": 83,
             "normalized": 0.4317343173431734
-        }
+        },
+        "mosh": 0.0741214057507987
     },
     {
         "date": "March 15",
@@ -3623,7 +3696,8 @@
         "temperature": {
             "value": 85,
             "normalized": 0.43911439114391143
-        }
+        },
+        "mosh": 0.1916932907348243
     },
     {
         "date": "March 16",
@@ -3672,7 +3746,8 @@
         "temperature": {
             "value": 108,
             "normalized": 0.5239852398523985
-        }
+        },
+        "mosh": 0.1485623003194888
     },
     {
         "date": "March 17",
@@ -3721,7 +3796,8 @@
         "temperature": {
             "value": 80,
             "normalized": 0.42066420664206644
-        }
+        },
+        "mosh": 0.1079872204472844
     },
     {
         "date": "March 18",
@@ -3770,7 +3846,8 @@
         "temperature": {
             "value": 98,
             "normalized": 0.4870848708487085
-        }
+        },
+        "mosh": 0.09456869009584666
     },
     {
         "date": "March 19",
@@ -3819,7 +3896,8 @@
         "temperature": {
             "value": 100,
             "normalized": 0.4944649446494465
-        }
+        },
+        "mosh": 0.00456869009584666
     },
     {
         "date": "March 20",
@@ -3868,7 +3946,8 @@
         "temperature": {
             "value": 97,
             "normalized": 0.4833948339483395
-        }
+        },
+        "mosh": 0.00345047923322686
     },
     {
         "date": "March 21",
@@ -3917,7 +3996,8 @@
         "temperature": {
             "value": 80,
             "normalized": 0.42066420664206644
-        }
+        },
+        "mosh": 0.00594249201277955
     },
     {
         "date": "March 22",
@@ -3966,7 +4046,8 @@
         "temperature": {
             "value": 87,
             "normalized": 0.44649446494464945
-        }
+        },
+        "mosh": 0.0003194888178914
     },
     {
         "date": "March 23",
@@ -4015,7 +4096,8 @@
         "temperature": {
             "value": 91,
             "normalized": 0.4612546125461255
-        }
+        },
+        "mosh": 0.00971246006389774
     },
     {
         "date": "March 24",
@@ -4064,7 +4146,8 @@
         "temperature": {
             "value": 94,
             "normalized": 0.47232472324723246
-        }
+        },
+        "mosh": 0.0011501597444089
     },
     {
         "date": "March 25",
@@ -4113,7 +4196,8 @@
         "temperature": {
             "value": 97,
             "normalized": 0.4833948339483395
-        }
+        },
+        "mosh": 0.0003194888178914
     },
     {
         "date": "March 26",
@@ -4162,7 +4246,8 @@
         "temperature": {
             "value": 94,
             "normalized": 0.47232472324723246
-        }
+        },
+        "mosh": 0.0003035143769968
     },
     {
         "date": "March 27",
@@ -4211,7 +4296,8 @@
         "temperature": {
             "value": 110,
             "normalized": 0.5313653136531366
-        }
+        },
+        "mosh": 0.0021725239616614
     },
     {
         "date": "March 28",
@@ -4260,7 +4346,8 @@
         "temperature": {
             "value": 118,
             "normalized": 0.5608856088560885
-        }
+        },
+        "mosh": 0.2597444089456869
     },
     {
         "date": "March 29",
@@ -4309,7 +4396,8 @@
         "temperature": {
             "value": 121,
             "normalized": 0.5719557195571956
-        }
+        },
+        "mosh": 0.0046006389776357
     },
     {
         "date": "March 30",
@@ -4358,7 +4446,8 @@
         "temperature": {
             "value": 167,
             "normalized": 0.7416974169741697
-        }
+        },
+        "mosh": 0.0080830670926518
     },
     {
         "date": "March 31",
@@ -4407,7 +4496,8 @@
         "temperature": {
             "value": 138,
             "normalized": 0.6346863468634686
-        }
+        },
+        "mosh": 0.1063897763578274
     },
     {
         "date": "April 01",
@@ -4456,7 +4546,8 @@
         "temperature": {
             "value": 105,
             "normalized": 0.5129151291512916
-        }
+        },
+        "mosh": 0.000814696485623
     },
     {
         "date": "April 02",
@@ -4505,7 +4596,8 @@
         "temperature": {
             "value": 95,
             "normalized": 0.47601476014760147
-        }
+        },
+        "mosh": 0.0008210862619808
     },
     {
         "date": "April 03",
@@ -4554,7 +4646,8 @@
         "temperature": {
             "value": 89,
             "normalized": 0.45387453874538747
-        }
+        },
+        "mosh": 0.0004952076677316
     },
     {
         "date": "April 04",
@@ -4603,7 +4696,8 @@
         "temperature": {
             "value": 94,
             "normalized": 0.47232472324723246
-        }
+        },
+        "mosh": 0.0007571884984026
     },
     {
         "date": "April 05",
@@ -4652,7 +4746,8 @@
         "temperature": {
             "value": 92,
             "normalized": 0.46494464944649444
-        }
+        },
+        "mosh": 0.0006261980830671
     },
     {
         "date": "April 06",
@@ -4701,7 +4796,8 @@
         "temperature": {
             "value": 85,
             "normalized": 0.43911439114391143
-        }
+        },
+        "mosh": 0.0009105431309904
     },
     {
         "date": "April 07",
@@ -4750,7 +4846,8 @@
         "temperature": {
             "value": 100,
             "normalized": 0.4944649446494465
-        }
+        },
+        "mosh": 0.0002108626198083
     },
     {
         "date": "April 08",
@@ -4799,7 +4896,8 @@
         "temperature": {
             "value": 95,
             "normalized": 0.47601476014760147
-        }
+        },
+        "mosh": 0.0008210862619808
     },
     {
         "date": "April 09",
@@ -4848,7 +4946,8 @@
         "temperature": {
             "value": 144,
             "normalized": 0.6568265682656826
-        }
+        },
+        "mosh": 0.0080830670926518
     },
     {
         "date": "April 10",
@@ -4897,7 +4996,8 @@
         "temperature": {
             "value": 98,
             "normalized": 0.4870848708487085
-        }
+        },
+        "mosh": 0.1613418530351438
     },
     {
         "date": "April 11",
@@ -4946,7 +5046,8 @@
         "temperature": {
             "value": 102,
             "normalized": 0.5018450184501845
-        }
+        },
+        "mosh": 0.0006932907348243
     },
     {
         "date": "April 12",
@@ -4995,7 +5096,8 @@
         "temperature": {
             "value": 104,
             "normalized": 0.5092250922509225
-        }
+        },
+        "mosh": 0.0004664536741214
     },
     {
         "date": "April 13",
@@ -5044,7 +5146,8 @@
         "temperature": {
             "value": 96,
             "normalized": 0.4797047970479705
-        }
+        },
+        "mosh": 0.0003386581469649
     },
     {
         "date": "April 14",
@@ -5093,7 +5196,8 @@
         "temperature": {
             "value": 104,
             "normalized": 0.5092250922509225
-        }
+        },
+        "mosh": 0.00050479233226835
     },
     {
         "date": "April 15",
@@ -5142,7 +5246,8 @@
         "temperature": {
             "value": 99,
             "normalized": 0.4907749077490775
-        }
+        },
+        "mosh": 0.1654952076677316
     },
     {
         "date": "April 16",
@@ -5191,7 +5296,8 @@
         "temperature": {
             "value": 89,
             "normalized": 0.45387453874538747
-        }
+        },
+        "mosh": 0.00591054313099042
     },
     {
         "date": "April 17",
@@ -5240,7 +5346,8 @@
         "temperature": {
             "value": 75,
             "normalized": 0.4022140221402214
-        }
+        },
+        "mosh": 0.0036421725239617
     },
     {
         "date": "April 18",
@@ -5289,7 +5396,8 @@
         "temperature": {
             "value": 68,
             "normalized": 0.3763837638376384
-        }
+        },
+        "mosh": 0.7827476038338658
     },
     {
         "date": "April 19",
@@ -5338,7 +5446,8 @@
         "temperature": {
             "value": 58,
             "normalized": 0.33948339483394835
-        }
+        },
+        "mosh": 0.000370607028754
     },
     {
         "date": "April 20",
@@ -5387,7 +5496,8 @@
         "temperature": {
             "value": 81,
             "normalized": 0.42435424354243545
-        }
+        },
+        "mosh": 0.0044728434504792
     },
     {
         "date": "April 21",
@@ -5436,7 +5546,8 @@
         "temperature": {
             "value": 111,
             "normalized": 0.5350553505535055
-        }
+        },
+        "mosh": 0.0043769968051118
     },
     {
         "date": "April 22",
@@ -5485,7 +5596,8 @@
         "temperature": {
             "value": 83,
             "normalized": 0.4317343173431734
-        }
+        },
+        "mosh": 0.0093929712460063
     },
     {
         "date": "April 23",
@@ -5534,7 +5646,8 @@
         "temperature": {
             "value": 86,
             "normalized": 0.44280442804428044
-        }
+        },
+        "mosh": 0.0005111821086262
     },
     {
         "date": "April 24",
@@ -5583,7 +5696,8 @@
         "temperature": {
             "value": 100,
             "normalized": 0.4944649446494465
-        }
+        },
+        "mosh": 0.0012460063897764
     },
     {
         "date": "April 25",
@@ -5632,7 +5746,8 @@
         "temperature": {
             "value": 69,
             "normalized": 0.3800738007380074
-        }
+        },
+        "mosh": 0.0744408945686901
     },
     {
         "date": "April 26",
@@ -5681,7 +5796,8 @@
         "temperature": {
             "value": 77,
             "normalized": 0.4095940959409594
-        }
+        },
+        "mosh": 0.1351437699680511
     },
     {
         "date": "April 27",
@@ -5730,7 +5846,8 @@
         "temperature": {
             "value": 79,
             "normalized": 0.41697416974169743
-        }
+        },
+        "mosh": 0.1952076677316294
     },
     {
         "date": "April 28",
@@ -5779,7 +5896,8 @@
         "temperature": {
             "value": 87,
             "normalized": 0.44649446494464945
-        }
+        },
+        "mosh": 0.2319488817891374
     },
     {
         "date": "April 29",
@@ -5828,7 +5946,8 @@
         "temperature": {
             "value": 98,
             "normalized": 0.4870848708487085
-        }
+        },
+        "mosh": 0.2792332268370607
     },
     {
         "date": "April 30",
@@ -5877,7 +5996,8 @@
         "temperature": {
             "value": 137,
             "normalized": 0.6309963099630996
-        }
+        },
+        "mosh": 0.2351437699680511
     },
     {
         "date": "May 01",
@@ -5926,7 +6046,8 @@
         "temperature": {
             "value": 121,
             "normalized": 0.5719557195571956
-        }
+        },
+        "mosh": 0.00386581469648563
     },
     {
         "date": "May 02",
@@ -5975,7 +6096,8 @@
         "temperature": {
             "value": 108,
             "normalized": 0.5239852398523985
-        }
+        },
+        "mosh": 0.00485623003194887
     },
     {
         "date": "May 03",
@@ -6024,7 +6146,8 @@
         "temperature": {
             "value": 107,
             "normalized": 0.5202952029520295
-        }
+        },
+        "mosh": 0.0078594249201278
     },
     {
         "date": "May 04",
@@ -6073,7 +6196,8 @@
         "temperature": {
             "value": 118,
             "normalized": 0.5608856088560885
-        }
+        },
+        "mosh": 0.0045367412140575
     },
     {
         "date": "May 05",
@@ -6122,7 +6246,8 @@
         "temperature": {
             "value": 100,
             "normalized": 0.4944649446494465
-        }
+        },
+        "mosh": 0.00242811501597443
     },
     {
         "date": "May 06",
@@ -6171,7 +6296,8 @@
         "temperature": {
             "value": 125,
             "normalized": 0.5867158671586716
-        }
+        },
+        "mosh": 0.0058466453674122
     },
     {
         "date": "May 07",
@@ -6220,7 +6346,8 @@
         "temperature": {
             "value": 100,
             "normalized": 0.4944649446494465
-        }
+        },
+        "mosh": 0.00325878594249204
     },
     {
         "date": "May 08",
@@ -6269,7 +6396,8 @@
         "temperature": {
             "value": 96,
             "normalized": 0.4797047970479705
-        }
+        },
+        "mosh": 0.005367412140575
     },
     {
         "date": "May 09",
@@ -6318,7 +6446,8 @@
         "temperature": {
             "value": 85,
             "normalized": 0.43911439114391143
-        }
+        },
+        "mosh": 0.0006389776357828
     },
     {
         "date": "May 10",
@@ -6367,7 +6496,8 @@
         "temperature": {
             "value": 90,
             "normalized": 0.4575645756457565
-        }
+        },
+        "mosh": 0.00817891373801916
     },
     {
         "date": "May 11",
@@ -6416,7 +6546,8 @@
         "temperature": {
             "value": 161,
             "normalized": 0.7195571955719557
-        }
+        },
+        "mosh": 0.0014376996805112
     },
     {
         "date": "May 12",
@@ -6465,7 +6596,8 @@
         "temperature": {
             "value": 156,
             "normalized": 0.7011070110701108
-        }
+        },
+        "mosh": 0.0050479233226837
     },
     {
         "date": "May 13",
@@ -6514,7 +6646,8 @@
         "temperature": {
             "value": 139,
             "normalized": 0.6383763837638377
-        }
+        },
+        "mosh": 0.0088817891373802
     },
     {
         "date": "May 14",
@@ -6563,7 +6696,8 @@
         "temperature": {
             "value": 144,
             "normalized": 0.6568265682656826
-        }
+        },
+        "mosh": 0.0080830670926518
     },
     {
         "date": "May 15",
@@ -6612,7 +6746,8 @@
         "temperature": {
             "value": 159,
             "normalized": 0.7121771217712177
-        }
+        },
+        "mosh": 0.0031629392971247
     },
     {
         "date": "May 16",
@@ -6661,7 +6796,8 @@
         "temperature": {
             "value": 198,
             "normalized": 0.8560885608856088
-        }
+        },
+        "mosh": 0.0092651757188498
     },
     {
         "date": "May 17",
@@ -6710,7 +6846,8 @@
         "temperature": {
             "value": 227,
             "normalized": 0.9630996309963099
-        }
+        },
+        "mosh": 0.00814696485623
     },
     {
         "date": "May 18",
@@ -6759,7 +6896,8 @@
         "temperature": {
             "value": 142,
             "normalized": 0.6494464944649446
-        }
+        },
+        "mosh": 0.00686900958466453
     },
     {
         "date": "May 19",
@@ -6808,7 +6946,8 @@
         "temperature": {
             "value": 128,
             "normalized": 0.5977859778597786
-        }
+        },
+        "mosh": 0.00594249201277955
     },
     {
         "date": "May 20",
@@ -6857,7 +6996,8 @@
         "temperature": {
             "value": 140,
             "normalized": 0.6420664206642066
-        }
+        },
+        "mosh": 0.0057188498402555
     },
     {
         "date": "May 21",
@@ -6906,7 +7046,8 @@
         "temperature": {
             "value": 146,
             "normalized": 0.6642066420664207
-        }
+        },
+        "mosh": 0.768370607028754
     },
     {
         "date": "May 22",
@@ -6955,7 +7096,8 @@
         "temperature": {
             "value": 184,
             "normalized": 0.8044280442804428
-        }
+        },
+        "mosh": 0.0004472843450479
     },
     {
         "date": "May 23",
@@ -7004,7 +7146,8 @@
         "temperature": {
             "value": 150,
             "normalized": 0.6789667896678967
-        }
+        },
+        "mosh": 0.1773162939297125
     },
     {
         "date": "May 24",
@@ -7053,7 +7196,8 @@
         "temperature": {
             "value": 150,
             "normalized": 0.6789667896678967
-        }
+        },
+        "mosh": 0.0080191693290735
     },
     {
         "date": "May 25",
@@ -7102,7 +7246,8 @@
         "temperature": {
             "value": 157,
             "normalized": 0.7047970479704797
-        }
+        },
+        "mosh": 0.0046964856230032
     },
     {
         "date": "May 26",
@@ -7151,7 +7296,8 @@
         "temperature": {
             "value": 218,
             "normalized": 0.9298892988929889
-        }
+        },
+        "mosh": 0.0085942492012779
     },
     {
         "date": "May 27",
@@ -7200,7 +7346,8 @@
         "temperature": {
             "value": 225,
             "normalized": 0.955719557195572
-        }
+        },
+        "mosh": 0.0038658146964856
     },
     {
         "date": "May 28",
@@ -7249,7 +7396,8 @@
         "temperature": {
             "value": 173,
             "normalized": 0.7638376383763837
-        }
+        },
+        "mosh": 0.0005111821086262
     },
     {
         "date": "May 29",
@@ -7298,7 +7446,8 @@
         "temperature": {
             "value": 191,
             "normalized": 0.8302583025830258
-        }
+        },
+        "mosh": 0.0053035143769968
     },
     {
         "date": "May 30",
@@ -7347,7 +7496,8 @@
         "temperature": {
             "value": 166,
             "normalized": 0.7380073800738007
-        }
+        },
+        "mosh": 0.0054952076677316
     },
     {
         "date": "May 31",
@@ -7396,7 +7546,8 @@
         "temperature": {
             "value": 159,
             "normalized": 0.7121771217712177
-        }
+        },
+        "mosh": 0.0007348242811502
     },
     {
         "date": "June 01",
@@ -7445,7 +7596,8 @@
         "temperature": {
             "value": 161,
             "normalized": 0.7195571955719557
-        }
+        },
+        "mosh": 0.0047603833865815
     },
     {
         "date": "June 02",
@@ -7494,7 +7646,8 @@
         "temperature": {
             "value": 195,
             "normalized": 0.8450184501845018
-        }
+        },
+        "mosh": 0.0056549520766773
     },
     {
         "date": "June 03",
@@ -7543,7 +7696,8 @@
         "temperature": {
             "value": 170,
             "normalized": 0.7527675276752768
-        }
+        },
+        "mosh": 0.0073801916932907
     },
     {
         "date": "June 04",
@@ -7592,7 +7746,8 @@
         "temperature": {
             "value": 157,
             "normalized": 0.7047970479704797
-        }
+        },
+        "mosh": 0.0077316293929713
     },
     {
         "date": "June 05",
@@ -7641,7 +7796,8 @@
         "temperature": {
             "value": 177,
             "normalized": 0.7785977859778598
-        }
+        },
+        "mosh": 0.0091054313099042
     },
     {
         "date": "June 06",
@@ -7690,7 +7846,8 @@
         "temperature": {
             "value": 141,
             "normalized": 0.6457564575645757
-        }
+        },
+        "mosh": 0.0091054313099042
     },
     {
         "date": "June 07",
@@ -7739,7 +7896,8 @@
         "temperature": {
             "value": 146,
             "normalized": 0.6642066420664207
-        }
+        },
+        "mosh": 0.0018849840255591
     },
     {
         "date": "June 08",
@@ -7788,7 +7946,8 @@
         "temperature": {
             "value": 167,
             "normalized": 0.7416974169741697
-        }
+        },
+        "mosh": 0.0054313099041534
     },
     {
         "date": "June 09",
@@ -7837,7 +7996,8 @@
         "temperature": {
             "value": 164,
             "normalized": 0.7306273062730627
-        }
+        },
+        "mosh": 0.0053035143769968
     },
     {
         "date": "June 10",
@@ -7886,7 +8046,8 @@
         "temperature": {
             "value": 187,
             "normalized": 0.8154981549815498
-        }
+        },
+        "mosh": 0.0028753993610224
     },
     {
         "date": "June 11",
@@ -7935,7 +8096,8 @@
         "temperature": {
             "value": 201,
             "normalized": 0.8671586715867159
-        }
+        },
+        "mosh": 0.6884984025559105
     },
     {
         "date": "June 12",
@@ -7984,7 +8146,8 @@
         "temperature": {
             "value": 165,
             "normalized": 0.7343173431734318
-        }
+        },
+        "mosh": 0.6261980830670927
     },
     {
         "date": "June 13",
@@ -8033,7 +8196,8 @@
         "temperature": {
             "value": 166,
             "normalized": 0.7380073800738007
-        }
+        },
+        "mosh": 0.0236421725239617
     },
     {
         "date": "June 14",
@@ -8082,7 +8246,8 @@
         "temperature": {
             "value": 183,
             "normalized": 0.8007380073800738
-        }
+        },
+        "mosh": 0.7827476038338658
     },
     {
         "date": "June 15",
@@ -8131,7 +8296,8 @@
         "temperature": {
             "value": 198,
             "normalized": 0.8560885608856088
-        }
+        },
+        "mosh": 0.0044728434504792
     },
     {
         "date": "June 16",
@@ -8180,7 +8346,8 @@
         "temperature": {
             "value": 170,
             "normalized": 0.7527675276752768
-        }
+        },
+        "mosh": 0.0875399361022364
     },
     {
         "date": "June 17",
@@ -8229,7 +8396,8 @@
         "temperature": {
             "value": 185,
             "normalized": 0.8081180811808119
-        }
+        },
+        "mosh": 0.0907348242811502
     },
     {
         "date": "June 18",
@@ -8278,7 +8446,8 @@
         "temperature": {
             "value": 205,
             "normalized": 0.8819188191881919
-        }
+        },
+        "mosh": 0.0562300319488818
     },
     {
         "date": "June 19",
@@ -8327,7 +8496,8 @@
         "temperature": {
             "value": 227,
             "normalized": 0.9630996309963099
-        }
+        },
+        "mosh": 0.0098402555910544
     },
     {
         "date": "June 20",
@@ -8376,7 +8546,8 @@
         "temperature": {
             "value": 213,
             "normalized": 0.9114391143911439
-        }
+        },
+        "mosh": 0.0091373801916933
     },
     {
         "date": "June 21",
@@ -8425,7 +8596,8 @@
         "temperature": {
             "value": 237,
             "normalized": 1
-        }
+        },
+        "mosh": 0.0030990415335463
     },
     {
         "date": "June 22",
@@ -8474,7 +8646,8 @@
         "temperature": {
             "value": 212,
             "normalized": 0.9077490774907749
-        }
+        },
+        "mosh": 0.0090095846645367
     },
     {
         "date": "June 23",
@@ -8523,7 +8696,8 @@
         "temperature": {
             "value": 184,
             "normalized": 0.8044280442804428
-        }
+        },
+        "mosh": 0.0025878594249201
     },
     {
         "date": "June 24",
@@ -8572,7 +8746,8 @@
         "temperature": {
             "value": 179,
             "normalized": 0.7859778597785978
-        }
+        },
+        "mosh": 0.0055591054313099
     },
     {
         "date": "June 25",
@@ -8621,7 +8796,8 @@
         "temperature": {
             "value": 176,
             "normalized": 0.7749077490774908
-        }
+        },
+        "mosh": 0.0084025559105431
     },
     {
         "date": "June 26",
@@ -8670,7 +8846,8 @@
         "temperature": {
             "value": 165,
             "normalized": 0.7343173431734318
-        }
+        },
+        "mosh": 0.646964856230032
     },
     {
         "date": "June 27",
@@ -8719,7 +8896,8 @@
         "temperature": {
             "value": 185,
             "normalized": 0.8081180811808119
-        }
+        },
+        "mosh": 0.0052076677316294
     },
     {
         "date": "June 28",
@@ -8768,7 +8946,8 @@
         "temperature": {
             "value": 180,
             "normalized": 0.7896678966789668
-        }
+        },
+        "mosh": 0.00287539936102236
     },
     {
         "date": "June 29",
@@ -8817,7 +8996,8 @@
         "temperature": {
             "value": 174,
             "normalized": 0.7675276752767528
-        }
+        },
+        "mosh": 0.00884984025559107
     },
     {
         "date": "June 30",
@@ -8866,7 +9046,8 @@
         "temperature": {
             "value": 170,
             "normalized": 0.7527675276752768
-        }
+        },
+        "mosh": 0.00345047923322686
     },
     {
         "date": "July 01",
@@ -8915,7 +9096,8 @@
         "temperature": {
             "value": 161,
             "normalized": 0.7195571955719557
-        }
+        },
+        "mosh": 0.0090415335463258
     },
     {
         "date": "July 02",
@@ -8964,7 +9146,8 @@
         "temperature": {
             "value": 162,
             "normalized": 0.7232472324723247
-        }
+        },
+        "mosh": 0.9869009584664537
     },
     {
         "date": "July 03",
@@ -9013,7 +9196,8 @@
         "temperature": {
             "value": 175,
             "normalized": 0.7712177121771218
-        }
+        },
+        "mosh": 0.0002779552715654
     },
     {
         "date": "July 04",
@@ -9062,7 +9246,8 @@
         "temperature": {
             "value": 188,
             "normalized": 0.8191881918819188
-        }
+        },
+        "mosh": 0.0003290734824281
     },
     {
         "date": "July 05",
@@ -9111,7 +9296,8 @@
         "temperature": {
             "value": 189,
             "normalized": 0.8228782287822878
-        }
+        },
+        "mosh": 0.0003833865814696
     },
     {
         "date": "July 06",
@@ -9160,7 +9346,8 @@
         "temperature": {
             "value": 206,
             "normalized": 0.8856088560885609
-        }
+        },
+        "mosh": 0.0066453674121406
     },
     {
         "date": "July 07",
@@ -9209,7 +9396,8 @@
         "temperature": {
             "value": 192,
             "normalized": 0.8339483394833949
-        }
+        },
+        "mosh": 0.0005750798722045
     },
     {
         "date": "July 08",
@@ -9258,7 +9446,8 @@
         "temperature": {
             "value": 181,
             "normalized": 0.7933579335793358
-        }
+        },
+        "mosh": 0.00077316293929713
     },
     {
         "date": "July 09",
@@ -9307,7 +9496,8 @@
         "temperature": {
             "value": 185,
             "normalized": 0.8081180811808119
-        }
+        },
+        "mosh": 0.0057188498402555
     },
     {
         "date": "July 10",
@@ -9356,7 +9546,8 @@
         "temperature": {
             "value": 194,
             "normalized": 0.8413284132841329
-        }
+        },
+        "mosh": 0.0081150159744409
     },
     {
         "date": "July 11",
@@ -9405,7 +9596,8 @@
         "temperature": {
             "value": 177,
             "normalized": 0.7785977859778598
-        }
+        },
+        "mosh": 0.004408945686901
     },
     {
         "date": "July 12",
@@ -9454,7 +9646,8 @@
         "temperature": {
             "value": 158,
             "normalized": 0.7084870848708487
-        }
+        },
+        "mosh": 0.003258785942492
     },
     {
         "date": "July 13",
@@ -9503,7 +9696,8 @@
         "temperature": {
             "value": 158,
             "normalized": 0.7084870848708487
-        }
+        },
+        "mosh": 0.007444089456869
     },
     {
         "date": "July 14",
@@ -9552,7 +9746,8 @@
         "temperature": {
             "value": 161,
             "normalized": 0.7195571955719557
-        }
+        },
+        "mosh": 0.3309904153354633
     },
     {
         "date": "July 15",
@@ -9601,7 +9796,8 @@
         "temperature": {
             "value": 181,
             "normalized": 0.7933579335793358
-        }
+        },
+        "mosh": 0.3964856230031949
     },
     {
         "date": "July 16",
@@ -9650,7 +9846,8 @@
         "temperature": {
             "value": 191,
             "normalized": 0.8302583025830258
-        }
+        },
+        "mosh": 0.3773162939297125
     },
     {
         "date": "July 17",
@@ -9699,7 +9896,8 @@
         "temperature": {
             "value": 185,
             "normalized": 0.8081180811808119
-        }
+        },
+        "mosh": 0.3370607028753994
     },
     {
         "date": "July 18",
@@ -9748,7 +9946,8 @@
         "temperature": {
             "value": 215,
             "normalized": 0.9188191881918819
-        }
+        },
+        "mosh": 0.605111821086262
     },
     {
         "date": "July 19",
@@ -9797,7 +9996,8 @@
         "temperature": {
             "value": 230,
             "normalized": 0.974169741697417
-        }
+        },
+        "mosh": 0.097444089456869
     },
     {
         "date": "July 20",
@@ -9846,7 +10046,8 @@
         "temperature": {
             "value": 194,
             "normalized": 0.8413284132841329
-        }
+        },
+        "mosh": 0.0070287539936102
     },
     {
         "date": "July 21",
@@ -9895,7 +10096,8 @@
         "temperature": {
             "value": 196,
             "normalized": 0.8487084870848709
-        }
+        },
+        "mosh": 0.0000958466453674
     },
     {
         "date": "July 22",
@@ -9944,7 +10146,8 @@
         "temperature": {
             "value": 187,
             "normalized": 0.8154981549815498
-        }
+        },
+        "mosh": 0.0055591054313099
     },
     {
         "date": "July 23",
@@ -9993,7 +10196,8 @@
         "temperature": {
             "value": 164,
             "normalized": 0.7306273062730627
-        }
+        },
+        "mosh": 0.0000958466453674
     },
     {
         "date": "July 24",
@@ -10042,7 +10246,8 @@
         "temperature": {
             "value": 162,
             "normalized": 0.7232472324723247
-        }
+        },
+        "mosh": 0.0040575079872205
     },
     {
         "date": "July 25",
@@ -10091,7 +10296,8 @@
         "temperature": {
             "value": 175,
             "normalized": 0.7712177121771218
-        }
+        },
+        "mosh": 0.0044728434504792
     },
     {
         "date": "July 26",
@@ -10140,7 +10346,8 @@
         "temperature": {
             "value": 191,
             "normalized": 0.8302583025830258
-        }
+        },
+        "mosh": 0.0082747603833865
     },
     {
         "date": "July 27",
@@ -10189,7 +10396,8 @@
         "temperature": {
             "value": 182,
             "normalized": 0.7970479704797048
-        }
+        },
+        "mosh": 0.0044408945686901
     },
     {
         "date": "July 28",
@@ -10238,7 +10446,8 @@
         "temperature": {
             "value": 178,
             "normalized": 0.7822878228782287
-        }
+        },
+        "mosh": 0.007923322683706
     },
     {
         "date": "July 29",
@@ -10287,7 +10496,8 @@
         "temperature": {
             "value": 182,
             "normalized": 0.7970479704797048
-        }
+        },
+        "mosh": 0.1428115015974441
     },
     {
         "date": "July 30",
@@ -10336,7 +10546,8 @@
         "temperature": {
             "value": 183,
             "normalized": 0.8007380073800738
-        }
+        },
+        "mosh": 0.1878594249201278
     },
     {
         "date": "July 31",
@@ -10385,7 +10596,8 @@
         "temperature": {
             "value": 181,
             "normalized": 0.7933579335793358
-        }
+        },
+        "mosh": 0.0070287539936102
     },
     {
         "date": "August 01",
@@ -10434,7 +10646,8 @@
         "temperature": {
             "value": 186,
             "normalized": 0.8118081180811808
-        }
+        },
+        "mosh": 0.0431309904153354
     },
     {
         "date": "August 02",
@@ -10483,7 +10696,8 @@
         "temperature": {
             "value": 182,
             "normalized": 0.7970479704797048
-        }
+        },
+        "mosh": 0.0072843450479233
     },
     {
         "date": "August 03",
@@ -10532,7 +10746,8 @@
         "temperature": {
             "value": 191,
             "normalized": 0.8302583025830258
-        }
+        },
+        "mosh": 0.000223642172524
     },
     {
         "date": "August 04",
@@ -10581,7 +10796,8 @@
         "temperature": {
             "value": 189,
             "normalized": 0.8228782287822878
-        }
+        },
+        "mosh": 0.0087539936102237
     },
     {
         "date": "August 05",
@@ -10630,7 +10846,8 @@
         "temperature": {
             "value": 171,
             "normalized": 0.7564575645756457
-        }
+        },
+        "mosh": 0.0050798722044729
     },
     {
         "date": "August 06",
@@ -10679,7 +10896,8 @@
         "temperature": {
             "value": 178,
             "normalized": 0.7822878228782287
-        }
+        },
+        "mosh": 0.0039297124600639
     },
     {
         "date": "August 07",
@@ -10728,7 +10946,8 @@
         "temperature": {
             "value": 173,
             "normalized": 0.7638376383763837
-        }
+        },
+        "mosh": 0.489137380191693
     },
     {
         "date": "August 08",
@@ -10777,7 +10996,8 @@
         "temperature": {
             "value": 162,
             "normalized": 0.7232472324723247
-        }
+        },
+        "mosh": 0.5686900958466453
     },
     {
         "date": "August 09",
@@ -10826,7 +11046,8 @@
         "temperature": {
             "value": 172,
             "normalized": 0.7601476014760148
-        }
+        },
+        "mosh": 0.6693290734824281
     },
     {
         "date": "August 10",
@@ -10875,7 +11096,8 @@
         "temperature": {
             "value": 167,
             "normalized": 0.7416974169741697
-        }
+        },
+        "mosh": 0.4086261980830671
     },
     {
         "date": "August 11",
@@ -10924,7 +11146,8 @@
         "temperature": {
             "value": 173,
             "normalized": 0.7638376383763837
-        }
+        },
+        "mosh": 0.0049520766773163
     },
     {
         "date": "August 12",
@@ -10973,7 +11196,8 @@
         "temperature": {
             "value": 176,
             "normalized": 0.7749077490774908
-        }
+        },
+        "mosh": 0.0004313099041534
     },
     {
         "date": "August 13",
@@ -11022,7 +11246,8 @@
         "temperature": {
             "value": 175,
             "normalized": 0.7712177121771218
-        }
+        },
+        "mosh": 0.0004728434504792
     },
     {
         "date": "August 14",
@@ -11071,7 +11296,8 @@
         "temperature": {
             "value": 189,
             "normalized": 0.8228782287822878
-        }
+        },
+        "mosh": 0.0005750798722045
     },
     {
         "date": "August 15",
@@ -11120,7 +11346,8 @@
         "temperature": {
             "value": 180,
             "normalized": 0.7896678966789668
-        }
+        },
+        "mosh": 0.0004952076677316
     },
     {
         "date": "August 16",
@@ -11169,7 +11396,8 @@
         "temperature": {
             "value": 180,
             "normalized": 0.7896678966789668
-        }
+        },
+        "mosh": 0.0004057507987221
     },
     {
         "date": "August 17",
@@ -11218,7 +11446,8 @@
         "temperature": {
             "value": 182,
             "normalized": 0.7970479704797048
-        }
+        },
+        "mosh": 0.0008210862619808
     },
     {
         "date": "August 18",
@@ -11267,7 +11496,8 @@
         "temperature": {
             "value": 179,
             "normalized": 0.7859778597785978
-        }
+        },
+        "mosh": 0.0087539936102237
     },
     {
         "date": "August 19",
@@ -11316,7 +11546,8 @@
         "temperature": {
             "value": 168,
             "normalized": 0.7453874538745388
-        }
+        },
+        "mosh": 0.0095527156549521
     },
     {
         "date": "August 20",
@@ -11365,7 +11596,8 @@
         "temperature": {
             "value": 173,
             "normalized": 0.7638376383763837
-        }
+        },
+        "mosh": 0.0099680511182109
     },
     {
         "date": "August 21",
@@ -11414,7 +11646,8 @@
         "temperature": {
             "value": 177,
             "normalized": 0.7785977859778598
-        }
+        },
+        "mosh": 0.0004472843450479
     },
     {
         "date": "August 22",
@@ -11463,7 +11696,8 @@
         "temperature": {
             "value": 193,
             "normalized": 0.8376383763837638
-        }
+        },
+        "mosh": 0.0120447284345048
     },
     {
         "date": "August 23",
@@ -11512,7 +11746,8 @@
         "temperature": {
             "value": 205,
             "normalized": 0.8819188191881919
-        }
+        },
+        "mosh": 0.3182108626198083
     },
     {
         "date": "August 24",
@@ -11561,7 +11796,8 @@
         "temperature": {
             "value": 187,
             "normalized": 0.8154981549815498
-        }
+        },
+        "mosh": 0.0837060702875399
     },
     {
         "date": "August 25",
@@ -11610,7 +11846,8 @@
         "temperature": {
             "value": 183,
             "normalized": 0.8007380073800738
-        }
+        },
+        "mosh": 0.0057188498402555
     },
     {
         "date": "August 26",
@@ -11659,7 +11896,8 @@
         "temperature": {
             "value": 186,
             "normalized": 0.8118081180811808
-        }
+        },
+        "mosh": 0.0038338658146964
     },
     {
         "date": "August 27",
@@ -11708,7 +11946,8 @@
         "temperature": {
             "value": 191,
             "normalized": 0.8302583025830258
-        }
+        },
+        "mosh": 0.0021086261980831
     },
     {
         "date": "August 28",
@@ -11757,7 +11996,8 @@
         "temperature": {
             "value": 189,
             "normalized": 0.8228782287822878
-        }
+        },
+        "mosh": 0.0097444089456869
     },
     {
         "date": "August 29",
@@ -11806,7 +12046,8 @@
         "temperature": {
             "value": 207,
             "normalized": 0.8892988929889298
-        }
+        },
+        "mosh": 0.0062619808306709
     },
     {
         "date": "August 30",
@@ -11855,7 +12096,8 @@
         "temperature": {
             "value": 172,
             "normalized": 0.7601476014760148
-        }
+        },
+        "mosh": 0.0190095846645367
     },
     {
         "date": "August 31",
@@ -11904,7 +12146,8 @@
         "temperature": {
             "value": 153,
             "normalized": 0.6900369003690037
-        }
+        },
+        "mosh": 0.3421725239616614
     },
     {
         "date": "September 01",
@@ -11953,7 +12196,8 @@
         "temperature": {
             "value": 152,
             "normalized": 0.6863468634686347
-        }
+        },
+        "mosh": 0.0035782747603834
     },
     {
         "date": "September 02",
@@ -12002,7 +12246,8 @@
         "temperature": {
             "value": 148,
             "normalized": 0.6715867158671587
-        }
+        },
+        "mosh": 0.0048242811501597
     },
     {
         "date": "September 03",
@@ -12051,7 +12296,8 @@
         "temperature": {
             "value": 148,
             "normalized": 0.6715867158671587
-        }
+        },
+        "mosh": 0.0003514376996805
     },
     {
         "date": "September 04",
@@ -12100,7 +12346,8 @@
         "temperature": {
             "value": 169,
             "normalized": 0.7490774907749077
-        }
+        },
+        "mosh": 0.00562300319488816
     },
     {
         "date": "September 05",
@@ -12149,7 +12396,8 @@
         "temperature": {
             "value": 187,
             "normalized": 0.8154981549815498
-        }
+        },
+        "mosh": 0.0099361022364217
     },
     {
         "date": "September 06",
@@ -12198,7 +12446,8 @@
         "temperature": {
             "value": 167,
             "normalized": 0.7416974169741697
-        }
+        },
+        "mosh": 0.6821086261980831
     },
     {
         "date": "September 07",
@@ -12247,7 +12496,8 @@
         "temperature": {
             "value": 168,
             "normalized": 0.7453874538745388
-        }
+        },
+        "mosh": 0.7654952076677316
     },
     {
         "date": "September 08",
@@ -12296,7 +12546,8 @@
         "temperature": {
             "value": 155,
             "normalized": 0.6974169741697417
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "September 09",
@@ -12345,7 +12596,8 @@
         "temperature": {
             "value": 146,
             "normalized": 0.6642066420664207
-        }
+        },
+        "mosh": 0.4984025559105431
     },
     {
         "date": "September 10",
@@ -12394,7 +12646,8 @@
         "temperature": {
             "value": 153,
             "normalized": 0.6900369003690037
-        }
+        },
+        "mosh": 0.13706070287539935
     },
     {
         "date": "September 11",
@@ -12443,7 +12696,8 @@
         "temperature": {
             "value": 148,
             "normalized": 0.6715867158671587
-        }
+        },
+        "mosh": 0.1440894568690096
     },
     {
         "date": "September 12",
@@ -12492,7 +12746,8 @@
         "temperature": {
             "value": 154,
             "normalized": 0.6937269372693727
-        }
+        },
+        "mosh": 0.012779552715655
     },
     {
         "date": "September 13",
@@ -12541,7 +12796,8 @@
         "temperature": {
             "value": 153,
             "normalized": 0.6900369003690037
-        }
+        },
+        "mosh": 0.0383386581469649
     },
     {
         "date": "September 14",
@@ -12590,7 +12846,8 @@
         "temperature": {
             "value": 134,
             "normalized": 0.6199261992619927
-        }
+        },
+        "mosh": 0.0000958466453674
     },
     {
         "date": "September 15",
@@ -12639,7 +12896,8 @@
         "temperature": {
             "value": 128,
             "normalized": 0.5977859778597786
-        }
+        },
+        "mosh": 0.0088498402555911
     },
     {
         "date": "September 16",
@@ -12688,7 +12946,8 @@
         "temperature": {
             "value": 116,
             "normalized": 0.5535055350553506
-        }
+        },
+        "mosh": 0.0061341853035144
     },
     {
         "date": "September 17",
@@ -12737,7 +12996,8 @@
         "temperature": {
             "value": 129,
             "normalized": 0.6014760147601476
-        }
+        },
+        "mosh": 0.0079872204472844
     },
     {
         "date": "September 18",
@@ -12786,7 +13046,8 @@
         "temperature": {
             "value": 132,
             "normalized": 0.6125461254612546
-        }
+        },
+        "mosh": 0.6246006389776357
     },
     {
         "date": "September 19",
@@ -12835,7 +13096,8 @@
         "temperature": {
             "value": 139,
             "normalized": 0.6383763837638377
-        }
+        },
+        "mosh": 0.8958466453674122
     },
     {
         "date": "September 20",
@@ -12884,7 +13146,8 @@
         "temperature": {
             "value": 152,
             "normalized": 0.6863468634686347
-        }
+        },
+        "mosh": 0.0373801916932907
     },
     {
         "date": "September 21",
@@ -12933,7 +13196,8 @@
         "temperature": {
             "value": 151,
             "normalized": 0.6826568265682657
-        }
+        },
+        "mosh": 0.0389776357827476
     },
     {
         "date": "September 22",
@@ -12982,7 +13246,8 @@
         "temperature": {
             "value": 139,
             "normalized": 0.6383763837638377
-        }
+        },
+        "mosh": 0.0990415335463258
     },
     {
         "date": "September 23",
@@ -13031,7 +13296,8 @@
         "temperature": {
             "value": 133,
             "normalized": 0.6162361623616236
-        }
+        },
+        "mosh": 0.9725239616613419
     },
     {
         "date": "September 24",
@@ -13080,7 +13346,8 @@
         "temperature": {
             "value": 146,
             "normalized": 0.6642066420664207
-        }
+        },
+        "mosh": 0.0044728434504792
     },
     {
         "date": "September 25",
@@ -13129,7 +13396,8 @@
         "temperature": {
             "value": 146,
             "normalized": 0.6642066420664207
-        }
+        },
+        "mosh": 0.7549520766773163
     },
     {
         "date": "September 26",
@@ -13178,7 +13446,8 @@
         "temperature": {
             "value": 148,
             "normalized": 0.6715867158671587
-        }
+        },
+        "mosh": 0.0549520766773163
     },
     {
         "date": "September 27",
@@ -13227,7 +13496,8 @@
         "temperature": {
             "value": 152,
             "normalized": 0.6863468634686347
-        }
+        },
+        "mosh": 0.0693290734824281
     },
     {
         "date": "September 28",
@@ -13276,7 +13546,8 @@
         "temperature": {
             "value": 161,
             "normalized": 0.7195571955719557
-        }
+        },
+        "mosh": 0.0357827476038339
     },
     {
         "date": "September 29",
@@ -13325,7 +13596,8 @@
         "temperature": {
             "value": 171,
             "normalized": 0.7564575645756457
-        }
+        },
+        "mosh": 0.0351437699680511
     },
     {
         "date": "September 30",
@@ -13374,7 +13646,8 @@
         "temperature": {
             "value": 146,
             "normalized": 0.6642066420664207
-        }
+        },
+        "mosh": 0.0050479233226837
     },
     {
         "date": "October 01",
@@ -13423,7 +13696,8 @@
         "temperature": {
             "value": 147,
             "normalized": 0.6678966789667896
-        }
+        },
+        "mosh": 0.035463258785943
     },
     {
         "date": "October 02",
@@ -13472,7 +13746,8 @@
         "temperature": {
             "value": 161,
             "normalized": 0.7195571955719557
-        }
+        },
+        "mosh": 0.1319488817891374
     },
     {
         "date": "October 03",
@@ -13521,7 +13796,8 @@
         "temperature": {
             "value": 146,
             "normalized": 0.6642066420664207
-        }
+        },
+        "mosh": 0.1661341853035144
     },
     {
         "date": "October 04",
@@ -13570,7 +13846,8 @@
         "temperature": {
             "value": 138,
             "normalized": 0.6346863468634686
-        }
+        },
+        "mosh": 0.1325878594249201
     },
     {
         "date": "October 05",
@@ -13619,7 +13896,8 @@
         "temperature": {
             "value": 138,
             "normalized": 0.6346863468634686
-        }
+        },
+        "mosh": 0.2099041533546326
     },
     {
         "date": "October 06",
@@ -13668,7 +13946,8 @@
         "temperature": {
             "value": 127,
             "normalized": 0.5940959409594095
-        }
+        },
+        "mosh": 0.2827476038338658
     },
     {
         "date": "October 07",
@@ -13717,7 +13996,8 @@
         "temperature": {
             "value": 139,
             "normalized": 0.6383763837638377
-        }
+        },
+        "mosh": 0.310223642172524
     },
     {
         "date": "October 08",
@@ -13766,7 +14046,8 @@
         "temperature": {
             "value": 133,
             "normalized": 0.6162361623616236
-        }
+        },
+        "mosh": 0.3830670926517572
     },
     {
         "date": "October 09",
@@ -13815,7 +14096,8 @@
         "temperature": {
             "value": 133,
             "normalized": 0.6162361623616236
-        }
+        },
+        "mosh": 0.3968051118210863
     },
     {
         "date": "October 10",
@@ -13864,7 +14146,8 @@
         "temperature": {
             "value": 147,
             "normalized": 0.6678966789667896
-        }
+        },
+        "mosh": 0.2776357827476038
     },
     {
         "date": "October 11",
@@ -13913,7 +14196,8 @@
         "temperature": {
             "value": 150,
             "normalized": 0.6789667896678967
-        }
+        },
+        "mosh": 0.4015974440894568
     },
     {
         "date": "October 12",
@@ -13962,7 +14246,8 @@
         "temperature": {
             "value": 144,
             "normalized": 0.6568265682656826
-        }
+        },
+        "mosh": 0.6549520766773163
     },
     {
         "date": "October 13",
@@ -14011,7 +14296,8 @@
         "temperature": {
             "value": 158,
             "normalized": 0.7084870848708487
-        }
+        },
+        "mosh": 0.0805111821086262
     },
     {
         "date": "October 14",
@@ -14060,7 +14346,8 @@
         "temperature": {
             "value": 154,
             "normalized": 0.6937269372693727
-        }
+        },
+        "mosh": 0.0396166134185304
     },
     {
         "date": "October 15",
@@ -14109,7 +14396,8 @@
         "temperature": {
             "value": 172,
             "normalized": 0.7601476014760148
-        }
+        },
+        "mosh": 0.2252396166134185
     },
     {
         "date": "October 16",
@@ -14158,7 +14446,8 @@
         "temperature": {
             "value": 191,
             "normalized": 0.8302583025830258
-        }
+        },
+        "mosh": 0.3932907348242812
     },
     {
         "date": "October 17",
@@ -14207,7 +14496,8 @@
         "temperature": {
             "value": 138,
             "normalized": 0.6346863468634686
-        }
+        },
+        "mosh": 0.09201277955271566
     },
     {
         "date": "October 18",
@@ -14256,7 +14546,8 @@
         "temperature": {
             "value": 150,
             "normalized": 0.6789667896678967
-        }
+        },
+        "mosh": 0.08722044728434505
     },
     {
         "date": "October 19",
@@ -14305,7 +14596,8 @@
         "temperature": {
             "value": 168,
             "normalized": 0.7453874538745388
-        }
+        },
+        "mosh": 0.1329073482428115
     },
     {
         "date": "October 20",
@@ -14354,7 +14646,8 @@
         "temperature": {
             "value": 139,
             "normalized": 0.6383763837638377
-        }
+        },
+        "mosh": 0.08083067092651754
     },
     {
         "date": "October 21",
@@ -14403,7 +14696,8 @@
         "temperature": {
             "value": 135,
             "normalized": 0.6236162361623616
-        }
+        },
+        "mosh": 0.0792332268370607
     },
     {
         "date": "October 22",
@@ -14452,7 +14746,8 @@
         "temperature": {
             "value": 117,
             "normalized": 0.5571955719557196
-        }
+        },
+        "mosh": 0.1070287539936102
     },
     {
         "date": "October 23",
@@ -14501,7 +14796,8 @@
         "temperature": {
             "value": 134,
             "normalized": 0.6199261992619927
-        }
+        },
+        "mosh": 0.0214057507987221
     },
     {
         "date": "October 24",
@@ -14550,7 +14846,8 @@
         "temperature": {
             "value": 152,
             "normalized": 0.6863468634686347
-        }
+        },
+        "mosh": 0.1638977635782748
     },
     {
         "date": "October 25",
@@ -14599,7 +14896,8 @@
         "temperature": {
             "value": 150,
             "normalized": 0.6789667896678967
-        }
+        },
+        "mosh": 0.1166134185303515
     },
     {
         "date": "October 26",
@@ -14648,7 +14946,8 @@
         "temperature": {
             "value": 145,
             "normalized": 0.6605166051660517
-        }
+        },
+        "mosh": 0.8293929712460063
     },
     {
         "date": "October 27",
@@ -14697,7 +14996,8 @@
         "temperature": {
             "value": 130,
             "normalized": 0.6051660516605166
-        }
+        },
+        "mosh": 0.829073482428115
     },
     {
         "date": "October 28",
@@ -14746,7 +15046,8 @@
         "temperature": {
             "value": 131,
             "normalized": 0.6088560885608856
-        }
+        },
+        "mosh": 0.0744408945686901
     },
     {
         "date": "October 29",
@@ -14795,7 +15096,8 @@
         "temperature": {
             "value": 119,
             "normalized": 0.5645756457564576
-        }
+        },
+        "mosh": 0.0166134185303515
     },
     {
         "date": "October 30",
@@ -14844,7 +15146,8 @@
         "temperature": {
             "value": 108,
             "normalized": 0.5239852398523985
-        }
+        },
+        "mosh": 0.8741214057507987
     },
     {
         "date": "October 31",
@@ -14893,7 +15196,8 @@
         "temperature": {
             "value": 106,
             "normalized": 0.5166051660516605
-        }
+        },
+        "mosh": 0.0798722044728435
     },
     {
         "date": "November 01",
@@ -14942,7 +15246,8 @@
         "temperature": {
             "value": 117,
             "normalized": 0.5571955719557196
-        }
+        },
+        "mosh": 0.0517571884984026
     },
     {
         "date": "November 02",
@@ -14991,7 +15296,8 @@
         "temperature": {
             "value": 105,
             "normalized": 0.5129151291512916
-        }
+        },
+        "mosh": 0.1351437699680511
     },
     {
         "date": "November 03",
@@ -15040,7 +15346,8 @@
         "temperature": {
             "value": 98,
             "normalized": 0.4870848708487085
-        }
+        },
+        "mosh": 0.1415335463258786
     },
     {
         "date": "November 04",
@@ -15089,7 +15396,8 @@
         "temperature": {
             "value": 84,
             "normalized": 0.4354243542435424
-        }
+        },
+        "mosh": 0.202555910543131
     },
     {
         "date": "November 05",
@@ -15138,7 +15446,8 @@
         "temperature": {
             "value": 86,
             "normalized": 0.44280442804428044
-        }
+        },
+        "mosh": 0.18753993610223644
     },
     {
         "date": "November 06",
@@ -15187,7 +15496,8 @@
         "temperature": {
             "value": 81,
             "normalized": 0.42435424354243545
-        }
+        },
+        "mosh": 0.28753993610223644
     },
     {
         "date": "November 07",
@@ -15236,7 +15546,8 @@
         "temperature": {
             "value": 48,
             "normalized": 0.3025830258302583
-        }
+        },
+        "mosh": 0.38210862619808307
     },
     {
         "date": "November 08",
@@ -15285,7 +15596,8 @@
         "temperature": {
             "value": 26,
             "normalized": 0.22140221402214022
-        }
+        },
+        "mosh": 0.3003194888178914
     },
     {
         "date": "November 09",
@@ -15334,7 +15646,8 @@
         "temperature": {
             "value": 41,
             "normalized": 0.2767527675276753
-        }
+        },
+        "mosh": 0.43099041533546327
     },
     {
         "date": "November 10",
@@ -15383,7 +15696,8 @@
         "temperature": {
             "value": 57,
             "normalized": 0.33579335793357934
-        }
+        },
+        "mosh": 0.33706070287539935
     },
     {
         "date": "November 11",
@@ -15432,7 +15746,8 @@
         "temperature": {
             "value": 29,
             "normalized": 0.23247232472324722
-        }
+        },
+        "mosh": 0.36900958466453676
     },
     {
         "date": "November 12",
@@ -15481,7 +15796,8 @@
         "temperature": {
             "value": 33,
             "normalized": 0.24723247232472326
-        }
+        },
+        "mosh": 0.5287539936102237
     },
     {
         "date": "November 13",
@@ -15530,7 +15846,8 @@
         "temperature": {
             "value": 48,
             "normalized": 0.3025830258302583
-        }
+        },
+        "mosh": 0.4424920127795527
     },
     {
         "date": "November 14",
@@ -15579,7 +15896,8 @@
         "temperature": {
             "value": 56,
             "normalized": 0.33210332103321033
-        }
+        },
+        "mosh": 0.5718849840255591
     },
     {
         "date": "November 15",
@@ -15628,7 +15946,8 @@
         "temperature": {
             "value": 120,
             "normalized": 0.5682656826568265
-        }
+        },
+        "mosh": 0.6862619808306709
     },
     {
         "date": "November 16",
@@ -15677,7 +15996,8 @@
         "temperature": {
             "value": 118,
             "normalized": 0.5608856088560885
-        }
+        },
+        "mosh": 0.6575079872204473
     },
     {
         "date": "November 17",
@@ -15726,7 +16046,8 @@
         "temperature": {
             "value": 96,
             "normalized": 0.4797047970479705
-        }
+        },
+        "mosh": 0.7424920127795527
     },
     {
         "date": "November 18",
@@ -15775,7 +16096,8 @@
         "temperature": {
             "value": 68,
             "normalized": 0.3763837638376384
-        }
+        },
+        "mosh": 0.71182108626198083
     },
     {
         "date": "November 19",
@@ -15824,7 +16146,8 @@
         "temperature": {
             "value": 62,
             "normalized": 0.35424354243542433
-        }
+        },
+        "mosh": 0.66773162939297126
     },
     {
         "date": "November 20",
@@ -15873,7 +16196,8 @@
         "temperature": {
             "value": 80,
             "normalized": 0.42066420664206644
-        }
+        },
+        "mosh": 0.8795527156549521
     },
     {
         "date": "November 21",
@@ -15922,7 +16246,8 @@
         "temperature": {
             "value": 117,
             "normalized": 0.5571955719557196
-        }
+        },
+        "mosh": 0.19808306709265175
     },
     {
         "date": "November 22",
@@ -15971,7 +16296,8 @@
         "temperature": {
             "value": 108,
             "normalized": 0.5239852398523985
-        }
+        },
+        "mosh": 0.8194888178913738
     },
     {
         "date": "November 23",
@@ -16020,7 +16346,8 @@
         "temperature": {
             "value": 85,
             "normalized": 0.43911439114391143
-        }
+        },
+        "mosh": 0.9584664536741214
     },
     {
         "date": "November 24",
@@ -16069,7 +16396,8 @@
         "temperature": {
             "value": 76,
             "normalized": 0.4059040590405904
-        }
+        },
+        "mosh": 0.8511182108626198
     },
     {
         "date": "November 25",
@@ -16118,7 +16446,8 @@
         "temperature": {
             "value": 49,
             "normalized": 0.3062730627306273
-        }
+        },
+        "mosh": 0.8111821086261981
     },
     {
         "date": "November 26",
@@ -16167,7 +16496,8 @@
         "temperature": {
             "value": 28,
             "normalized": 0.22878228782287824
-        }
+        },
+        "mosh": 0.4185303514376997
     },
     {
         "date": "November 27",
@@ -16216,7 +16546,8 @@
         "temperature": {
             "value": 81,
             "normalized": 0.42435424354243545
-        }
+        },
+        "mosh": 0.9447284345047924
     },
     {
         "date": "November 28",
@@ -16265,7 +16596,8 @@
         "temperature": {
             "value": 19,
             "normalized": 0.19557195571955718
-        }
+        },
+        "mosh": 8.5511182108626198
     },
     {
         "date": "November 29",
@@ -16314,7 +16646,8 @@
         "temperature": {
             "value": -5,
             "normalized": 0.1070110701107011
-        }
+        },
+        "mosh": 0.7766773162939297
     },
     {
         "date": "November 30",
@@ -16363,7 +16696,8 @@
         "temperature": {
             "value": 66,
             "normalized": 0.36900369003690037
-        }
+        },
+        "mosh": 0.7188498402555911
     },
     {
         "date": "December 01",
@@ -16412,7 +16746,8 @@
         "temperature": {
             "value": 89,
             "normalized": 0.45387453874538747
-        }
+        },
+        "mosh": 0.670926517571885
     },
     {
         "date": "December 02",
@@ -16461,7 +16796,8 @@
         "temperature": {
             "value": 76,
             "normalized": 0.4059040590405904
-        }
+        },
+        "mosh": 0.89201277955271566
     },
     {
         "date": "December 03",
@@ -16510,7 +16846,8 @@
         "temperature": {
             "value": 28,
             "normalized": 0.22878228782287824
-        }
+        },
+        "mosh": 0.94089456869009586
     },
     {
         "date": "December 04",
@@ -16559,7 +16896,8 @@
         "temperature": {
             "value": 9,
             "normalized": 0.15867158671586715
-        }
+        },
+        "mosh": 0.98562300319488816
     },
     {
         "date": "December 05",
@@ -16608,7 +16946,8 @@
         "temperature": {
             "value": 4,
             "normalized": 0.14022140221402213
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "December 06",
@@ -16657,7 +16996,8 @@
         "temperature": {
             "value": 34,
             "normalized": 0.25092250922509224
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "December 07",
@@ -16706,7 +17046,8 @@
         "temperature": {
             "value": 75,
             "normalized": 0.4022140221402214
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "December 08",
@@ -16755,7 +17096,8 @@
         "temperature": {
             "value": 88,
             "normalized": 0.45018450184501846
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "December 09",
@@ -16804,7 +17146,8 @@
         "temperature": {
             "value": 91,
             "normalized": 0.4612546125461255
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "December 10",
@@ -16853,7 +17196,8 @@
         "temperature": {
             "value": 85,
             "normalized": 0.43911439114391143
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "December 11",
@@ -16902,7 +17246,8 @@
         "temperature": {
             "value": 90,
             "normalized": 0.4575645756457565
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "December 12",
@@ -16951,7 +17296,8 @@
         "temperature": {
             "value": 69,
             "normalized": 0.3800738007380074
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "December 13",
@@ -17000,7 +17346,8 @@
         "temperature": {
             "value": 68,
             "normalized": 0.3763837638376384
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "December 14",
@@ -17049,7 +17396,8 @@
         "temperature": {
             "value": 79,
             "normalized": 0.41697416974169743
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "December 15",
@@ -17098,7 +17446,8 @@
         "temperature": {
             "value": 58,
             "normalized": 0.33948339483394835
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "December 16",
@@ -17147,7 +17496,8 @@
         "temperature": {
             "value": 67,
             "normalized": 0.3726937269372694
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "December 17",
@@ -17196,7 +17546,8 @@
         "temperature": {
             "value": 74,
             "normalized": 0.3985239852398524
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "December 18",
@@ -17245,7 +17596,8 @@
         "temperature": {
             "value": 75,
             "normalized": 0.4022140221402214
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "December 19",
@@ -17294,7 +17646,8 @@
         "temperature": {
             "value": 50,
             "normalized": 0.30996309963099633
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "December 20",
@@ -17343,7 +17696,8 @@
         "temperature": {
             "value": 19,
             "normalized": 0.19557195571955718
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "December 21",
@@ -17392,7 +17746,8 @@
         "temperature": {
             "value": 49,
             "normalized": 0.3062730627306273
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "December 22",
@@ -17441,7 +17796,8 @@
         "temperature": {
             "value": 61,
             "normalized": 0.3505535055350554
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "December 23",
@@ -17490,7 +17846,8 @@
         "temperature": {
             "value": 67,
             "normalized": 0.3726937269372694
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "December 24",
@@ -17539,7 +17896,8 @@
         "temperature": {
             "value": 87,
             "normalized": 0.44649446494464945
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "December 25",
@@ -17588,7 +17946,8 @@
         "temperature": {
             "value": 97,
             "normalized": 0.4833948339483395
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "December 26",
@@ -17637,7 +17996,8 @@
         "temperature": {
             "value": 84,
             "normalized": 0.4354243542435424
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "December 27",
@@ -17686,7 +18046,8 @@
         "temperature": {
             "value": 71,
             "normalized": 0.3874538745387454
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "December 28",
@@ -17735,7 +18096,8 @@
         "temperature": {
             "value": 26,
             "normalized": 0.22140221402214022
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "December 29",
@@ -17784,7 +18146,8 @@
         "temperature": {
             "value": 26,
             "normalized": 0.22140221402214022
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "December 30",
@@ -17833,7 +18196,8 @@
         "temperature": {
             "value": 24,
             "normalized": 0.2140221402214022
-        }
+        },
+        "mosh": 1.0
     },
     {
         "date": "December 31",
@@ -17882,6 +18246,7 @@
         "temperature": {
             "value": 35,
             "normalized": 0.25461254612546125
-        }
+        },
+        "mosh": 1.0
     }
 ]
