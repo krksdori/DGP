@@ -78,7 +78,7 @@ class TideLines {
 		    if(colorShade3<0) {
 		    	colorShade3 = 0;
 		    }
-			pg.stroke(colorShade3, colorShade2+colorShade3, colorShade+colorShade3);
+			pg.stroke(colorShade3, colorShade2+colorShade3, colorShade+colorShade3*2.5);
 
 		    float x = 0;
 		    float y = h + waveH * noise(noiseX, noiseY + h * 0.1, noiseF);

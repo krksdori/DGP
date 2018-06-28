@@ -34,11 +34,11 @@ LogScreen logScreen;
 
 int dayCount = 0;
 int dayCountMagic = 0;
-int daySpeed = 60*4; // 60*6
+int daySpeed = 60*4; // 60*4
 int cols = 3;
 int rows = 3;
-int blockw = 1920;
-int blockh = 1080;
+int blockw = 320;
+int blockh = 180;
 int masterw = blockw*3;
 int masterh = blockh*3;
 boolean activated = false;
@@ -108,9 +108,7 @@ public void draw() {
   if(ticker%(daySpeed) == 0) {
     if(firstAction == false) {
       dayCount = (dayCount%365)+1;
-      if(dayCount%365 ==0) {
-        exit();
-      }
+      
     } else {
       firstAction = false;
     }
@@ -124,15 +122,18 @@ public void draw() {
     }
   }
   }
- 
+
   TimeFrame timeFrameSelected = parseJSON.timeFrames.get(dayCount%365);
   TimeFrame timeFrameSelectedMagic = parseJSON.timeFrames.get(dayCountMagic%365);
 
-  smoothJson.newTarget(parseJSON.timeFrames.get((dayCount+1)%365));
+  smoothJson.newTarget(parseJSON.timeFrames.get((dayCountMagic)%365));
   smoothJson.update();
   TimeFrame timeFrameSmooth = smoothJson.tfCurrent;
 
   main.beginDraw();
+
+
+
   //main.background(0);
   main.image(rainDrops.draw(timeFrameSelected.precipitationN, timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0.0f, 0.0f, blockw, blockh);
   if(timeFrameSelected.windSpeedN > 0.5f) {
@@ -212,7 +213,11 @@ public void draw() {
  }
   
  master.blend(sunRise.draw(timeFrameSelectedMagic.cloudCoverN, ticker), 0, 0, blockw, blockh, 0, 0, master.width, master.height, SCREEN);
- master.blend(moonPhases.draw(timeFrameSmooth.moonAge, ticker), 0, 0, master.width, master.height, 0, 0, master.width, master.height, SCREEN);
+ master.blend(moonPhases.draw(timeFrameSmooth.moonAge, ticker, timeFrameSelectedMagic.cloudCoverN), 0, 0, master.width, master.height, 0, 0, master.width, master.height, SCREEN);
+ 
+ master.noStroke();
+ master.fill(map(timeFrameSmooth.mosh, 0.0f, 1.0f, 0.0f, 255.0f));
+ master.rect(width/2 -blockw/2 , height/2 + blockh /2 - 10, 10, 10);
   
  master.endDraw();
  image(master, 0, 0, width, height);
@@ -245,7 +250,11 @@ public void draw() {
  if(ticker%(daySpeed) == daySpeed-1) {
     if(exportVideo) {
      videoExport.endMovie();
+      // if(dayCount%365==0) {
+      //   exit();
+      // }
     }
+   
  }
  
  if(activated == true) {
@@ -311,19 +320,19 @@ class LogScreen {
       	font = createFont("data/font/SourceCodePro-Regular.ttf", fontSize);
 		pg = createGraphics(_width, _height);
 
-		for(int i = 0; i < 7; i++) {
+		for(int i = 0; i < 8; i++) {
 			columns.add(new Column());
 			columnsTarget.add(new Column());
 		}
 	}
 
-	public void setType(TimeFrame timeFrameSelected, TimeFrame tfCurrent) {
+	public void setType(TimeFrame timeFrameSelected, TimeFrame tfCurrent, int dayCount) {
 		for(int i = 0; i < columnsTarget.size(); i++) {
 			if(i == 0) {
 				columnsTarget.get(i).type[0] = "moon age";
 				columnsTarget.get(i).type[1] = timeFrameSelected.moonAge+"";
-				columnsTarget.get(i).type[2] = "..";
-				columnsTarget.get(i).type[3] = "..";
+				columnsTarget.get(i).type[2] = timeFrameSelected.date+"";
+				columnsTarget.get(i).type[3] = dayCount + "";
 			} else if(i == 1) {
 				columnsTarget.get(i).type[0] = "moon visible" ;
 				columnsTarget.get(i).type[1] = timeFrameSelected.moonVisible+"";
@@ -354,7 +363,13 @@ class LogScreen {
 				columnsTarget.get(i).type[1] = timeFrameSelected.cloudCover+"";
 				columnsTarget.get(i).type[2] = timeFrameSelected.cloudCoverN+"";
 				columnsTarget.get(i).type[3] = "..";
-			}
+			} else if(i == 7) {
+        columnsTarget.get(i).type[0] = "mosh";
+        columnsTarget.get(i).type[1] = timeFrameSelected.mosh+"";
+        columnsTarget.get(i).type[2] = tfCurrent.mosh+"";
+        columnsTarget.get(i).type[3] = "..";
+      }
+ 
 		}
 		columns = columnsTarget;
 	}
@@ -378,12 +393,16 @@ class LogScreen {
 
 	public PGraphics draw(TimeFrame timeFrameSelected, TimeFrame tfCurrent, int dayCount, int ticker) {
 
-		setType(timeFrameSelected, tfCurrent);
+		setType(timeFrameSelected, tfCurrent, dayCount);
 		updateType();
 
 		pg.beginDraw();
-		pg.background(0, 100, 0);
+		pg.background(100);
 		pg.textFont(font);
+
+    pg.noStroke();
+    pg.fill(map(tfCurrent.mosh, 0.0f, 1.0f, 0.0f, 255.0f));
+    pg.rect(0, pg.height-10, 10, 10);
 		
 		int lineHeight = 10;
 		int spacingC1 = floor((blockw/4)*1);
@@ -392,6 +411,7 @@ class LogScreen {
 
 		int i = 0;
 		for(Column c : columns) {
+      fill(0);
 			pg.pushMatrix();
 			pg.translate(0, (i*lineHeight) + 20);
 			pg.text(c.type[0], 0, 0);
@@ -411,6 +431,7 @@ class LogScreen {
 
 class MoonPhases {
      
+  float currentf = 255;
   int f = color(255);
   int bg = color(0,0,0);
   PShader blur;
@@ -436,12 +457,12 @@ class MoonPhases {
       moon = createGraphics(blockw, blockh);
 
       moonTexture.beginDraw();
-      moonTexture.background(0);
+      moonTexture.background(255);
       for(int i = 0; i< 24000; i++){
         float t = random(TWO_PI);
         
         moonTexture.strokeWeight(0.1f);
-        moonTexture.stroke(255, 255, 255, 10);
+        moonTexture.stroke(0, 0, 0, 10);
 
         float x1 = blockw/2 + radius*0.5f * cos(t);
         float y1 = blockh/2 + radius*0.5f * sin(t);
@@ -458,18 +479,26 @@ class MoonPhases {
 
   }
 
-  public void moonPhasesDraw(PGraphics p, float moonAge) {
+  public void moonPhasesDraw(PGraphics p, float moonAge, float cloudCoverN) {
     p.beginDraw();
     float mapMoonData = map(moonAge, 0.0f, 29.53059f, 600.0f, 0.0f);
 
+//println(moonAge);
     t = ((mapMoonData+300)%frames)/(float)frames;
     p.background(0);
     p.translate(blockw/2, blockh/2);
 
-    float moonRotate = map(moonAge, 0.0f, 29.53059f, PI*0.0f, -PI*2.0f);
+    float newf = map(cloudCoverN, 0, 1, 255, 120);
+    //float newf = map(mouseX, 0, width, 120, 255);
 
-    float rX = cos(moonRotate)*blockw/3;
-    float rY = sin(moonRotate)*blockh/3;
+    currentf = currentf*0.9f + newf * 0.1f;
+    f = color(currentf);
+    //f = color(255, map(cloudCoverN, 0, 1, 10, 200));
+    //f = color(100);
+    //float moonRotate = map(moonAge, 0.0, 29.53059, PI*0.0, -PI*2.0);
+
+    //float rX = cos(moonRotate)*blockw/3;
+    //float rY = sin(moonRotate)*blockh/3;
 
     //p.rotate(moonRotate);
     //p.translate(floor(rX), floor(rY));
@@ -517,7 +546,7 @@ class MoonPhases {
     p.endDraw();
 }
 
-public PGraphics rotateMoon(float moonAge, float x, float y) {
+public PGraphics rotateMoon(float moonAge, float x, float y, float cloudCoverN) {
   moon.beginDraw();
   moon.pushMatrix();
   moon.translate(blockw/2,blockh/2);
@@ -537,6 +566,7 @@ public PGraphics rotateMoon(float moonAge, float x, float y) {
   
   // moon.rect(0, 0, width,height);
   moon.translate(x, y);
+  //moon.tint(25, 255);//map(cloudCoverN, 0.0, 1.0, 255, 10));
   moon.image(moonTexture, -blockw/2, -blockh/2);
   //moon.fill(255, 0, 0);
   //moon.rect(0, 0, width, height);
@@ -545,7 +575,7 @@ public PGraphics rotateMoon(float moonAge, float x, float y) {
   return moon;
 }
   
-  public PGraphics draw(float moonAge, int ticker) {
+  public PGraphics draw(float moonAge, int ticker, float cloudCoverN) {
 
     
     pg.beginDraw();
@@ -555,8 +585,8 @@ public PGraphics rotateMoon(float moonAge, float x, float y) {
 
     float sliceRotation = ((PI*2.0f))/( ((60.0f*4.0f)*29.53059f) );
 
-    float x = ((cos( ((ticker*-sliceRotation))%(PI*2.0f) ) )*blockw/3.3f) ;//+ blockw/2 ; // + width/2 -100
-    float y = ((sin( ((ticker*-sliceRotation))%(PI*2.0f) ) )*blockw/4.3f) ; //+blockh*1.5 ; // + height+height/3 -100
+    float x = ((cos( ((ticker*-sliceRotation-PI*0.15f))%(PI*2.0f) ) )*blockw/3.3f) ;//+ blockw/2 ; // + width/2 -100
+    float y = ((sin( ((ticker*-sliceRotation-PI*0.15f))%(PI*2.0f) ) )*blockw/4.3f) ; //+blockh*1.5 ; // + height+height/3 -100
     
 
     //float rX = cos(moonRotate)*blockw/3;
@@ -565,14 +595,13 @@ public PGraphics rotateMoon(float moonAge, float x, float y) {
     pg.translate(x, y);
     pg.pushMatrix();
 
-    moonPhasesDraw(moonPhases, moonAge);
+    moonPhasesDraw(moonPhases, moonAge, cloudCoverN);
     
-
 
     pg.image(moonPhases, 0, 0);
     pg.pushMatrix();
 
-    pg.blend(rotateMoon(moonAge, x, y), 0, 0, blockw, blockh, 0, 0, blockw, blockh, DARKEST);
+    pg.blend(rotateMoon(moonAge, x, y, cloudCoverN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SUBTRACT);
     pg.popMatrix();
     pg.popMatrix();
 
@@ -637,8 +666,11 @@ class ParseJSON {
         JSONObject temperatureJO = timeFrame.getJSONObject("temperature");
         float temperature = (temperatureJO.getFloat("value"))*0.1f;
         float temperatureN = temperatureJO.getFloat("normalized");
+        
+        // MOSH
+        float mosh = timeFrame.getFloat("mosh");
 
-        timeFrames.add(new TimeFrame(date, precipitation, precipitationN, moonAge, moonVisible, moonPhase, windDirection, windSpeedValue, windSpeedValueN, tideMin, tideMinN, tideMax, tideMaxN, cloudCover, cloudCoverN, temperature, temperatureN));
+        timeFrames.add(new TimeFrame(date, precipitation, precipitationN, moonAge, moonVisible, moonPhase, windDirection, windSpeedValue, windSpeedValueN, tideMin, tideMinN, tideMax, tideMaxN, cloudCover, cloudCoverN, temperature, temperatureN, mosh));
        // println(timeFrames.size());
     }
   }
@@ -669,12 +701,14 @@ class TimeFrame {
    
    float temperature;
    float temperatureN;
+   
+   float mosh;
 
    TimeFrame() {
 
    }
    
-   TimeFrame(String date, float precipitation, float precipitationN, float moonAge, int moonVisible, String moonPhase, float windDirection, int windSpeed, float windSpeedN, int tideMin, float tideMinN, int tideMax, float tideMaxN, float cloudCover, float cloudCoverN, float temperature, float temperatureN) {
+   TimeFrame(String date, float precipitation, float precipitationN, float moonAge, int moonVisible, String moonPhase, float windDirection, int windSpeed, float windSpeedN, int tideMin, float tideMinN, int tideMax, float tideMaxN, float cloudCover, float cloudCoverN, float temperature, float temperatureN, float mosh) {
      this.date = date;
      this.precipitation = precipitation;
      this.precipitationN = precipitationN;
@@ -692,6 +726,7 @@ class TimeFrame {
      this.cloudCoverN = cloudCoverN;
      this.temperature = temperature;
      this.temperatureN = temperatureN;
+     this.mosh = mosh;
    }
    
 }
@@ -720,6 +755,7 @@ class SmoothJson {
      newTf.cloudCoverN = first.cloudCoverN;
      newTf.temperature = first.temperature;
      newTf.temperatureN = first.temperatureN;
+     newTf.mosh = first.mosh;
      this.tfCurrent = newTf;
   }
 
@@ -742,14 +778,17 @@ class SmoothJson {
      newTf.cloudCoverN = target.cloudCoverN;
      newTf.temperature = target.temperature;
      newTf.temperatureN = target.temperatureN;
-    tfTarget = newTf;
+     newTf.mosh = target.mosh;
+     tfTarget = newTf;
   }
 
   public void update() {
+      tfCurrent.mosh = tfCurrent.mosh*0.9f + tfTarget.mosh*0.1f;
+      
       //tfCurrent.windSpeedN = tfCurrent.windSpeedN*0.9 + tfTarget.windSpeedN*0.1;
       //tfCurrent.windDirection = tfCurrent.windDirection*0.99 + tfTarget.windDirection*0.01;
       //tfCurrent.temperatureN = tfCurrent.temperatureN*0.99 + tfTarget.temperatureN*0.01;
-      //tfCurrent.moonAge = tfCurrent.moonAge*0.99 + tfTarget.moonAge*0.01;
+      tfCurrent.moonAge = tfCurrent.moonAge*0.99f + tfTarget.moonAge*0.01f;
   }
 
 }
@@ -1012,30 +1051,49 @@ class Blob {
 
 class Temperature {
 
-	PGraphics pg;
+  PGraphics pg;
 
-  int warm = color(255, 100, 0);
-  int cold = color(0, 100, 255);
+  //color warm = color(255, 100, 0);
+  //color cold = color(0, 100, 255);
+
+
+
+  int c1 = color(13,74,139); // cold
+  int c2 = color(103, 168, 222);
+  int c3 = color(248, 245, 152);
+  int c4 = color(220, 136, 4); // warm
+	
   int blockw = 2560;
   int blockh = 1440;
 
 	Temperature(int _width, int _height) {
 		pg = createGraphics(_width, _height);
-    blockw = _width;
-    blockh = _height;
+    	blockw = _width;
+    	blockh = _height;
 	}
 
 	public PGraphics draw(float temperature) {
 		  pg.beginDraw();
 		  pg.loadPixels();
 
+		  float c = temperature;
+
+		  int sc = color(0.0f); 
+		  int sc2 = color(0.0f);
+		  if(c<0.5f) {
+			  sc = lerpColor(c1, c2, map(c, 0.0f, 0.5f, 0.0f, 1.0f) );
+		  }
+		  if(c > 0.5f) {
+			  sc2 = lerpColor(c3, c4, map(c, 0.5f, 1.0f, 0.0f, 1.0f) );
+		 }
+
       	//float finalR = red(cold)*(1.0-temperature) + red(warm)*(temperature); 
       	//float finalG = green(cold)*(1.0-temperature) + green(warm)*(temperature); 
       	//float finalB = blue(cold)*(1.0-temperature) + blue(warm)*(temperature); 
 
-      	  int sc = lerpColor(cold, warm, temperature );
+      	  //color sc = lerpColor(cold, warm, map(mouseX, 0, width, 0, 1));
 		  for (int i = 0; i < blockw*blockh; i++) {
-  				pg.pixels[i] = color(red(sc), green(sc), blue(sc), 130);
+  				pg.pixels[i] = color(sc+sc2, 100);
 		  }
 
 
@@ -1130,7 +1188,7 @@ class TideLines {
 		    if(colorShade3<0) {
 		    	colorShade3 = 0;
 		    }
-			pg.stroke(colorShade3, colorShade2+colorShade3, colorShade+colorShade3);
+			pg.stroke(colorShade3, colorShade2+colorShade3, colorShade+colorShade3*2.5f);
 
 		    float x = 0;
 		    float y = h + waveH * noise(noiseX, noiseY + h * 0.1f, noiseF);
@@ -1370,9 +1428,9 @@ class FlowField {
 
 
 }
-  public void settings() {  size(1536, 864); }
+  public void settings() {  size(960, 540); }
   static public void main(String[] passedArgs) {
-    String[] appletArgs = new String[] { "voidmix" };
+    String[] appletArgs = new String[] { "--present", "--window-color=#000000", "--hide-stop", "voidmix" };
     if (passedArgs != null) {
       PApplet.main(concat(appletArgs, passedArgs));
     } else {

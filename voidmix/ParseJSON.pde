@@ -174,7 +174,7 @@ class SmoothJson {
       //tfCurrent.windSpeedN = tfCurrent.windSpeedN*0.9 + tfTarget.windSpeedN*0.1;
       //tfCurrent.windDirection = tfCurrent.windDirection*0.99 + tfTarget.windDirection*0.01;
       //tfCurrent.temperatureN = tfCurrent.temperatureN*0.99 + tfTarget.temperatureN*0.01;
-      //tfCurrent.moonAge = tfCurrent.moonAge*0.99 + tfTarget.moonAge*0.01;
+      tfCurrent.moonAge = tfCurrent.moonAge*0.99 + tfTarget.moonAge*0.01;
   }
 
 }

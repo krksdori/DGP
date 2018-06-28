@@ -32,13 +32,13 @@ class LogScreen {
 		}
 	}
 
-	void setType(TimeFrame timeFrameSelected, TimeFrame tfCurrent) {
+	void setType(TimeFrame timeFrameSelected, TimeFrame tfCurrent, int dayCount) {
 		for(int i = 0; i < columnsTarget.size(); i++) {
 			if(i == 0) {
 				columnsTarget.get(i).type[0] = "moon age";
 				columnsTarget.get(i).type[1] = timeFrameSelected.moonAge+"";
-				columnsTarget.get(i).type[2] = "..";
-				columnsTarget.get(i).type[3] = "..";
+				columnsTarget.get(i).type[2] = timeFrameSelected.date+"";
+				columnsTarget.get(i).type[3] = dayCount + "";
 			} else if(i == 1) {
 				columnsTarget.get(i).type[0] = "moon visible" ;
 				columnsTarget.get(i).type[1] = timeFrameSelected.moonVisible+"";
@@ -99,7 +99,7 @@ class LogScreen {
 
 	PGraphics draw(TimeFrame timeFrameSelected, TimeFrame tfCurrent, int dayCount, int ticker) {
 
-		setType(timeFrameSelected, tfCurrent);
+		setType(timeFrameSelected, tfCurrent, dayCount);
 		updateType();
 
 		pg.beginDraw();

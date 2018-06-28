@@ -1,6 +1,7 @@
 
 class MoonPhases {
      
+  float currentf = 255;
   color f = color(255);
   color bg = color(0,0,0);
   PShader blur;
@@ -26,12 +27,12 @@ class MoonPhases {
       moon = createGraphics(blockw, blockh);
 
       moonTexture.beginDraw();
-      moonTexture.background(0);
+      moonTexture.background(255);
       for(int i = 0; i< 24000; i++){
         float t = random(TWO_PI);
         
         moonTexture.strokeWeight(0.1);
-        moonTexture.stroke(255, 255, 255, 10);
+        moonTexture.stroke(0, 0, 0, 10);
 
         float x1 = blockw/2 + radius*0.5 * cos(t);
         float y1 = blockh/2 + radius*0.5 * sin(t);
@@ -48,18 +49,26 @@ class MoonPhases {
 
   }
 
-  void moonPhasesDraw(PGraphics p, float moonAge) {
+  void moonPhasesDraw(PGraphics p, float moonAge, float cloudCoverN) {
     p.beginDraw();
     float mapMoonData = map(moonAge, 0.0, 29.53059, 600.0, 0.0);
 
+//println(moonAge);
     t = ((mapMoonData+300)%frames)/(float)frames;
     p.background(0);
     p.translate(blockw/2, blockh/2);
 
-    float moonRotate = map(moonAge, 0.0, 29.53059, PI*0.0, -PI*2.0);
+    float newf = map(cloudCoverN, 0, 1, 255, 120);
+    //float newf = map(mouseX, 0, width, 120, 255);
 
-    float rX = cos(moonRotate)*blockw/3;
-    float rY = sin(moonRotate)*blockh/3;
+    currentf = currentf*0.9 + newf * 0.1;
+    f = color(currentf);
+    //f = color(255, map(cloudCoverN, 0, 1, 10, 200));
+    //f = color(100);
+    //float moonRotate = map(moonAge, 0.0, 29.53059, PI*0.0, -PI*2.0);
+
+    //float rX = cos(moonRotate)*blockw/3;
+    //float rY = sin(moonRotate)*blockh/3;
 
     //p.rotate(moonRotate);
     //p.translate(floor(rX), floor(rY));
@@ -107,7 +116,7 @@ class MoonPhases {
     p.endDraw();
 }
 
-PGraphics rotateMoon(float moonAge, float x, float y) {
+PGraphics rotateMoon(float moonAge, float x, float y, float cloudCoverN) {
   moon.beginDraw();
   moon.pushMatrix();
   moon.translate(blockw/2,blockh/2);
@@ -127,6 +136,7 @@ PGraphics rotateMoon(float moonAge, float x, float y) {
   
   // moon.rect(0, 0, width,height);
   moon.translate(x, y);
+  //moon.tint(25, 255);//map(cloudCoverN, 0.0, 1.0, 255, 10));
   moon.image(moonTexture, -blockw/2, -blockh/2);
   //moon.fill(255, 0, 0);
   //moon.rect(0, 0, width, height);
@@ -135,7 +145,7 @@ PGraphics rotateMoon(float moonAge, float x, float y) {
   return moon;
 }
   
-  PGraphics draw(float moonAge, int ticker) {
+  PGraphics draw(float moonAge, int ticker, float cloudCoverN) {
 
     
     pg.beginDraw();
@@ -145,8 +155,8 @@ PGraphics rotateMoon(float moonAge, float x, float y) {
 
     float sliceRotation = ((PI*2.0))/( ((60.0*4.0)*29.53059) );
 
-    float x = ((cos( ((ticker*-sliceRotation))%(PI*2.0) ) )*blockw/3.3) ;//+ blockw/2 ; // + width/2 -100
-    float y = ((sin( ((ticker*-sliceRotation))%(PI*2.0) ) )*blockw/4.3) ; //+blockh*1.5 ; // + height+height/3 -100
+    float x = ((cos( ((ticker*-sliceRotation-PI*0.15))%(PI*2.0) ) )*blockw/3.3) ;//+ blockw/2 ; // + width/2 -100
+    float y = ((sin( ((ticker*-sliceRotation-PI*0.15))%(PI*2.0) ) )*blockw/4.3) ; //+blockh*1.5 ; // + height+height/3 -100
     
 
     //float rX = cos(moonRotate)*blockw/3;
@@ -155,14 +165,13 @@ PGraphics rotateMoon(float moonAge, float x, float y) {
     pg.translate(x, y);
     pg.pushMatrix();
 
-    moonPhasesDraw(moonPhases, moonAge);
+    moonPhasesDraw(moonPhases, moonAge, cloudCoverN);
     
-
 
     pg.image(moonPhases, 0, 0);
     pg.pushMatrix();
 
-    pg.blend(rotateMoon(moonAge, x, y), 0, 0, blockw, blockh, 0, 0, blockw, blockh, DARKEST);
+    pg.blend(rotateMoon(moonAge, x, y, cloudCoverN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SUBTRACT);
     pg.popMatrix();
     pg.popMatrix();
 

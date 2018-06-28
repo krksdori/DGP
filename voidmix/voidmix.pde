@@ -16,7 +16,7 @@ LogScreen logScreen;
 
 int dayCount = 0;
 int dayCountMagic = 0;
-int daySpeed = 60*4; // 60*6
+int daySpeed = 60*4; // 60*4
 int cols = 3;
 int rows = 3;
 int blockw = 320;
@@ -32,7 +32,7 @@ PGraphics master;
 
 ArrayList<Frame> frames = new ArrayList();
 
-boolean exportVideo = true;
+boolean exportVideo = false;
 
 void setup() {
   
@@ -104,7 +104,7 @@ void draw() {
     }
   }
   }
- 
+
   TimeFrame timeFrameSelected = parseJSON.timeFrames.get(dayCount%365);
   TimeFrame timeFrameSelectedMagic = parseJSON.timeFrames.get(dayCountMagic%365);
 
@@ -113,6 +113,9 @@ void draw() {
   TimeFrame timeFrameSmooth = smoothJson.tfCurrent;
 
   main.beginDraw();
+
+
+
   //main.background(0);
   main.image(rainDrops.draw(timeFrameSelected.precipitationN, timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0.0, 0.0, blockw, blockh);
   if(timeFrameSelected.windSpeedN > 0.5) {
@@ -192,7 +195,7 @@ void draw() {
  }
   
  master.blend(sunRise.draw(timeFrameSelectedMagic.cloudCoverN, ticker), 0, 0, blockw, blockh, 0, 0, master.width, master.height, SCREEN);
- master.blend(moonPhases.draw(timeFrameSmooth.moonAge, ticker), 0, 0, master.width, master.height, 0, 0, master.width, master.height, SCREEN);
+ master.blend(moonPhases.draw(timeFrameSmooth.moonAge, ticker, timeFrameSelectedMagic.cloudCoverN), 0, 0, master.width, master.height, 0, 0, master.width, master.height, SCREEN);
  
  master.noStroke();
  master.fill(map(timeFrameSmooth.mosh, 0.0, 1.0, 0.0, 255.0));
@@ -229,9 +232,9 @@ void draw() {
  if(ticker%(daySpeed) == daySpeed-1) {
     if(exportVideo) {
      videoExport.endMovie();
-      if(dayCount%365==0) {
-        exit();
-     }
+      // if(dayCount%365==0) {
+      //   exit();
+      // }
     }
    
  }
