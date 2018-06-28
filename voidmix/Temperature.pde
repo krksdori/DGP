@@ -10,8 +10,8 @@ class Temperature {
 
   color c1 = color(13,74,139); // cold
   color c2 = color(103, 168, 222);
-  color c3 = color(248, 245, 152);
-  color c4 = color(220, 136, 4); // warm
+  color c3 = color(198, 223, 223);
+  color c4 = color(208, 223, 223); // warm
 	
   int blockw = 2560;
   int blockh = 1440;
@@ -26,7 +26,8 @@ class Temperature {
 		  pg.beginDraw();
 		  pg.loadPixels();
 
-		  float c = temperature;
+		  float c = temperature;//map(mouseX, 0, width, 0, 1.0);// temperature;
+      //println(temperature);
 
 		  color sc = color(0.0); 
 		  color sc2 = color(0.0);
@@ -37,13 +38,18 @@ class Temperature {
 			  sc2 = lerpColor(c3, c4, map(c, 0.5, 1.0, 0.0, 1.0) );
 		 }
 
+      if(c > 0.85) {
+        sc = color(255, 228, 196);
+        sc2 = color(0, 0, 0);
+      }
+
       	//float finalR = red(cold)*(1.0-temperature) + red(warm)*(temperature); 
       	//float finalG = green(cold)*(1.0-temperature) + green(warm)*(temperature); 
       	//float finalB = blue(cold)*(1.0-temperature) + blue(warm)*(temperature); 
 
       	  //color sc = lerpColor(cold, warm, map(mouseX, 0, width, 0, 1));
 		  for (int i = 0; i < blockw*blockh; i++) {
-  				pg.pixels[i] = color(sc+sc2, 100);
+  				pg.pixels[i] = color(sc+sc2, 200);
 		  }
 
 

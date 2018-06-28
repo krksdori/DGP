@@ -19,8 +19,8 @@ int dayCountMagic = 0;
 int daySpeed = 60*4; // 60*4
 int cols = 3;
 int rows = 3;
-int blockw = 320;
-int blockh = 180;
+int blockw = 1920;
+int blockh = 1080;
 int masterw = blockw*3;
 int masterh = blockh*3;
 boolean activated = false;
@@ -32,7 +32,7 @@ PGraphics master;
 
 ArrayList<Frame> frames = new ArrayList();
 
-boolean exportVideo = false;
+boolean exportVideo = true;
 
 void setup() {
   
@@ -48,13 +48,16 @@ void setup() {
   parseJSON = new ParseJSON();
   
   moonPhases = new MoonPhases(master.width, master.height);
+  sunRise = new SunRise(master.width, master.height);
+  
   rainDrops = new RainDrops(blockw, blockh);
-  sunRise = new SunRise(blockw, blockh);
+  
+  
   windMap = new WindMap(blockw, blockh);
   perlinCloud = new PerlinCloud(blockw, blockh);
   tideLines = new TideLines(blockw, blockh);
   temperature = new Temperature(blockw, blockh);
-  logScreen = new LogScreen(blockw, blockh);
+  logScreen = new LogScreen(2560, 1440);
   
   parseJSON.parse("result.json");
   smoothJson = new SmoothJson(parseJSON.timeFrames.get(0));
@@ -127,7 +130,7 @@ void draw() {
     main.blend(tideLines.draw(timeFrameSelected.tideMinN, timeFrameSelected.tideMaxN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);  
   }
   
-  main.blend(temperature.draw(timeFrameSmooth.temperatureN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
+  main.blend(temperature.draw(timeFrameSelected.temperatureN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
   
   dayNightFade(main, ticker);
   main.endDraw();

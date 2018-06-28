@@ -18,6 +18,7 @@ class LogScreen {
   	ArrayList<Column> columns = new ArrayList<Column>();
   	ArrayList<Column> columnsTarget = new ArrayList<Column>();
   	int fontSize = 10;
+  PImage tempScreen;
   	
 	LogScreen(int _width, int _height) {
       	blockw = _width;
@@ -25,6 +26,7 @@ class LogScreen {
 
       	font = createFont("data/font/SourceCodePro-Regular.ttf", fontSize);
 		pg = createGraphics(_width, _height);
+    tempScreen = loadImage("log-temp.png");
 
 		for(int i = 0; i < 8; i++) {
 			columns.add(new Column());
@@ -104,6 +106,9 @@ class LogScreen {
 
 		pg.beginDraw();
 		pg.background(100);
+    
+    pg.image(tempScreen, 0.0, 0.0);
+
 		pg.textFont(font);
 
     pg.noStroke();

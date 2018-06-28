@@ -32,6 +32,8 @@ class RainDrops {
 
    if(p < 0.025) {
      pg.background(0, 0, map(p, 0.0, 1.0, 140, 100));
+   //    pg.background(map(p, 0.0, 1.0, 10, 50));
+   
      //pg.background(0, 0, 255);
    } else {
      //pg.background(255, 0, 0);

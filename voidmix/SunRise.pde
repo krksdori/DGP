@@ -60,7 +60,7 @@ class Blob {
   Blob(float x, float y) {
     pos = new PVector (cos(x), sin(y));
     vel = new PVector(-1 , 1);
-    r = 20;
+    r = 50;
     
     pos.x = 0;
     pos.y = 0;

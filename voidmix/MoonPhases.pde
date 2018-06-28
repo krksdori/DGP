@@ -7,7 +7,7 @@ class MoonPhases {
   PShader blur;
   float theta;
   float t;
-  float radius = 200;
+  float radius = 500;
   int frames = 600;
   PGraphics moonTexture; 
   PGraphics moonPhases;
@@ -58,7 +58,7 @@ class MoonPhases {
     p.background(0);
     p.translate(blockw/2, blockh/2);
 
-    float newf = map(cloudCoverN, 0, 1, 255, 120);
+    float newf = map(cloudCoverN, 0, 1, 255, 200);
     //float newf = map(mouseX, 0, width, 120, 255);
 
     currentf = currentf*0.9 + newf * 0.1;
