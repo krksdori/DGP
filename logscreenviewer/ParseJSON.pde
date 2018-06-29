@@ -8,9 +8,11 @@ class TimeFrame {
    float moonAge;
    int moonVisible;
    String moonPhase;
+   String moonImageName;
 
    float windDirection;
    String windDirectionTitle;
+   String windDirectionArraw;
    float windSpeed;
    float windSpeedN;
 
@@ -31,13 +33,14 @@ class TimeFrame {
 
    }
    
-   TimeFrame(String date, float precipitation, float precipitationN, float moonAge, int moonVisible, String moonPhase, float windDirection, String windDirectionTitle, float windSpeed, float windSpeedN, int tideMin, float tideMinN, int tideMax, float tideMaxN, float cloudCover, float cloudCoverN, float temperature, float temperatureN, float mosh) {
+   TimeFrame(String date, float precipitation, float precipitationN, float moonAge, int moonVisible, String moonPhase, String moonImageName, float windDirection, String windDirectionTitle, String windDirectionArraw, float windSpeed, float windSpeedN, int tideMin, float tideMinN, int tideMax, float tideMaxN, float cloudCover, float cloudCoverN, float temperature, float temperatureN, float mosh) {
      this.date = date;
      this.precipitation = precipitation;
      this.precipitationN = precipitationN;
      this.moonAge = moonAge;
      this.moonVisible = moonVisible;
      this.moonPhase = moonPhase;
+     this.moonImageName = moonImageName;
      this.windDirection = windDirection;
      this.windSpeed = windSpeed;
      this.windSpeedN =windSpeedN;
@@ -48,6 +51,7 @@ class TimeFrame {
      this.cloudCover = cloudCover;
      this.cloudCoverN = cloudCoverN;
      this.windDirectionTitle = windDirectionTitle;
+     this.windDirectionArraw = windDirectionArraw;
      this.temperature = temperature;
      this.temperatureN = temperatureN;
      this.mosh = mosh;
@@ -80,7 +84,8 @@ class ParseJSON {
         float moonAge = moonJO.getFloat("moonAge");
         int moonVisible = moonJO.getInt("visible");
         String moonPhase = moonJO.getString("phase");
-
+        String moonImageName = trim(moonPhase.replace(" ", ""));
+        println(moonImageName);
         // WIND
         float windDirection = timeFrame.getInt("windDirection")*1.0;
         JSONObject windJO = timeFrame.getJSONObject("windSpeed");
@@ -88,32 +93,41 @@ class ParseJSON {
         float windSpeedValueN = windJO.getFloat("normalized");
         //360=north, 90=east, 180=south, 270=west, 0=calm/variable //45
         String[] windTitleOptions = { "North", "Northeast", "East", "Southeast", "South", "Southwest", "West", "Northwest" };
+        String[] windArrowOptions = { "↑", "↗", "→", "↘", "↓", "↙", "←", "↖" };
         String windDirectionTitle = windTitleOptions[0];
-
+        String windDirectionArraw = windArrowOptions[0];
 
         if(windDirection > 360-(45/2) && windDirection < 45/2) {
             windDirectionTitle = windTitleOptions[0];
+            windDirectionArraw = windArrowOptions[0];
         }
         if(windDirection > (45/2) && windDirection < (45/2) + 45) {
             windDirectionTitle = windTitleOptions[1];
+            windDirectionArraw = windArrowOptions[1];
         }
         if(windDirection > (45/2) + 45 && windDirection < (45/2) + 45 * 2) {
             windDirectionTitle = windTitleOptions[2];
+            windDirectionArraw = windArrowOptions[2];
         }
         if(windDirection > (45/2) + 45 * 2 && windDirection < (45/2) + 45 * 3) {
             windDirectionTitle = windTitleOptions[3];
+            windDirectionArraw = windArrowOptions[3];
         }
         if(windDirection > (45/2) + 45 * 3 && windDirection < (45/2) + 45 * 4) {
             windDirectionTitle = windTitleOptions[4];
+            windDirectionArraw = windArrowOptions[4];
         }
         if(windDirection > (45/2) + 45 * 4 && windDirection < (45/2) + 45 * 5) {
             windDirectionTitle = windTitleOptions[5];
+            windDirectionArraw = windArrowOptions[5];
         }
         if(windDirection > (45/2) + 45 * 5 && windDirection < (45/2) + 45 * 6) {
             windDirectionTitle = windTitleOptions[6];
+            windDirectionArraw = windArrowOptions[6];
         }
         if(windDirection > (45/2) + 45 * 6 && windDirection < (45/2) + 45 * 7) {
             windDirectionTitle = windTitleOptions[7];
+            windDirectionArraw = windArrowOptions[7];
         }
 
         // TIDE
@@ -140,7 +154,7 @@ class ParseJSON {
         // MOSH
         float mosh = timeFrame.getFloat("mosh");
 
-        timeFrames.add(new TimeFrame(date, precipitation, precipitationN, moonAge, moonVisible, moonPhase, windDirection, windDirectionTitle, windSpeedValue, windSpeedValueN, tideMin, tideMinN, tideMax, tideMaxN, cloudCover, cloudCoverN, temperature, temperatureN, mosh));
+        timeFrames.add(new TimeFrame(date, precipitation, precipitationN, moonAge, moonVisible, moonPhase, moonImageName, windDirection, windDirectionTitle, windDirectionArraw, windSpeedValue, windSpeedValueN, tideMin, tideMinN, tideMax, tideMaxN, cloudCover, cloudCoverN, temperature, temperatureN, mosh));
        // println(timeFrames.size());
     }
   }

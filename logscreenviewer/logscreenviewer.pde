@@ -51,19 +51,17 @@ void draw() {
    if(ticker%(daySpeed) == 0) {
     if(firstAction == false) {
       dayCount = (dayCount%365)+1;
-      
     } else {
       firstAction = false;
     }
-    initVideo();
+    //initVideo();
   }
-
   if(dayCount > 0) {
    if((ticker-80)%(daySpeed) == 0) {
-    if(firstAction == false) {
-      dayCountMagic = (dayCountMagic%365)+1;
+      if(firstAction == false) {
+        dayCountMagic = (dayCountMagic%365)+1;
+      }
     }
-  }
   }
   
   smoothJson.newTarget(parseJSON.timeFrames.get((dayCountMagic)%365));

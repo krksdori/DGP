@@ -19,7 +19,11 @@ class LogScreen {
   	ArrayList<Column> columnsTarget = new ArrayList<Column>();
   	int fontSize = 20;
     PImage tempScreen;
-  	
+    float currentOffset = -100;
+    float targetOffset = -100;
+    HashMap<String, PImage> moons = new HashMap<String, PImage>();
+    String[] moonTitles = {  "FirstQuarter", "NewMoon", "WaxingCrescent", "FullMoon", "WaningCrescent", "WaxingGibbous", "LastQuarter", "WaningGibbous" };
+    
 	LogScreen(int _width, int _height) {
       	blockw = _width;
       	blockh = _height;
@@ -31,6 +35,11 @@ class LogScreen {
 		for(int i = 0; i < 8; i++) {
 			columns.add(new Column());
 			columnsTarget.add(new Column());
+		}
+		
+		for(String i : moonTitles) {
+			moons.put(i, loadImage("moon/"+i+".png") );
+			println("moon/"+i+".png");
 		}
 	}
 
@@ -44,37 +53,81 @@ class LogScreen {
 			} else if(i == 1) {
 				columnsTarget.get(i).type[0] = "Wind Direction" ;
 				columnsTarget.get(i).type[1] = timeFrameSelected.windDirectionTitle+"";
-				columnsTarget.get(i).type[2] = "..";
+				columnsTarget.get(i).type[2] = timeFrameSelected.windDirectionArraw+"";
 				
 			} else if(i == 2) {
 				columnsTarget.get(i).type[0] = "Wind Speed";
 				columnsTarget.get(i).type[1] = timeFrameSelected.windSpeed+" m/s";
-				columnsTarget.get(i).type[2] = "..";
+				
+				if(timeFrameSelected.windSpeedN > 0.5) {
+					columnsTarget.get(i).type[2] = nf(dist(0.5, 0.0,timeFrameSelected.windSpeedN, 0.0)*100.0, 2, 2) + " % ↑";
+				} else if(timeFrameSelected.windSpeed < 0.5) {
+					columnsTarget.get(i).type[2] = "-" + nf(dist(0.5, 0.0,timeFrameSelected.windSpeedN, 0.0)*100.0, 2, 2) + " % ↓";
+				} else {
+					columnsTarget.get(i).type[2] = 	"";
+				}
 				
 			} else if(i == 3) {
 				columnsTarget.get(i).type[0] = "Cloud Cover";
 				columnsTarget.get(i).type[1] = timeFrameSelected.cloudCover+" %";
-				columnsTarget.get(i).type[2] = "..";
+				
+				if(timeFrameSelected.cloudCoverN > 0.5) {
+					columnsTarget.get(i).type[2] = nf(dist(0.5, 0.0,timeFrameSelected.cloudCoverN, 0.0)*100.0, 2, 2) + " % ↑";
+				} else if(timeFrameSelected.cloudCoverN < 0.5) {
+					columnsTarget.get(i).type[2] = "-" + nf(dist(0.5, 0.0,timeFrameSelected.cloudCoverN, 0.0)*100.0, 2, 2) + " % ↓";
+				} else {
+					columnsTarget.get(i).type[2] = 	"";
+				}
 				
 			} else if(i == 4) {
 				columnsTarget.get(i).type[0] = "Precipitation";
 				columnsTarget.get(i).type[1] = timeFrameSelected.precipitation+" mm";
-				columnsTarget.get(i).type[2] = "";
+				
+				if(timeFrameSelected.precipitationN > 0.5) {
+					columnsTarget.get(i).type[2] = nf(dist(0.5, 0.0,timeFrameSelected.precipitationN, 0.0)*100.0, 2, 2) + " % ↑";
+				} else if(timeFrameSelected.precipitationN < 0.5) {
+					columnsTarget.get(i).type[2] = "-" + nf(dist(0.5, 0.0,timeFrameSelected.precipitationN, 0.0)*100.0, 2, 2) + " % ↓";
+				} else {
+					columnsTarget.get(i).type[2] = 	"";
+				}
 				
 			} else if(i == 5) {
 				columnsTarget.get(i).type[0] = "Temperature";
-				columnsTarget.get(i).type[1] = timeFrameSelected.temperature+" °C";
-				columnsTarget.get(i).type[2] = "";
+				columnsTarget.get(i).type[1] = timeFrameSelected.temperatureN+" °C";
+				
+				if(timeFrameSelected.temperatureN > 0.5) {
+					columnsTarget.get(i).type[2] = nf(dist(0.5, 0.0,timeFrameSelected.temperatureN, 0.0)*100.0, 2, 2) + " % ↑";
+				} else if(timeFrameSelected.temperatureN < 0.5) {
+					columnsTarget.get(i).type[2] = "-" + nf(dist(0.5, 0.0,timeFrameSelected.temperatureN, 0.0)*100.0, 2, 2) + " % ↓";
+				} else {
+					columnsTarget.get(i).type[2] = 	"";
+				}
 				
 			} else if(i == 6) {
 				columnsTarget.get(i).type[0] = "Low Tide";
-				columnsTarget.get(i).type[1] = timeFrameSelected.tideMin+" cm";
-				columnsTarget.get(i).type[2] = "";
+				columnsTarget.get(i).type[1] = timeFrameSelected.tideMinN+" cm";
+				
+				if(timeFrameSelected.tideMinN > 0.5) {
+					columnsTarget.get(i).type[2] = nf(dist(0.5, 0.0,timeFrameSelected.tideMinN, 0.0)*100.0, 2, 2) + " % ↑";
+				} else if(timeFrameSelected.tideMinN < 0.5) {
+					columnsTarget.get(i).type[2] = "-" + nf(dist(0.5, 0.0,timeFrameSelected.tideMinN, 0.0)*100.0, 2, 2) + " % ↓";
+				} else {
+					columnsTarget.get(i).type[2] = 	"";
+				}
+
 				
 			} else if(i == 7) {
 		        columnsTarget.get(i).type[0] = "High Tide";
-		        columnsTarget.get(i).type[1] = timeFrameSelected.tideMax+" cm";
-		        columnsTarget.get(i).type[2] = "";
+		        columnsTarget.get(i).type[1] = timeFrameSelected.tideMaxN+" cm";
+		        
+		        if(timeFrameSelected.tideMaxN > 0.5) {
+					columnsTarget.get(i).type[2] = nf(dist(0.5, 0.0,timeFrameSelected.tideMaxN, 0.0)*100.0, 2, 2) + " % ↑";
+				} else if(timeFrameSelected.tideMaxN < 0.5) {
+					columnsTarget.get(i).type[2] = "-" + nf(dist(0.5, 0.0,timeFrameSelected.tideMaxN, 0.0)*100.0, 2, 2) + " % ↓";
+				} else {
+					columnsTarget.get(i).type[2] = 	"";
+				}
+
       		}
  
 		}
@@ -117,9 +170,10 @@ class LogScreen {
 		// //pg.fill(0,255,255);
 		// pg.rect(0,height-20,width, 20);
 
-    //pg.noStroke();
-    //pg.fill(255, 0, 0);
-    //pg.rect(0, pg.height-10, 10, 10);
+    	//pg.noStroke();
+    	//pg.fill(255, 0, 0);
+    	//pg.rect(0, pg.height-10, 10, 10);
+    	
     	pg.pushMatrix();
     	pg.text("Date     " + timeFrameSelected.date, 20, 30);
     	pg.text("Location     52°04’52.8”N 4°19’09.7”E", width-472, 30);
@@ -133,7 +187,33 @@ class LogScreen {
 
     	
     	pg.pushMatrix();
+    	
     	pg.translate(678, 500);		
+
+    	pg.stroke(255);
+    	//float offset = Math.abs(sin(ticker*0.01)*400.0);
+
+    	if((ticker-80)%(daySpeed) == 0) {
+    		targetOffset = 450.0;
+      	}
+
+      	if((ticker-80)%(daySpeed) == 100) {
+    		targetOffset = -100.0;
+      	}
+
+    	currentOffset = currentOffset*0.95 + targetOffset *0.05;
+    	//pg.line(0.0, currentOffset, 1200.0, currentOffset);
+
+    	float distM = ((0) + 20) - currentOffset;
+		float mapDistM = map(distM, 100, 0, 0, 255.0);
+		if(distM<0) {
+			mapDistM = 255.0;
+		}
+
+    	pg.tint(255, mapDistM);
+    	pg.image(moons.get(timeFrameSelected.moonImageName), 1040.0, 5.0, 20, 20);
+    	pg.tint(255, 255);
+    	
 
 		int lineHeight = 40;
 		int spacingC1 = 520;
@@ -142,9 +222,18 @@ class LogScreen {
 
 		int i = 0;
 		for(Column c : columns) {
-      pg.fill(255, 0, 0);
-			pg.pushMatrix();
+      		pg.pushMatrix();
+
+      		float dist = ((i*lineHeight) + 20) - currentOffset;
 			pg.translate(0, (i*lineHeight) + 20);
+			
+			float mapDist = map(dist, 100, 0, 0, 110.0);
+			if(dist<0) {
+				mapDist = 110.0;
+			}
+
+			pg.fill(mapDist);
+
 			pg.text(c.type[0], 0, 0);
 			pg.text(c.type[1], spacingC1, 0);
 			pg.text(c.type[2], spacingC2, 0);
