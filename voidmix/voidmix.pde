@@ -1,6 +1,7 @@
 import com.hamoid.*;
 
 VideoExport videoExport;
+VideoExport videoExportLogScreen;
 
 ParseJSON parseJSON;
 SmoothJson smoothJson;
@@ -83,6 +84,13 @@ void initVideo() {
       videoExport.setLoadPixels(true);
       videoExport.setDebugging(false);
       videoExport.startMovie();
+
+      videoExportLogScreen = new VideoExport(this, "export-log/options-day-" + dayCount + ".mp4", logScreen.pg);
+      videoExportLogScreen.setQuality(70, 128);
+      videoExportLogScreen.setFrameRate(30);
+      videoExportLogScreen.setLoadPixels(true);
+      videoExportLogScreen.setDebugging(false);
+      videoExportLogScreen.startMovie();
   }
 }
 
@@ -202,7 +210,8 @@ void draw() {
  
  master.noStroke();
  master.fill(map(timeFrameSmooth.mosh, 0.0, 1.0, 0.0, 255.0));
- master.rect(width/2 -blockw/2 , height/2 + blockh /2 - 10, 10, 10);
+ //master.fill(255);
+ master.rect(master.width/2, master.height/2 + blockh /2 - 10, 10, 10);
   
  master.endDraw();
  image(master, 0, 0, width, height);
@@ -229,12 +238,14 @@ void draw() {
  if(exportVideo) {
    if(activated) {
     videoExport.saveFrame();
+    videoExportLogScreen.saveFrame();
    }
  }
   
  if(ticker%(daySpeed) == daySpeed-1) {
     if(exportVideo) {
      videoExport.endMovie();
+     videoExportLogScreen.endMovie();
       // if(dayCount%365==0) {
       //   exit();
       // }
@@ -264,6 +275,7 @@ void keyPressed() {
   if (key == 'q') {
     if(exportVideo) {
       videoExport.endMovie();
+      videoExportLogScreen.endMovie();
       exit();
     }
   }

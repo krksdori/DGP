@@ -143,7 +143,7 @@ class ParseJSON {
 
         // CLOUD
         JSONObject cloudCoverJO = timeFrame.getJSONObject("cloudCover");
-        float cloudCover = float(nf(map(cloudCoverJO.getFloat("value"), 0, 8, 0, 100), 1, 2));
+        float cloudCover = float(nf(map(cloudCoverJO.getFloat("value"), 0, 8, 0, 99), 2, 2));
         float cloudCoverN = cloudCoverJO.getFloat("normalized");
         
         // TEMPERATURE

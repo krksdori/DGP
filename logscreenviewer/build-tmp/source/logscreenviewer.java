@@ -69,19 +69,17 @@ public void draw() {
    if(ticker%(daySpeed) == 0) {
     if(firstAction == false) {
       dayCount = (dayCount%365)+1;
-      
     } else {
       firstAction = false;
     }
-    initVideo();
+    //initVideo();
   }
-
   if(dayCount > 0) {
    if((ticker-80)%(daySpeed) == 0) {
-    if(firstAction == false) {
-      dayCountMagic = (dayCountMagic%365)+1;
+      if(firstAction == false) {
+        dayCountMagic = (dayCountMagic%365)+1;
+      }
     }
-  }
   }
   
   smoothJson.newTarget(parseJSON.timeFrames.get((dayCountMagic)%365));
@@ -129,7 +127,11 @@ class LogScreen {
   	ArrayList<Column> columnsTarget = new ArrayList<Column>();
   	int fontSize = 20;
     PImage tempScreen;
-  	
+    float currentOffset = -100;
+    float targetOffset = -100;
+    HashMap<String, PImage> moons = new HashMap<String, PImage>();
+    String[] moonTitles = {  "FirstQuarter", "NewMoon", "WaxingCrescent", "FullMoon", "WaningCrescent", "WaxingGibbous", "LastQuarter", "WaningGibbous" };
+    
 	LogScreen(int _width, int _height) {
       	blockw = _width;
       	blockh = _height;
@@ -141,6 +143,11 @@ class LogScreen {
 		for(int i = 0; i < 8; i++) {
 			columns.add(new Column());
 			columnsTarget.add(new Column());
+		}
+		
+		for(String i : moonTitles) {
+			moons.put(i, loadImage("moon/"+i+".png") );
+			println("moon/"+i+".png");
 		}
 	}
 
@@ -154,37 +161,81 @@ class LogScreen {
 			} else if(i == 1) {
 				columnsTarget.get(i).type[0] = "Wind Direction" ;
 				columnsTarget.get(i).type[1] = timeFrameSelected.windDirectionTitle+"";
-				columnsTarget.get(i).type[2] = "..";
+				columnsTarget.get(i).type[2] = timeFrameSelected.windDirectionArraw+"";
 				
 			} else if(i == 2) {
 				columnsTarget.get(i).type[0] = "Wind Speed";
-				columnsTarget.get(i).type[1] = timeFrameSelected.windSpeed+" m/s";
-				columnsTarget.get(i).type[2] = "..";
+				columnsTarget.get(i).type[1] = nf(timeFrameSelected.windSpeed,2, 2)+" m/s";
+				
+				if(timeFrameSelected.windSpeedN > 0.5f) {
+					columnsTarget.get(i).type[2] = nf(dist(0.5f, 0.0f,timeFrameSelected.windSpeedN, 0.0f)*100.0f, 2, 2) + " % ↑";
+				} else if(timeFrameSelected.windSpeed < 0.5f) {
+					columnsTarget.get(i).type[2] = "-" + nf(dist(0.5f, 0.0f,timeFrameSelected.windSpeedN, 0.0f)*100.0f, 2, 2) + " % ↓";
+				} else {
+					columnsTarget.get(i).type[2] = 	"00.00 %";
+				}
 				
 			} else if(i == 3) {
 				columnsTarget.get(i).type[0] = "Cloud Cover";
-				columnsTarget.get(i).type[1] = timeFrameSelected.cloudCover+" %";
-				columnsTarget.get(i).type[2] = "..";
+				columnsTarget.get(i).type[1] = nf(timeFrameSelected.cloudCover, 2, 2) +" %";
+				
+				if(timeFrameSelected.cloudCoverN > 0.5f) {
+					columnsTarget.get(i).type[2] = nf(dist(0.5f, 0.0f,timeFrameSelected.cloudCoverN, 0.0f)*100.0f, 2, 2) + " % ↑";
+				} else if(timeFrameSelected.cloudCoverN < 0.5f) {
+					columnsTarget.get(i).type[2] = "-" + nf(dist(0.5f, 0.0f,timeFrameSelected.cloudCoverN, 0.0f)*100.0f, 2, 2) + " % ↓";
+				} else {
+					columnsTarget.get(i).type[2] = 	"00.00 %";
+				}
 				
 			} else if(i == 4) {
 				columnsTarget.get(i).type[0] = "Precipitation";
-				columnsTarget.get(i).type[1] = timeFrameSelected.precipitation+" mm";
-				columnsTarget.get(i).type[2] = "";
+				columnsTarget.get(i).type[1] = nf(timeFrameSelected.precipitation, 2, 2)+" mm";
+				
+				if(timeFrameSelected.precipitationN > 0.5f) {
+					columnsTarget.get(i).type[2] = nf(dist(0.5f, 0.0f,timeFrameSelected.precipitationN, 0.0f)*100.0f, 2, 2) + " % ↑";
+				} else if(timeFrameSelected.precipitationN < 0.5f) {
+					columnsTarget.get(i).type[2] = "-" + nf(dist(0.5f, 0.0f,timeFrameSelected.precipitationN, 0.0f)*100.0f, 2, 2) + " % ↓";
+				} else {
+					columnsTarget.get(i).type[2] = 	"00.00 %";
+				}
 				
 			} else if(i == 5) {
 				columnsTarget.get(i).type[0] = "Temperature";
-				columnsTarget.get(i).type[1] = timeFrameSelected.temperature+" °C";
-				columnsTarget.get(i).type[2] = "";
+				columnsTarget.get(i).type[1] = nf(timeFrameSelected.temperature, 2, 2)+" °C";
+				
+				if(timeFrameSelected.temperatureN > 0.5f) {
+					columnsTarget.get(i).type[2] = nf(dist(0.5f, 0.0f,timeFrameSelected.temperatureN, 0.0f)*100.0f, 2, 2) + " % ↑";
+				} else if(timeFrameSelected.temperatureN < 0.5f) {
+					columnsTarget.get(i).type[2] = "-" + nf(dist(0.5f, 0.0f,timeFrameSelected.temperatureN, 0.0f)*100.0f, 2, 2) + " % ↓";
+				} else {
+					columnsTarget.get(i).type[2] = 	"00.00 %";
+				}
 				
 			} else if(i == 6) {
 				columnsTarget.get(i).type[0] = "Low Tide";
-				columnsTarget.get(i).type[1] = timeFrameSelected.tideMin+" cm";
-				columnsTarget.get(i).type[2] = "";
+				columnsTarget.get(i).type[1] = nf(timeFrameSelected.tideMin, 2, 2)+" cm";
+				
+				if(timeFrameSelected.tideMinN > 0.5f) {
+					columnsTarget.get(i).type[2] = nf(dist(0.5f, 0.0f,timeFrameSelected.tideMinN, 0.0f)*100.0f, 2, 2) + " % ↑";
+				} else if(timeFrameSelected.tideMinN < 0.5f) {
+					columnsTarget.get(i).type[2] = "-" + nf(dist(0.5f, 0.0f,timeFrameSelected.tideMinN, 0.0f)*100.0f, 2, 2) + " % ↓";
+				} else {
+					columnsTarget.get(i).type[2] = 	"00.00 %";
+				}
+
 				
 			} else if(i == 7) {
 		        columnsTarget.get(i).type[0] = "High Tide";
-		        columnsTarget.get(i).type[1] = timeFrameSelected.tideMax+" cm";
-		        columnsTarget.get(i).type[2] = "";
+		        columnsTarget.get(i).type[1] = nf(timeFrameSelected.tideMax, 2, 2)+" cm";
+		        
+		        if(timeFrameSelected.tideMaxN > 0.5f) {
+					columnsTarget.get(i).type[2] = nf(dist(0.5f, 0.0f,timeFrameSelected.tideMaxN, 0.0f)*100.0f, 2, 2) + " % ↑";
+				} else if(timeFrameSelected.tideMaxN < 0.5f) {
+					columnsTarget.get(i).type[2] = "-" + nf(dist(0.5f, 0.0f,timeFrameSelected.tideMaxN, 0.0f)*100.0f, 2, 2) + " % ↓";
+				} else {
+					columnsTarget.get(i).type[2] = 	"00.00 %";
+				}
+
       		}
  
 		}
@@ -227,9 +278,10 @@ class LogScreen {
 		// //pg.fill(0,255,255);
 		// pg.rect(0,height-20,width, 20);
 
-    //pg.noStroke();
-    //pg.fill(255, 0, 0);
-    //pg.rect(0, pg.height-10, 10, 10);
+    	//pg.noStroke();
+    	//pg.fill(255, 0, 0);
+    	//pg.rect(0, pg.height-10, 10, 10);
+    	
     	pg.pushMatrix();
     	pg.text("Date     " + timeFrameSelected.date, 20, 30);
     	pg.text("Location     52°04’52.8”N 4°19’09.7”E", width-472, 30);
@@ -243,7 +295,33 @@ class LogScreen {
 
     	
     	pg.pushMatrix();
+    	
     	pg.translate(678, 500);		
+
+    	pg.stroke(255);
+    	//float offset = Math.abs(sin(ticker*0.01)*400.0);
+
+    	if((ticker-80)%(daySpeed) == 0) {
+    		targetOffset = 450.0f;
+      	}
+
+      	if((ticker-80)%(daySpeed) == 100) {
+    		targetOffset = -100.0f;
+      	}
+
+    	currentOffset = currentOffset*0.95f + targetOffset *0.05f;
+    	//pg.line(0.0, currentOffset, 1200.0, currentOffset);
+
+    	float distM = ((0) + 20) - currentOffset;
+		float mapDistM = map(distM, 100, 0, 0, 255.0f);
+		if(distM<0) {
+			mapDistM = 255.0f;
+		}
+
+    	pg.tint(255, mapDistM);
+    	pg.image(moons.get(timeFrameSelected.moonImageName), 1040.0f, 5.0f, 20, 20);
+    	pg.tint(255, 255);
+    	
 
 		int lineHeight = 40;
 		int spacingC1 = 520;
@@ -252,12 +330,45 @@ class LogScreen {
 
 		int i = 0;
 		for(Column c : columns) {
-      pg.fill(255, 0, 0);
-			pg.pushMatrix();
+      		pg.pushMatrix();
+
+      		float dist = ((i*lineHeight) + 20) - currentOffset;
 			pg.translate(0, (i*lineHeight) + 20);
-			pg.text(c.type[0], 0, 0);
-			pg.text(c.type[1], spacingC1, 0);
-			pg.text(c.type[2], spacingC2, 0);
+			
+			float mapDist = map(dist, 100, 0, 0, 110.0f);
+			if(dist<0) {
+				mapDist = 110.0f;
+			}
+
+			pg.fill(mapDist);
+
+			if(c.type[0].length() > 0) {
+				if(str(c.type[0].charAt(0)).equals("-")) {
+					pg.text(c.type[0], -12, 0);
+				} else {
+					pg.text(c.type[0], 0, 0);
+				}
+			}
+
+			if(c.type[1].length() > 0) {
+				if(str(c.type[1].charAt(0)).equals("-")) {
+					pg.text(c.type[1], spacingC1-12, 0);
+				} else {
+					pg.text(c.type[1], spacingC1, 0);
+				}
+			}
+
+			if(c.type[2].length() > 0) {
+				if(str(c.type[2].charAt(0)).equals("-")) {
+					pg.text(c.type[2], spacingC2-12, 0);
+				} else {
+					pg.text(c.type[2], spacingC2, 0);
+				}
+			}
+			
+
+			//pg.text(c.type[1], spacingC1, 0);
+			//pg.text(c.type[2], spacingC2, 0);
 			pg.popMatrix();
 			i++;
 		}
@@ -280,9 +391,11 @@ class TimeFrame {
    float moonAge;
    int moonVisible;
    String moonPhase;
+   String moonImageName;
 
    float windDirection;
    String windDirectionTitle;
+   String windDirectionArraw;
    float windSpeed;
    float windSpeedN;
 
@@ -303,13 +416,14 @@ class TimeFrame {
 
    }
    
-   TimeFrame(String date, float precipitation, float precipitationN, float moonAge, int moonVisible, String moonPhase, float windDirection, String windDirectionTitle, float windSpeed, float windSpeedN, int tideMin, float tideMinN, int tideMax, float tideMaxN, float cloudCover, float cloudCoverN, float temperature, float temperatureN, float mosh) {
+   TimeFrame(String date, float precipitation, float precipitationN, float moonAge, int moonVisible, String moonPhase, String moonImageName, float windDirection, String windDirectionTitle, String windDirectionArraw, float windSpeed, float windSpeedN, int tideMin, float tideMinN, int tideMax, float tideMaxN, float cloudCover, float cloudCoverN, float temperature, float temperatureN, float mosh) {
      this.date = date;
      this.precipitation = precipitation;
      this.precipitationN = precipitationN;
      this.moonAge = moonAge;
      this.moonVisible = moonVisible;
      this.moonPhase = moonPhase;
+     this.moonImageName = moonImageName;
      this.windDirection = windDirection;
      this.windSpeed = windSpeed;
      this.windSpeedN =windSpeedN;
@@ -320,6 +434,7 @@ class TimeFrame {
      this.cloudCover = cloudCover;
      this.cloudCoverN = cloudCoverN;
      this.windDirectionTitle = windDirectionTitle;
+     this.windDirectionArraw = windDirectionArraw;
      this.temperature = temperature;
      this.temperatureN = temperatureN;
      this.mosh = mosh;
@@ -352,7 +467,8 @@ class ParseJSON {
         float moonAge = moonJO.getFloat("moonAge");
         int moonVisible = moonJO.getInt("visible");
         String moonPhase = moonJO.getString("phase");
-
+        String moonImageName = trim(moonPhase.replace(" ", ""));
+        println(moonImageName);
         // WIND
         float windDirection = timeFrame.getInt("windDirection")*1.0f;
         JSONObject windJO = timeFrame.getJSONObject("windSpeed");
@@ -360,32 +476,41 @@ class ParseJSON {
         float windSpeedValueN = windJO.getFloat("normalized");
         //360=north, 90=east, 180=south, 270=west, 0=calm/variable //45
         String[] windTitleOptions = { "North", "Northeast", "East", "Southeast", "South", "Southwest", "West", "Northwest" };
+        String[] windArrowOptions = { "↑", "↗", "→", "↘", "↓", "↙", "←", "↖" };
         String windDirectionTitle = windTitleOptions[0];
-
+        String windDirectionArraw = windArrowOptions[0];
 
         if(windDirection > 360-(45/2) && windDirection < 45/2) {
             windDirectionTitle = windTitleOptions[0];
+            windDirectionArraw = windArrowOptions[0];
         }
         if(windDirection > (45/2) && windDirection < (45/2) + 45) {
             windDirectionTitle = windTitleOptions[1];
+            windDirectionArraw = windArrowOptions[1];
         }
         if(windDirection > (45/2) + 45 && windDirection < (45/2) + 45 * 2) {
             windDirectionTitle = windTitleOptions[2];
+            windDirectionArraw = windArrowOptions[2];
         }
         if(windDirection > (45/2) + 45 * 2 && windDirection < (45/2) + 45 * 3) {
             windDirectionTitle = windTitleOptions[3];
+            windDirectionArraw = windArrowOptions[3];
         }
         if(windDirection > (45/2) + 45 * 3 && windDirection < (45/2) + 45 * 4) {
             windDirectionTitle = windTitleOptions[4];
+            windDirectionArraw = windArrowOptions[4];
         }
         if(windDirection > (45/2) + 45 * 4 && windDirection < (45/2) + 45 * 5) {
             windDirectionTitle = windTitleOptions[5];
+            windDirectionArraw = windArrowOptions[5];
         }
         if(windDirection > (45/2) + 45 * 5 && windDirection < (45/2) + 45 * 6) {
             windDirectionTitle = windTitleOptions[6];
+            windDirectionArraw = windArrowOptions[6];
         }
         if(windDirection > (45/2) + 45 * 6 && windDirection < (45/2) + 45 * 7) {
             windDirectionTitle = windTitleOptions[7];
+            windDirectionArraw = windArrowOptions[7];
         }
 
         // TIDE
@@ -401,7 +526,7 @@ class ParseJSON {
 
         // CLOUD
         JSONObject cloudCoverJO = timeFrame.getJSONObject("cloudCover");
-        float cloudCover = PApplet.parseFloat(nf(map(cloudCoverJO.getFloat("value"), 0, 8, 0, 100), 1, 2));
+        float cloudCover = PApplet.parseFloat(nf(map(cloudCoverJO.getFloat("value"), 0, 8, 0, 99), 2, 2));
         float cloudCoverN = cloudCoverJO.getFloat("normalized");
         
         // TEMPERATURE
@@ -412,7 +537,7 @@ class ParseJSON {
         // MOSH
         float mosh = timeFrame.getFloat("mosh");
 
-        timeFrames.add(new TimeFrame(date, precipitation, precipitationN, moonAge, moonVisible, moonPhase, windDirection, windDirectionTitle, windSpeedValue, windSpeedValueN, tideMin, tideMinN, tideMax, tideMaxN, cloudCover, cloudCoverN, temperature, temperatureN, mosh));
+        timeFrames.add(new TimeFrame(date, precipitation, precipitationN, moonAge, moonVisible, moonPhase, moonImageName, windDirection, windDirectionTitle, windDirectionArraw, windSpeedValue, windSpeedValueN, tideMin, tideMinN, tideMax, tideMaxN, cloudCover, cloudCoverN, temperature, temperatureN, mosh));
        // println(timeFrames.size());
     }
   }

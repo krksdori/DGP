@@ -24,7 +24,7 @@ class PerlinCloud {
     }
 
 
-    float CC = map(cloudCoverN, 0, 1.0, 0, 255);
+    float CC = map(cloudCoverN, 0, 1.0, 0, 150);
 
 
 

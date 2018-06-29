@@ -57,75 +57,75 @@ class LogScreen {
 				
 			} else if(i == 2) {
 				columnsTarget.get(i).type[0] = "Wind Speed";
-				columnsTarget.get(i).type[1] = timeFrameSelected.windSpeed+" m/s";
+				columnsTarget.get(i).type[1] = nf(timeFrameSelected.windSpeed,2, 2)+" m/s";
 				
 				if(timeFrameSelected.windSpeedN > 0.5) {
 					columnsTarget.get(i).type[2] = nf(dist(0.5, 0.0,timeFrameSelected.windSpeedN, 0.0)*100.0, 2, 2) + " % ↑";
 				} else if(timeFrameSelected.windSpeed < 0.5) {
 					columnsTarget.get(i).type[2] = "-" + nf(dist(0.5, 0.0,timeFrameSelected.windSpeedN, 0.0)*100.0, 2, 2) + " % ↓";
 				} else {
-					columnsTarget.get(i).type[2] = 	"";
+					columnsTarget.get(i).type[2] = 	"00.00 %";
 				}
 				
 			} else if(i == 3) {
 				columnsTarget.get(i).type[0] = "Cloud Cover";
-				columnsTarget.get(i).type[1] = timeFrameSelected.cloudCover+" %";
+				columnsTarget.get(i).type[1] = nf(timeFrameSelected.cloudCover, 2, 2) +" %";
 				
 				if(timeFrameSelected.cloudCoverN > 0.5) {
 					columnsTarget.get(i).type[2] = nf(dist(0.5, 0.0,timeFrameSelected.cloudCoverN, 0.0)*100.0, 2, 2) + " % ↑";
 				} else if(timeFrameSelected.cloudCoverN < 0.5) {
 					columnsTarget.get(i).type[2] = "-" + nf(dist(0.5, 0.0,timeFrameSelected.cloudCoverN, 0.0)*100.0, 2, 2) + " % ↓";
 				} else {
-					columnsTarget.get(i).type[2] = 	"";
+					columnsTarget.get(i).type[2] = 	"00.00 %";
 				}
 				
 			} else if(i == 4) {
 				columnsTarget.get(i).type[0] = "Precipitation";
-				columnsTarget.get(i).type[1] = timeFrameSelected.precipitation+" mm";
+				columnsTarget.get(i).type[1] = nf(timeFrameSelected.precipitation, 2, 2)+" mm";
 				
 				if(timeFrameSelected.precipitationN > 0.5) {
 					columnsTarget.get(i).type[2] = nf(dist(0.5, 0.0,timeFrameSelected.precipitationN, 0.0)*100.0, 2, 2) + " % ↑";
 				} else if(timeFrameSelected.precipitationN < 0.5) {
 					columnsTarget.get(i).type[2] = "-" + nf(dist(0.5, 0.0,timeFrameSelected.precipitationN, 0.0)*100.0, 2, 2) + " % ↓";
 				} else {
-					columnsTarget.get(i).type[2] = 	"";
+					columnsTarget.get(i).type[2] = 	"00.00 %";
 				}
 				
 			} else if(i == 5) {
 				columnsTarget.get(i).type[0] = "Temperature";
-				columnsTarget.get(i).type[1] = timeFrameSelected.temperatureN+" °C";
+				columnsTarget.get(i).type[1] = nf(timeFrameSelected.temperature, 2, 2)+" °C";
 				
 				if(timeFrameSelected.temperatureN > 0.5) {
 					columnsTarget.get(i).type[2] = nf(dist(0.5, 0.0,timeFrameSelected.temperatureN, 0.0)*100.0, 2, 2) + " % ↑";
 				} else if(timeFrameSelected.temperatureN < 0.5) {
 					columnsTarget.get(i).type[2] = "-" + nf(dist(0.5, 0.0,timeFrameSelected.temperatureN, 0.0)*100.0, 2, 2) + " % ↓";
 				} else {
-					columnsTarget.get(i).type[2] = 	"";
+					columnsTarget.get(i).type[2] = 	"00.00 %";
 				}
 				
 			} else if(i == 6) {
 				columnsTarget.get(i).type[0] = "Low Tide";
-				columnsTarget.get(i).type[1] = timeFrameSelected.tideMinN+" cm";
+				columnsTarget.get(i).type[1] = nf(timeFrameSelected.tideMin, 2, 2)+" cm";
 				
 				if(timeFrameSelected.tideMinN > 0.5) {
 					columnsTarget.get(i).type[2] = nf(dist(0.5, 0.0,timeFrameSelected.tideMinN, 0.0)*100.0, 2, 2) + " % ↑";
 				} else if(timeFrameSelected.tideMinN < 0.5) {
 					columnsTarget.get(i).type[2] = "-" + nf(dist(0.5, 0.0,timeFrameSelected.tideMinN, 0.0)*100.0, 2, 2) + " % ↓";
 				} else {
-					columnsTarget.get(i).type[2] = 	"";
+					columnsTarget.get(i).type[2] = 	"00.00 %";
 				}
 
 				
 			} else if(i == 7) {
 		        columnsTarget.get(i).type[0] = "High Tide";
-		        columnsTarget.get(i).type[1] = timeFrameSelected.tideMaxN+" cm";
+		        columnsTarget.get(i).type[1] = nf(timeFrameSelected.tideMax, 2, 2)+" cm";
 		        
 		        if(timeFrameSelected.tideMaxN > 0.5) {
 					columnsTarget.get(i).type[2] = nf(dist(0.5, 0.0,timeFrameSelected.tideMaxN, 0.0)*100.0, 2, 2) + " % ↑";
 				} else if(timeFrameSelected.tideMaxN < 0.5) {
 					columnsTarget.get(i).type[2] = "-" + nf(dist(0.5, 0.0,timeFrameSelected.tideMaxN, 0.0)*100.0, 2, 2) + " % ↓";
 				} else {
-					columnsTarget.get(i).type[2] = 	"";
+					columnsTarget.get(i).type[2] = 	"00.00 %";
 				}
 
       		}
@@ -234,9 +234,33 @@ class LogScreen {
 
 			pg.fill(mapDist);
 
-			pg.text(c.type[0], 0, 0);
-			pg.text(c.type[1], spacingC1, 0);
-			pg.text(c.type[2], spacingC2, 0);
+			if(c.type[0].length() > 0) {
+				if(str(c.type[0].charAt(0)).equals("-")) {
+					pg.text(c.type[0], -12, 0);
+				} else {
+					pg.text(c.type[0], 0, 0);
+				}
+			}
+
+			if(c.type[1].length() > 0) {
+				if(str(c.type[1].charAt(0)).equals("-")) {
+					pg.text(c.type[1], spacingC1-12, 0);
+				} else {
+					pg.text(c.type[1], spacingC1, 0);
+				}
+			}
+
+			if(c.type[2].length() > 0) {
+				if(str(c.type[2].charAt(0)).equals("-")) {
+					pg.text(c.type[2], spacingC2-12, 0);
+				} else {
+					pg.text(c.type[2], spacingC2, 0);
+				}
+			}
+			
+
+			//pg.text(c.type[1], spacingC1, 0);
+			//pg.text(c.type[2], spacingC2, 0);
 			pg.popMatrix();
 			i++;
 		}
