@@ -15,13 +15,14 @@ TideLines tideLines;
 Temperature temperature;
 LogScreen logScreen;
 
-int dayCount = 0;
-int dayCountMagic = 0;
+int dayCountStart = 0;
+int dayCount = dayCountStart;
+int dayCountMagic = dayCountStart;
 int daySpeed = 60*4; // 60*4
 int cols = 3;
 int rows = 3;
-int blockw = 1920;
-int blockh = 1080;
+int blockw = 1920;//480;//1920;
+int blockh = 1080;//270;//1080;
 int masterw = blockw*3;
 int masterh = blockh*3;
 boolean activated = false;
@@ -61,7 +62,7 @@ void setup() {
   logScreen = new LogScreen(2560, 1440);
   
   parseJSON.parse("result.json");
-  smoothJson = new SmoothJson(parseJSON.timeFrames.get(0));
+  smoothJson = new SmoothJson(parseJSON.timeFrames.get(dayCountStart));
 
   initVideo();
   
@@ -78,14 +79,14 @@ void setup() {
 
 void initVideo() {
   if(exportVideo) {
-      videoExport = new VideoExport(this, "export/options-day-" + dayCount + ".mp4", master);
+      videoExport = new VideoExport(this, "export-dump/options-day-" + dayCount + ".mp4", master);
       videoExport.setQuality(70, 128);
       videoExport.setFrameRate(30);
       videoExport.setLoadPixels(true);
       videoExport.setDebugging(false);
       videoExport.startMovie();
 
-      videoExportLogScreen = new VideoExport(this, "export-log/options-day-" + dayCount + ".mp4", logScreen.pg);
+      videoExportLogScreen = new VideoExport(this, "export-log-dump/options-day-" + dayCount + ".mp4", logScreen.pg);
       videoExportLogScreen.setQuality(70, 128);
       videoExportLogScreen.setFrameRate(30);
       videoExportLogScreen.setLoadPixels(true);
@@ -118,6 +119,7 @@ void draw() {
 
   TimeFrame timeFrameSelected = parseJSON.timeFrames.get(dayCount%365);
   TimeFrame timeFrameSelectedMagic = parseJSON.timeFrames.get(dayCountMagic%365);
+  TimeFrame timeStart = parseJSON.timeFrames.get(dayCountStart);
 
   smoothJson.newTarget(parseJSON.timeFrames.get((dayCountMagic)%365));
   smoothJson.update();
@@ -206,7 +208,7 @@ void draw() {
  }
   
  master.blend(sunRise.draw(timeFrameSelectedMagic.cloudCoverN, ticker), 0, 0, blockw, blockh, 0, 0, master.width, master.height, SCREEN);
- master.blend(moonPhases.draw(timeFrameSmooth.moonAge, ticker, timeFrameSelectedMagic.cloudCoverN), 0, 0, master.width, master.height, 0, 0, master.width, master.height, SCREEN);
+ master.blend(moonPhases.draw(timeFrameSmooth.moonAge, timeStart.moonAge, ticker, timeFrameSelectedMagic.cloudCoverN), 0, 0, master.width, master.height, 0, 0, master.width, master.height, SCREEN);
  
  master.noStroke();
  master.fill(map(timeFrameSmooth.mosh, 0.0, 1.0, 0.0, 255.0));
@@ -223,9 +225,9 @@ void draw() {
    println(ticker);
   }
  text("dayspeed: " + daySpeed, 50, 90);
- //master.text("moonAge: " + timeFrameSelected.moonAge, 50, 110);
- //master.text("moonVisible: " + timeFrameSelected.moonVisible+"%", 50, 130);
- //master.text("moonPhase: " + timeFrameSelected.moonPhase, 50, 150);
+ text("moonAge: " + timeFrameSelected.moonAge, 50, 110);
+ text("moonVisible: " + timeFrameSelected.moonVisible+"%", 50, 130);
+ text("moonPhase: " + timeFrameSelected.moonPhase, 50, 150);
  //master.text("windDirection: " + timeFrameSelected.windDirection, 50, 170);
  //master.text("windSpeed: " + timeFrameSelected.windSpeed, 50, 190);
  //master.text("windSpeedN: " + timeFrameSelected.windSpeedN, 50, 210);

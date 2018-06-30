@@ -33,13 +33,14 @@ TideLines tideLines;
 Temperature temperature;
 LogScreen logScreen;
 
-int dayCount = 0;
-int dayCountMagic = 0;
+int dayCountStart = 25;
+int dayCount = dayCountStart;
+int dayCountMagic = dayCountStart;
 int daySpeed = 60*4; // 60*4
 int cols = 3;
 int rows = 3;
-int blockw = 1920;
-int blockh = 1080;
+int blockw = 480;//1920;
+int blockh = 270;//1080;
 int masterw = blockw*3;
 int masterh = blockh*3;
 boolean activated = false;
@@ -79,7 +80,7 @@ public void setup() {
   logScreen = new LogScreen(2560, 1440);
   
   parseJSON.parse("result.json");
-  smoothJson = new SmoothJson(parseJSON.timeFrames.get(0));
+  smoothJson = new SmoothJson(parseJSON.timeFrames.get(dayCountStart));
 
   initVideo();
   
@@ -96,14 +97,14 @@ public void setup() {
 
 public void initVideo() {
   if(exportVideo) {
-      videoExport = new VideoExport(this, "export/options-day-" + dayCount + ".mp4", master);
+      videoExport = new VideoExport(this, "export-dump/options-day-" + dayCount + ".mp4", master);
       videoExport.setQuality(70, 128);
       videoExport.setFrameRate(30);
       videoExport.setLoadPixels(true);
       videoExport.setDebugging(false);
       videoExport.startMovie();
 
-      videoExportLogScreen = new VideoExport(this, "export-log/options-day-" + dayCount + ".mp4", logScreen.pg);
+      videoExportLogScreen = new VideoExport(this, "export-log-dump/options-day-" + dayCount + ".mp4", logScreen.pg);
       videoExportLogScreen.setQuality(70, 128);
       videoExportLogScreen.setFrameRate(30);
       videoExportLogScreen.setLoadPixels(true);
@@ -136,6 +137,7 @@ public void draw() {
 
   TimeFrame timeFrameSelected = parseJSON.timeFrames.get(dayCount%365);
   TimeFrame timeFrameSelectedMagic = parseJSON.timeFrames.get(dayCountMagic%365);
+  TimeFrame timeStart = parseJSON.timeFrames.get(dayCountStart);
 
   smoothJson.newTarget(parseJSON.timeFrames.get((dayCountMagic)%365));
   smoothJson.update();
@@ -224,7 +226,7 @@ public void draw() {
  }
   
  master.blend(sunRise.draw(timeFrameSelectedMagic.cloudCoverN, ticker), 0, 0, blockw, blockh, 0, 0, master.width, master.height, SCREEN);
- master.blend(moonPhases.draw(timeFrameSmooth.moonAge, ticker, timeFrameSelectedMagic.cloudCoverN), 0, 0, master.width, master.height, 0, 0, master.width, master.height, SCREEN);
+ master.blend(moonPhases.draw(timeFrameSmooth.moonAge, timeStart.moonAge, ticker, timeFrameSelectedMagic.cloudCoverN), 0, 0, master.width, master.height, 0, 0, master.width, master.height, SCREEN);
  
  master.noStroke();
  master.fill(map(timeFrameSmooth.mosh, 0.0f, 1.0f, 0.0f, 255.0f));
@@ -241,9 +243,9 @@ public void draw() {
    println(ticker);
   }
  text("dayspeed: " + daySpeed, 50, 90);
- //master.text("moonAge: " + timeFrameSelected.moonAge, 50, 110);
- //master.text("moonVisible: " + timeFrameSelected.moonVisible+"%", 50, 130);
- //master.text("moonPhase: " + timeFrameSelected.moonPhase, 50, 150);
+ text("moonAge: " + timeFrameSelected.moonAge, 50, 110);
+ text("moonVisible: " + timeFrameSelected.moonVisible+"%", 50, 130);
+ text("moonPhase: " + timeFrameSelected.moonPhase, 50, 150);
  //master.text("windDirection: " + timeFrameSelected.windDirection, 50, 170);
  //master.text("windSpeed: " + timeFrameSelected.windSpeed, 50, 190);
  //master.text("windSpeedN: " + timeFrameSelected.windSpeedN, 50, 210);
@@ -348,7 +350,7 @@ class LogScreen {
 		
 		for(String i : moonTitles) {
 			moons.put(i, loadImage("moon/"+i+".png") );
-			println("moon/"+i+".png");
+			//println("moon/"+i+".png");
 		}
 	}
 
@@ -633,20 +635,27 @@ class MoonPhases {
 
   }
 
-  public void moonPhasesDraw(PGraphics p, float moonAge, float cloudCoverN) {
+  public void moonPhasesDraw(PGraphics p, float moonAge,  float moonAgeStart, float cloudCoverN, float ticker) {
     p.beginDraw();
+    
     float mapMoonData = map(moonAge, 0.0f, 29.53059f, 600.0f, 0.0f);
+    int offset = PApplet.parseInt(map(moonAgeStart, 0.0f, 29.53059f, 600.0f, 0.0f));
 
-//println(moonAge);
-    t = ((mapMoonData+300)%frames)/(float)frames;
+
+    float sliceSize = 29.53059f/600.0f;
+    t = ( (frames-300+offset-(ticker*sliceSize))%frames)/(float)frames;
+    //((mapMoonData+300)%frames)/(float)frames;
+    println(t);
+    
     p.background(0);
     p.translate(blockw/2, blockh/2);
+    
 
     float newf = map(cloudCoverN, 0, 1, 255, 200);
-    //float newf = map(mouseX, 0, width, 120, 255);
-
     currentf = currentf*0.9f + newf * 0.1f;
     f = color(currentf);
+
+
     //f = color(255, map(cloudCoverN, 0, 1, 10, 200));
     //f = color(100);
     //float moonRotate = map(moonAge, 0.0, 29.53059, PI*0.0, -PI*2.0);
@@ -729,7 +738,7 @@ public PGraphics rotateMoon(float moonAge, float x, float y, float cloudCoverN) 
   return moon;
 }
   
-  public PGraphics draw(float moonAge, int ticker, float cloudCoverN) {
+  public PGraphics draw(float moonAge, float moonAgeStart, int ticker, float cloudCoverN) {
 
     
     pg.beginDraw();
@@ -739,8 +748,10 @@ public PGraphics rotateMoon(float moonAge, float x, float y, float cloudCoverN) 
 
     float sliceRotation = ((PI*2.0f))/( ((60.0f*4.0f)*29.53059f) );
 
-    float x = ((cos( ((ticker*-sliceRotation-PI*0.15f))%(PI*2.0f) ) )*blockw/3.3f) ;//+ blockw/2 ; // + width/2 -100
-    float y = ((sin( ((ticker*-sliceRotation-PI*0.15f))%(PI*2.0f) ) )*blockw/4.3f) ; //+blockh*1.5 ; // + height+height/3 -100
+    float offset = map(moonAgeStart, 0.0f, 29.53059f, 0, 2.0f*PI); // start
+
+    float x = ((cos( ((ticker*-sliceRotation-offset))%(PI*2.0f) ) )*blockw/3.3f) ;//+ blockw/2 ; // + width/2 -100
+    float y = ((sin( ((ticker*-sliceRotation-offset))%(PI*2.0f) ) )*blockw/4.3f) ; //+blockh*1.5 ; // + height+height/3 -100
     
 
     //float rX = cos(moonRotate)*blockw/3;
@@ -749,7 +760,7 @@ public PGraphics rotateMoon(float moonAge, float x, float y, float cloudCoverN) 
     pg.translate(x, y);
     pg.pushMatrix();
 
-    moonPhasesDraw(moonPhases, moonAge, cloudCoverN);
+    moonPhasesDraw(moonPhases, moonAge, moonAgeStart, cloudCoverN, ticker);
     
 
     pg.image(moonPhases, 0, 0);
@@ -853,7 +864,7 @@ class ParseJSON {
         int moonVisible = moonJO.getInt("visible");
         String moonPhase = moonJO.getString("phase");
         String moonImageName = trim(moonPhase.replace(" ", ""));
-        println(moonImageName);
+        //println(moonImageName);
         // WIND
         float windDirection = timeFrame.getInt("windDirection")*1.0f;
         JSONObject windJO = timeFrame.getJSONObject("windSpeed");
@@ -1464,7 +1475,7 @@ class WindMap {
 		}
 
 		flowfield.init(windDirection);
-    println("new wind dir " + windDirection);
+    //println("new wind dir " + windDirection);
 		pg.endDraw();	
 
   		return pg;

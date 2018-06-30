@@ -36,7 +36,7 @@ class WindMap {
 		}
 
 		flowfield.init(windDirection);
-    println("new wind dir " + windDirection);
+    //println("new wind dir " + windDirection);
 		pg.endDraw();	
 
   		return pg;

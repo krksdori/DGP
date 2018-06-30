@@ -85,7 +85,7 @@ class ParseJSON {
         int moonVisible = moonJO.getInt("visible");
         String moonPhase = moonJO.getString("phase");
         String moonImageName = trim(moonPhase.replace(" ", ""));
-        println(moonImageName);
+        //println(moonImageName);
         // WIND
         float windDirection = timeFrame.getInt("windDirection")*1.0;
         JSONObject windJO = timeFrame.getJSONObject("windSpeed");

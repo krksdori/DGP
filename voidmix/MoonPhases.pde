@@ -49,20 +49,27 @@ class MoonPhases {
 
   }
 
-  void moonPhasesDraw(PGraphics p, float moonAge, float cloudCoverN) {
+  void moonPhasesDraw(PGraphics p, float moonAge,  float moonAgeStart, float cloudCoverN, float ticker) {
     p.beginDraw();
+    
     float mapMoonData = map(moonAge, 0.0, 29.53059, 600.0, 0.0);
+    int offset = int(map(moonAgeStart, 0.0, 29.53059, 600.0, 0.0));
 
-//println(moonAge);
-    t = ((mapMoonData+300)%frames)/(float)frames;
+
+    float sliceSize = 29.53059/600.0;
+    t = ( (frames-300+offset-(ticker*sliceSize))%frames)/(float)frames;
+    //((mapMoonData+300)%frames)/(float)frames;
+    println(t);
+    
     p.background(0);
     p.translate(blockw/2, blockh/2);
+    
 
     float newf = map(cloudCoverN, 0, 1, 255, 200);
-    //float newf = map(mouseX, 0, width, 120, 255);
-
     currentf = currentf*0.9 + newf * 0.1;
     f = color(currentf);
+
+
     //f = color(255, map(cloudCoverN, 0, 1, 10, 200));
     //f = color(100);
     //float moonRotate = map(moonAge, 0.0, 29.53059, PI*0.0, -PI*2.0);
@@ -145,7 +152,7 @@ PGraphics rotateMoon(float moonAge, float x, float y, float cloudCoverN) {
   return moon;
 }
   
-  PGraphics draw(float moonAge, int ticker, float cloudCoverN) {
+  PGraphics draw(float moonAge, float moonAgeStart, int ticker, float cloudCoverN) {
 
     
     pg.beginDraw();
@@ -155,8 +162,10 @@ PGraphics rotateMoon(float moonAge, float x, float y, float cloudCoverN) {
 
     float sliceRotation = ((PI*2.0))/( ((60.0*4.0)*29.53059) );
 
-    float x = ((cos( ((ticker*-sliceRotation-PI*0.15))%(PI*2.0) ) )*blockw/3.3) ;//+ blockw/2 ; // + width/2 -100
-    float y = ((sin( ((ticker*-sliceRotation-PI*0.15))%(PI*2.0) ) )*blockw/4.3) ; //+blockh*1.5 ; // + height+height/3 -100
+    float offset = map(moonAgeStart, 0.0, 29.53059, 0, 2.0*PI); // start
+
+    float x = ((cos( ((ticker*-sliceRotation-offset))%(PI*2.0) ) )*blockw/3.3) ;//+ blockw/2 ; // + width/2 -100
+    float y = ((sin( ((ticker*-sliceRotation-offset))%(PI*2.0) ) )*blockw/4.3) ; //+blockh*1.5 ; // + height+height/3 -100
     
 
     //float rX = cos(moonRotate)*blockw/3;
@@ -165,7 +174,7 @@ PGraphics rotateMoon(float moonAge, float x, float y, float cloudCoverN) {
     pg.translate(x, y);
     pg.pushMatrix();
 
-    moonPhasesDraw(moonPhases, moonAge, cloudCoverN);
+    moonPhasesDraw(moonPhases, moonAge, moonAgeStart, cloudCoverN, ticker);
     
 
     pg.image(moonPhases, 0, 0);
