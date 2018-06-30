@@ -79,14 +79,14 @@ void setup() {
 
 void initVideo() {
   if(exportVideo) {
-      videoExport = new VideoExport(this, "export-dump/options-day-" + dayCount + ".mp4", master);
+      videoExport = new VideoExport(this, "export/options-day-" + dayCount + ".mp4", master);
       videoExport.setQuality(70, 128);
       videoExport.setFrameRate(30);
       videoExport.setLoadPixels(true);
       videoExport.setDebugging(false);
       videoExport.startMovie();
 
-      videoExportLogScreen = new VideoExport(this, "export-log-dump/options-day-" + dayCount + ".mp4", logScreen.pg);
+      videoExportLogScreen = new VideoExport(this, "export-log/options-day-" + dayCount + ".mp4", logScreen.pg);
       videoExportLogScreen.setQuality(70, 128);
       videoExportLogScreen.setFrameRate(30);
       videoExportLogScreen.setLoadPixels(true);

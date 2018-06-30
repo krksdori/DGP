@@ -10,3 +10,7 @@ ffmpeg version 4.0.1 Copyright (c) 2000-2018 the FFmpeg developers
   libswscale      5.  1.100 /  5.  1.100
   libswresample   3.  1.100 /  3.  1.100
   libpostproc    55.  1.100 / 55.  1.100
+Input #0, rawvideo, from 'pipe:':
+  Duration: N/A, start: 0.000000, bitrate: 2654208 kb/s
+    Stream #0:0: Video: rawvideo (RGB[24] / 0x18424752), rgb24, 2560x1440, 2654208 kb/s, 30 tbr, 30 tbn, 30 tbc
+/Users/dorakerekes/Documents/KABK/2-ProcessingSketches/repo-dgp/DGP/voidmix/export-log-dump/options-day-0.mp4: No such file or directory

@@ -131,6 +131,7 @@ public void draw() {
    if((ticker-80)%(daySpeed) == 0) {
     if(firstAction == false) {
       dayCountMagic = (dayCountMagic%365)+1;
+      println(dayCountMagic);
     }
   }
   }
@@ -688,7 +689,7 @@ class MoonPhases {
     float sliceSize = 29.53059f/600.0f;
     t = ( (frames-300+offset-(ticker*sliceSize))%frames)/(float)frames;
     //((mapMoonData+300)%frames)/(float)frames;
-    println(t);
+    //println(t);
     
     p.background(0);
     p.translate(blockw/2, blockh/2);
