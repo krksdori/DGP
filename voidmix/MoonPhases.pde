@@ -59,7 +59,7 @@ class MoonPhases {
     float sliceSize = 29.53059/600.0;
     t = ( (frames-300+offset-(ticker*sliceSize))%frames)/(float)frames;
     //((mapMoonData+300)%frames)/(float)frames;
-    println(t);
+    //println(t);
     
     p.background(0);
     p.translate(blockw/2, blockh/2);

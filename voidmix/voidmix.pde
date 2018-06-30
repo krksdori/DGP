@@ -113,6 +113,7 @@ void draw() {
    if((ticker-80)%(daySpeed) == 0) {
     if(firstAction == false) {
       dayCountMagic = (dayCountMagic%365)+1;
+      println(dayCountMagic);
     }
   }
   }
