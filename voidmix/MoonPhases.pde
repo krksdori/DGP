@@ -7,8 +7,8 @@ class MoonPhases {
   PShader blur;
   float theta;
   float t;
-  float radius = 1920;
-  int frames = 1080;
+  float radius = 500;
+  int frames = 600;
   PGraphics moonTexture; 
   PGraphics moonPhases;
   PGraphics moon;

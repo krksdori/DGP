@@ -39,8 +39,8 @@ int dayCountMagic = dayCountStart;
 int daySpeed = 60*4; // 60*4
 int cols = 3;
 int rows = 3;
-int blockw = 480;//1920;
-int blockh = 270;//1080;
+int blockw = 1920;//1920;
+int blockh = 1080;//1080;
 int masterw = blockw*3;
 int masterh = blockh*3;
 boolean activated = false;
@@ -151,16 +151,16 @@ public void draw() {
 
   //main.background(0);
   main.image(rainDrops.draw(timeFrameSelected.precipitationN, timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0.0f, 0.0f, blockw, blockh);
-  // if(timeFrameSelected.windSpeedN > 0.5) {
-  //   main.blend(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
-  // }
-  // main.blend(perlinCloud.draw(timeFrameSelected.cloudCoverN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
+  if(timeFrameSelected.windSpeedN > 0.5f) {
+    main.blend(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
+  }
+  main.blend(perlinCloud.draw(timeFrameSelected.cloudCoverN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
   
-  // if(timeFrameSelected.moonPhase.equals("Waning Crescent") || timeFrameSelected.moonPhase.equals("New Moon") || timeFrameSelected.moonPhase.equals("Full Moon") || timeFrameSelected.moonPhase.equals("Waxing Crescent")) {
-  //   main.blend(tideLines.draw(timeFrameSelected.tideMinN, timeFrameSelected.tideMaxN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);  
-  // }
+  if(timeFrameSelected.moonPhase.equals("Waning Crescent") || timeFrameSelected.moonPhase.equals("New Moon") || timeFrameSelected.moonPhase.equals("Full Moon") || timeFrameSelected.moonPhase.equals("Waxing Crescent")) {
+    main.blend(tideLines.draw(timeFrameSelected.tideMinN, timeFrameSelected.tideMaxN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);  
+  }
   
-  // main.blend(temperature.draw(timeFrameSelected.temperatureN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
+  main.blend(temperature.draw(timeFrameSelected.temperatureN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
   
   dayNightFade(main, ticker);
   main.endDraw();
@@ -223,7 +223,7 @@ public void draw() {
  //image(main, 0, 0);
 
  if(activated) {
-   //master.image(logScreen.draw(timeFrameSelectedMagic, timeFrameSmooth, dayCount, ticker), masterw/cols, masterh/rows, masterw/cols, masterh/rows);
+   master.image(logScreen.draw(timeFrameSelectedMagic, timeFrameSmooth, dayCount, ticker), masterw/cols, masterh/rows, masterw/cols, masterh/rows);
   //image(logScreen.draw(timeFrameSelected, dayCount, ticker), 0, 0);
  }
   
@@ -638,14 +638,15 @@ class MoonPhases {
   PShader blur;
   float theta;
   float t;
-  float radius = 500;
-  int frames = 600;
+  float radius = 1920;
+  int frames = 1080;
   PGraphics moonTexture; 
   PGraphics moonPhases;
   PGraphics moon;
   int blockw = 2560;
   int blockh = 1440;
   PGraphics pg;
+  
   
   MoonPhases(int _width, int _height) {
       blockw = _width;
