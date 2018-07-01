@@ -57,9 +57,17 @@ class MoonPhases {
 
 
     float sliceSize = 29.53059/600.0;
-    t = ( (frames-300+offset-(ticker*sliceSize))%frames)/(float)frames;
+    float slider = ((300)+offset - (ticker)*sliceSize);
+    
+    t = (( slider ) % frames) / (float)frames;
+
+    if(slider < 0) {
+      t = 1.0 + t;
+    }
+
+    //println(slider + " --  " + t);
+
     //((mapMoonData+300)%frames)/(float)frames;
-    //println(t);
     
     p.background(0);
     p.translate(blockw/2, blockh/2);
@@ -176,7 +184,6 @@ PGraphics rotateMoon(float moonAge, float x, float y, float cloudCoverN) {
 
     moonPhasesDraw(moonPhases, moonAge, moonAgeStart, cloudCoverN, ticker);
     
-
     pg.image(moonPhases, 0, 0);
     pg.pushMatrix();
 

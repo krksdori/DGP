@@ -21,8 +21,8 @@ int dayCountMagic = dayCountStart;
 int daySpeed = 60*4; // 60*4
 int cols = 3;
 int rows = 3;
-int blockw = 1920;//480;//1920;
-int blockh = 1080;//270;//1080;
+int blockw = 480;//1920;
+int blockh = 270;//1080;
 int masterw = blockw*3;
 int masterh = blockh*3;
 boolean activated = false;
@@ -49,7 +49,6 @@ void setup() {
   
   parseJSON = new ParseJSON();
   
-  moonPhases = new MoonPhases(master.width, master.height);
   sunRise = new SunRise(master.width, master.height);
   
   rainDrops = new RainDrops(blockw, blockh);
@@ -64,6 +63,8 @@ void setup() {
   parseJSON.parse("result.json");
   smoothJson = new SmoothJson(parseJSON.timeFrames.get(dayCountStart));
 
+  moonPhases = new MoonPhases(master.width, master.height);
+  
   initVideo();
   
   // populate the frames
@@ -132,16 +133,16 @@ void draw() {
 
   //main.background(0);
   main.image(rainDrops.draw(timeFrameSelected.precipitationN, timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0.0, 0.0, blockw, blockh);
-  if(timeFrameSelected.windSpeedN > 0.5) {
-    main.blend(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
-  }
-  main.blend(perlinCloud.draw(timeFrameSelected.cloudCoverN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
+  // if(timeFrameSelected.windSpeedN > 0.5) {
+  //   main.blend(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
+  // }
+  // main.blend(perlinCloud.draw(timeFrameSelected.cloudCoverN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
   
-  if(timeFrameSelected.moonPhase.equals("Waning Crescent") || timeFrameSelected.moonPhase.equals("New Moon") || timeFrameSelected.moonPhase.equals("Full Moon") || timeFrameSelected.moonPhase.equals("Waxing Crescent")) {
-    main.blend(tideLines.draw(timeFrameSelected.tideMinN, timeFrameSelected.tideMaxN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);  
-  }
+  // if(timeFrameSelected.moonPhase.equals("Waning Crescent") || timeFrameSelected.moonPhase.equals("New Moon") || timeFrameSelected.moonPhase.equals("Full Moon") || timeFrameSelected.moonPhase.equals("Waxing Crescent")) {
+  //   main.blend(tideLines.draw(timeFrameSelected.tideMinN, timeFrameSelected.tideMaxN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);  
+  // }
   
-  main.blend(temperature.draw(timeFrameSelected.temperatureN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
+  // main.blend(temperature.draw(timeFrameSelected.temperatureN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
   
   dayNightFade(main, ticker);
   main.endDraw();
@@ -204,7 +205,7 @@ void draw() {
  //image(main, 0, 0);
 
  if(activated) {
-   master.image(logScreen.draw(timeFrameSelectedMagic, timeFrameSmooth, dayCount, ticker), masterw/cols, masterh/rows, masterw/cols, masterh/rows);
+   //master.image(logScreen.draw(timeFrameSelectedMagic, timeFrameSmooth, dayCount, ticker), masterw/cols, masterh/rows, masterw/cols, masterh/rows);
   //image(logScreen.draw(timeFrameSelected, dayCount, ticker), 0, 0);
  }
   
@@ -241,14 +242,14 @@ void draw() {
  if(exportVideo) {
    if(activated) {
     videoExport.saveFrame();
-    videoExportLogScreen.saveFrame();
+    //videoExportLogScreen.saveFrame();
    }
  }
   
  if(ticker%(daySpeed) == daySpeed-1) {
     if(exportVideo) {
      videoExport.endMovie();
-     videoExportLogScreen.endMovie();
+     //videoExportLogScreen.endMovie();
       // if(dayCount%365==0) {
       //   exit();
       // }
