@@ -1,12 +1,60 @@
-ffmpeg version 4.0.1 Copyright (c) 2000-2018 the FFmpeg developers
+ffmpeg version 3.4.1 Copyright (c) 2000-2017 the FFmpeg developers
   built with Apple LLVM version 9.0.0 (clang-900.0.39.2)
-  configuration: --prefix=/usr/local/Cellar/ffmpeg/4.0.1 --enable-shared --enable-pthreads --enable-version3 --enable-hardcoded-tables --enable-avresample --cc=clang --host-cflags= --host-ldflags= --enable-gpl --enable-libmp3lame --enable-libx264 --enable-libxvid --enable-opencl --enable-videotoolbox --disable-lzma
-  libavutil      56. 14.100 / 56. 14.100
-  libavcodec     58. 18.100 / 58. 18.100
-  libavformat    58. 12.100 / 58. 12.100
-  libavdevice    58.  3.100 / 58.  3.100
-  libavfilter     7. 16.100 /  7. 16.100
-  libavresample   4.  0.  0 /  4.  0.  0
-  libswscale      5.  1.100 /  5.  1.100
-  libswresample   3.  1.100 /  3.  1.100
-  libpostproc    55.  1.100 / 55.  1.100
+  configuration: --prefix=/usr/local/Cellar/ffmpeg/3.4.1 --enable-shared --enable-pthreads --enable-version3 --enable-hardcoded-tables --enable-avresample --cc=clang --host-cflags= --host-ldflags= --enable-gpl --enable-ffplay --enable-frei0r --enable-libass --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopus --enable-librtmp --enable-libspeex --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-libxvid --enable-opencl --enable-videotoolbox --disable-lzma --enable-libopenjpeg --disable-decoder=jpeg2000 --extra-cflags=-I/usr/local/Cellar/openjpeg/2.3.0/include/openjpeg-2.3 --enable-nonfree
+  libavutil      55. 78.100 / 55. 78.100
+  libavcodec     57.107.100 / 57.107.100
+  libavformat    57. 83.100 / 57. 83.100
+  libavdevice    57. 10.100 / 57. 10.100
+  libavfilter     6.107.100 /  6.107.100
+  libavresample   3.  7.  0 /  3.  7.  0
+  libswscale      4.  8.100 /  4.  8.100
+  libswresample   2.  9.100 /  2.  9.100
+  libpostproc    54.  7.100 / 54.  7.100
+Input #0, rawvideo, from 'pipe:':
+  Duration: N/A, start: 0.000000, bitrate: 839808 kb/s
+    Stream #0:0: Video: rawvideo (RGB[24] / 0x18424752), rgb24, 1440x810, 839808 kb/s, 30 tbr, 30 tbn, 30 tbc
+Stream mapping:
+  Stream #0:0 -> #0:0 (rawvideo (native) -> h264 (libx264))
+[libx264 @ 0x7fa84a807400] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 AVX2 LZCNT BMI2
+[libx264 @ 0x7fa84a807400] profile High, level 3.2
+[libx264 @ 0x7fa84a807400] 264 - core 148 r2795 aaa9aa8 - H.264/MPEG-4 AVC codec - Copyleft 2003-2017 - http://www.videolan.org/x264.html - options: cabac=1 ref=3 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=7 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=12 lookahead_threads=2 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=40 rc=crf mbtree=1 crf=15.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+Output #0, mp4, to '/Users/boydrotgans/Git/DGP/voidmix/export/options-day-0.mp4':
+  Metadata:
+    comment         : Made with Video Export for Processing - https://git.io/vAXLk
+    encoder         : Lavf57.83.100
+    Stream #0:0: Video: h264 (libx264) (avc1 / 0x31637661), yuv420p, 1440x810, q=-1--1, 30 fps, 15360 tbn, 30 tbc
+    Metadata:
+      encoder         : Lavc57.107.100 libx264
+    Side data:
+      cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: -1
+frame=    1 fps=0.1 q=0.0 size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    frame=    1 fps=0.1 q=21.0 Lsize=      20kB time=00:00:00.00 bitrate=2569846.2kbits/s speed=4.6e-06x    
+video:20kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 4.426106%
+[libx264 @ 0x7fc2db007c00] frame I:1     Avg QP:13.03  size: 19305
+[libx264 @ 0x7fc2db007c00] mb I  I16..4: 13.7% 76.9%  9.4%
+[libx264 @ 0x7fc2db007c00] 8x8 transform intra:76.9%
+[libx264 @ 0x7fc2db007c00] coded y,uvDC,uvAC intra: 14.8% 0.0% 0.0%
+[libx264 @ 0x7fc2db007c00] i16 v,h,dc,p: 15% 24%  7% 54%
+[libx264 @ 0x7fc2db007c00] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 58%  8% 14%  3%  5%  5%  3%  2%  2%
+[libx264 @ 0x7fc2db007c00] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 44% 15% 14%  4%  7%  6%  3%  4%  3%
+[libx264 @ 0x7fc2db007c00] i8c dc,h,v,p: 100%  0%  0%  0%
+[libx264 @ 0x7fc2db007c00] kb/s:4633.20
+5 fps=5.1 q=0.0 size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    frame=   38 fps=5.1 q=0.0 size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    frame=   41 fps=5.1 q=0.0 size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    frame=   44 fps=5.0 q=0.0 size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    frame=   47 fps=5.0 q=0.0 size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    frame=   50 fps=5.0 q=0.0 size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    frame=   53 fps=5.0 q=0.0 size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    frame=   56 fps=5.0 q=0.0 size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    frame=   59 fps=5.0 q=21.0 size=       0kB time=00:00:00.00 bitrate=5907.7kbits/s speed=5.49e-06x    frame=   62 fps=5.0 q=21.0 size=       0kB time=00:00:00.10 bitrate=   3.8kbits/s speed=0.008x    frame=   65 fps=4.9 q=21.0 size=       0kB time=00:00:00.20 bitrate=   1.9kbits/s speed=0.0152x    frame=   66 fps=4.8 q=21.0 size=       0kB time=00:00:00.23 bitrate=   1.6kbits/s speed=0.0169x    frame=   66 fps=4.6 q=-1.0 Lsize=     428kB time=00:00:02.10 bitrate=1669.2kbits/s speed=0.148x    
+video:426kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.392469%
+[libx264 @ 0x7fa84a807400] frame I:1     Avg QP:11.34  size: 25653
+[libx264 @ 0x7fa84a807400] frame P:17    Avg QP:11.32  size: 10738
+[libx264 @ 0x7fa84a807400] frame B:48    Avg QP:14.69  size:  4741
+[libx264 @ 0x7fa84a807400] consecutive B-frames:  3.0%  0.0%  0.0% 97.0%
+[libx264 @ 0x7fa84a807400] mb I  I16..4: 13.3% 75.3% 11.4%
+[libx264 @ 0x7fa84a807400] mb P  I16..4:  6.4% 11.7%  2.6%  P16..4: 26.1%  8.5%  2.4%  0.0%  0.0%    skip:42.4%
+[libx264 @ 0x7fa84a807400] mb B  I16..4:  0.8%  0.9%  0.3%  B16..8: 30.5%  7.2%  0.5%  direct: 1.1%  skip:58.7%  L0:47.9% L1:49.7% BI: 2.4%
+[libx264 @ 0x7fa84a807400] 8x8 transform intra:58.0% inter:72.4%
+[libx264 @ 0x7fa84a807400] coded y,uvDC,uvAC intra: 16.0% 2.2% 1.6% inter: 3.6% 0.3% 0.0%
+[libx264 @ 0x7fa84a807400] i16 v,h,dc,p: 43% 24%  3% 30%
+[libx264 @ 0x7fa84a807400] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 32% 17% 30%  3%  6%  4%  4%  3%  2%
+[libx264 @ 0x7fa84a807400] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 29% 24% 22%  6%  7%  3%  3%  4%  1%
+[libx264 @ 0x7fa84a807400] i8c dc,h,v,p: 97%  3%  0%  0%
+[libx264 @ 0x7fa84a807400] Weighted P-Frames: Y:11.8% UV:0.0%
+[libx264 @ 0x7fa84a807400] ref P L0: 75.0%  0.8% 18.0%  5.4%  0.7%
+[libx264 @ 0x7fa84a807400] ref B L0: 82.5% 15.4%  2.1%
+[libx264 @ 0x7fa84a807400] ref B L1: 92.4%  7.6%
+[libx264 @ 0x7fa84a807400] kb/s:1584.65

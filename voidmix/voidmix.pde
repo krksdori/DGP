@@ -87,12 +87,12 @@ void initVideo() {
       videoExport.setDebugging(false);
       videoExport.startMovie();
 
-      videoExportLogScreen = new VideoExport(this, "export-log/options-day-" + dayCount + ".mp4", logScreen.pg);
-      videoExportLogScreen.setQuality(70, 128);
-      videoExportLogScreen.setFrameRate(30);
-      videoExportLogScreen.setLoadPixels(true);
-      videoExportLogScreen.setDebugging(false);
-      videoExportLogScreen.startMovie();
+      //videoExportLogScreen = new VideoExport(this, "export-log/options-day-" + dayCount + ".mp4", logScreen.pg);
+      //videoExportLogScreen.setQuality(70, 128);
+      //videoExportLogScreen.setFrameRate(30);
+      //videoExportLogScreen.setLoadPixels(true);
+      //videoExportLogScreen.setDebugging(false);
+      //videoExportLogScreen.startMovie();
   }
 }
 
@@ -128,12 +128,11 @@ void draw() {
   TimeFrame timeFrameSmooth = smoothJson.tfCurrent;
 
   main.beginDraw();
-  //main.background(0);
   main.image(rainDrops.draw(timeFrameSelected.precipitationN, timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0.0, 0.0, blockw, blockh);
-  if(timeFrameSelected.windSpeedN > 0.5) {
-    main.blend(windMap.draw(timeFrameSelected.windDirection, timeFrameSelected.windSpeedN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
+  if(timeFrameSelectedMagic.windSpeedN > 0.5) {
+    main.blend(windMap.draw(timeFrameSelectedMagic.windDirection, timeFrameSelectedMagic.windSpeedN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
   }
-  main.blend(perlinCloud.draw(timeFrameSelected.cloudCoverN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
+  main.blend(perlinCloud.draw(timeFrameSelectedMagic.cloudCoverN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);
   
   if(timeFrameSelected.moonPhase.equals("Waning Crescent") || timeFrameSelected.moonPhase.equals("New Moon") || timeFrameSelected.moonPhase.equals("Full Moon") || timeFrameSelected.moonPhase.equals("Waxing Crescent")) {
     main.blend(tideLines.draw(timeFrameSelected.tideMinN, timeFrameSelected.tideMaxN), 0, 0, blockw, blockh, 0, 0, blockw, blockh, SCREEN);  
@@ -199,11 +198,10 @@ void draw() {
     index++;
   }
     
- //image(main, 0, 0);
+ image(main, 0, 0);
 
  if(activated) {
    master.image(logScreen.draw(timeFrameSelectedMagic, timeFrameSmooth, dayCount, ticker), masterw/cols, masterh/rows, masterw/cols, masterh/rows);
-  //image(logScreen.draw(timeFrameSelected, dayCount, ticker), 0, 0);
  }
   
  master.blend(sunRise.draw(timeFrameSelectedMagic.cloudCoverN, ticker), 0, 0, blockw, blockh, 0, 0, master.width, master.height, SCREEN);
@@ -211,9 +209,8 @@ void draw() {
  
  master.noStroke();
  master.fill(map(timeFrameSmooth.mosh, 0.0, 1.0, 0.0, 255.0));
- //master.fill(255);
  master.rect(master.width/2, master.height/2 + blockh /2 - 10, 10, 10);
-  
+
  master.endDraw();
  image(master, 0, 0, width, height);
  
@@ -276,7 +273,7 @@ void keyPressed() {
   if (key == 'q') {
     if(exportVideo) {
       videoExport.endMovie();
-      videoExportLogScreen.endMovie();
+      //videoExportLogScreen.endMovie();
       exit();
     }
   }

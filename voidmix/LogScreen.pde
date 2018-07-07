@@ -54,7 +54,7 @@ class LogScreen {
 			} else if(i == 1) {
 				columnsTarget.get(i).type[0] = "Wind Direction" ;
 				columnsTarget.get(i).type[1] = timeFrameSelected.windDirectionTitle+"";
-				columnsTarget.get(i).type[2] = timeFrameSelected.windDirectionArraw+"";
+				columnsTarget.get(i).type[2] = timeFrameSelected.windDirectionArrow+"";
 				columnsTarget.get(i).type[3] = "false";
 				
 				

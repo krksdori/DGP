@@ -57,8 +57,8 @@ class MoonPhases {
     int offset = int(map(moonAgeStart, 0.0, 29.53059, 600.0, 0.0));
 
 
-    float sliceSize = 29.53059/600.0;
-    float slider = ((300)+offset - (ticker)*sliceSize);
+    float sliceSize = 29.53059/300.0;
+    float slider = ((300)+offset - (ticker*sliceSize));
     
     t = (( slider ) % frames) / (float)frames;
 
